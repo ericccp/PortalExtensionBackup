@@ -1,0 +1,95 @@
+$background-secondary: #F6F6F8 !default;
+$now-global-space--sm: 8px !default;
+$now-global-font-size--md: 14px !default;
+$now-global-space--sm: 8px !default;
+$sp-space--xs: 4px !default;
+$text-muted: #656E81 !default;
+
+.text-muted {
+	color: $text-muted !important;
+}
+
+.toggle-skip-level-wrapper {
+  .popover {
+    width: fit-content !important;
+    z-index: 1000 !important;
+    background-color: $background-primary !important;
+    .arrow:after {
+    	border-bottom-color: $background-primary !important;
+    }
+  }
+  
+  .btn-popover {
+    background-color: $background-secondary;
+    margin-left: $now-global-space--sm;
+    height: 36px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .popover-content {
+    display: flex;
+    align-items: center;
+    
+    .input-switch {
+      height: auto !important;
+      display: flex !important;
+      align-items: center;
+    }
+  }
+
+  .input-switch input[type=checkbox]:checked ~ .switch {
+    background-color: $brand-primary;
+  }
+
+  .switch {
+    border-radius: 2.7rem !important;
+    width: 26px !important;
+    height: 15px !important;
+    margin-bottom: 0px;
+  }
+
+  .switch:before {
+    border-radius: 2.7rem !important;
+  }
+  
+  .toggle-skip-level-label {
+    font-weight: 400;
+    font-size: $now-global-font-size--md;
+    line-height: 20px;
+    // Drop Bootstrap's <p> bottom margin, which pushes the label above the switch's center
+    margin: 0 0 0 $now-global-space--sm;
+  }
+  
+  .input-switch input[type=checkbox]:checked ~ .switch:before {
+  	left: 11px !important;
+  }
+
+  // toggle-skip-level toggle
+  @media screen and (-ms-high-contrast: active) {
+    .input-switch input.ng-not-empty+label.switch[for="toggle-skip-level"] {
+      background-color: highlight;
+      border: none;
+
+      &:before {
+        background-color: highlightText;
+      }
+    }
+
+    .input-switch input.ng-empty+label[for="toggle-skip-level"] {
+      background-color: window;
+      border: 1px solid windowText;
+
+      &:before {
+        background-color: windowText;
+      }
+    }
+  }
+  
+  .now-mobile-button-radius {
+    border-radius: $sp-space--xs !important;
+    font-size: 14px !important;
+  }
+}
+

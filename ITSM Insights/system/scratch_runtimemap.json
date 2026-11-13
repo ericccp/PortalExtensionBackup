@@ -264,6 +264,18 @@
         "CURRENT_SERVER_MOD_TIME": 1789105522000,
         "CURRENT_LOCAL_MOD_TIME": 1794581004266,
         "LOCAL_MOD_TIME": 1794581004266
+      },
+      "Asset Hub Toggle Skip Levels": {
+        "sys_id": "1c83311693634b14600674418bba10a1",
+        "SYS_PACKAGE": "293cfd9393284710600674418bba100b",
+        "packageName": "Portal Extension",
+        "scopeId": "293cfd9393284710600674418bba100b",
+        "scopeName": "Portal Extension",
+        "scopeValue": "x_1026751_portal_0",
+        "SERVER_MOD_TIME": 1793695522000,
+        "CURRENT_SERVER_MOD_TIME": 1793695522000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581233865,
+        "LOCAL_MOD_TIME": 1794581233865
       }
     }
   },
