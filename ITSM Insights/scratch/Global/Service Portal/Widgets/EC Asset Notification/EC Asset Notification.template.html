@@ -1,0 +1,44 @@
+<div>
+    <!-- Notifications -->
+    <section class="device-detail-card"
+        ng-if="c.data.deviceDetails.notifications && c.data.deviceDetails.notifications.length">
+
+        <div class="device-section-header">
+            <div>
+                <h2 class="device-section-title">Notifications</h2>
+                <p class="device-section-description">
+                    There are a few things that need your attention.
+                </p>
+            </div>
+        </div>
+
+        <div class="device-notification-list">
+
+            <div class="device-notification-item"
+                ng-repeat="notification in c.data.deviceDetails.notifications | orderBy:'order' track by notification.id">
+
+                <div class="device-notification-icon">
+                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                </div>
+
+                <div class="device-notification-content">
+                    <h3 class="device-notification-title">
+                        {{notification.label}}
+                    </h3>
+
+                    <p class="device-notification-description">
+                        {{notification.description}}
+                    </p>
+                </div>
+
+                <button type="button" class="device-notification-close"
+                    ng-click="c.dismissNotification(notification, $event)"
+                    aria-label="Dismiss {{notification.label}}">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+</div>

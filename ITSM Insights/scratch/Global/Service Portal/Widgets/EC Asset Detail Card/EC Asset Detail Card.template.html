@@ -1,0 +1,135 @@
+<div class="asset-metric-card" ng-class="[
+        'asset-metric-card--' + (data.state || options.color_scheme || 'neutral'),
+        {
+            'asset-metric-card--clickable': data.card_link || options.card_link,
+            'asset-metric-card--compact': options.compact_mobile == 'true'
+        }
+    ]" ng-style="{
+        'background-color': data.card_background || options.card_background || '',
+        'border-color': data.border_color || options.border_color || ''
+    }" ng-attr-title="{{c.formatDateText(data.tooltip || options.tooltip || undefined)}}">
+
+    <!--
+        Full-card link.
+
+        This is positioned over the card with CSS so the entire card can
+        remain clickable without changing the semantic structure of the
+        content below.
+    -->
+    <a ng-if="data.card_link || options.card_link" class="asset-metric-card__link"
+        ng-href="{{data.card_link || options.card_link}}"
+        ng-attr-target="{{(data.open_in_new_window || options.open_in_new_window) == 'true' ? '_blank' : undefined}}"
+        ng-attr-rel="{{(data.open_in_new_window || options.open_in_new_window) == 'true' ? 'noopener noreferrer' : undefined}}"
+        aria-label="{{c.formatDateText(data.aria_label || options.aria_label || data.title || options.title || 'View details')}}">
+    </a>
+
+
+    <!-- ============================================================
+         ICON
+         ============================================================ -->
+    <div ng-if="data.icon || options.icon || data.icon_class || options.icon_class"
+        class="asset-metric-card__icon-container" ng-style="{
+            'background-color':
+                data.icon_background ||
+                options.icon_background ||
+                ''
+        }" aria-hidden="true">
+
+        <!--
+            Preferred:
+                data.icon_class / options.icon_class
+
+            Example:
+                fa fa-shield
+
+            Fallback:
+                "fa fa-" + icon
+
+            Example option:
+                icon = shield
+        -->
+        <i class="asset-metric-card__icon" ng-class="
+                data.icon_class ||
+                options.icon_class ||
+                ('fa fa-' + (data.icon || options.icon))
+            " ng-style="{
+                'color':
+                    data.icon_color ||
+                    options.icon_color ||
+                    ''
+            }">
+        </i>
+
+    </div>
+
+
+    <!-- ============================================================
+         CONTENT
+         ============================================================ -->
+    <div class="asset-metric-card__content">
+
+        <!-- Title -->
+        <div ng-if="data.title || options.title" class="asset-metric-card__title" ng-style="{
+                'color':
+                    data.title_color ||
+                    options.title_color ||
+                    ''
+            }">
+
+            {{c.formatDateText(data.title || options.title)}}
+
+        </div>
+
+
+        <!-- Main / bold callout -->
+        <div ng-if="data.callout || options.callout" class="asset-metric-card__callout" ng-class="
+                'asset-metric-card__callout--' +
+                (
+                    data.callout_style ||
+                    options.callout_style ||
+                    'default'
+                )
+            " ng-style="{
+                'color':
+                    data.callout_color ||
+                    options.callout_color ||
+                    ''
+            }">
+
+            {{c.formatDateText(data.callout || options.callout)}}
+
+        </div>
+
+
+        <!-- Supporting subtitle -->
+        <div ng-if="data.subtitle || options.subtitle" class="asset-metric-card__subtitle" ng-style="{
+                'color':
+                    data.subtitle_color ||
+                    options.subtitle_color ||
+                    ''
+            }">
+
+            {{c.formatDateText(data.subtitle || options.subtitle)}}
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================================================
+         OPTIONAL CHEVRON
+         ============================================================ -->
+    <div ng-if="
+            (data.show_chevron == true ||
+             data.show_chevron == 'true' ||
+             options.show_chevron == true ||
+             options.show_chevron == 'true')
+            &&
+            (data.card_link || options.card_link)
+        " class="asset-metric-card__chevron" aria-hidden="true">
+
+        <i class="fa fa-chevron-right"></i>
+
+    </div>
+
+</div>

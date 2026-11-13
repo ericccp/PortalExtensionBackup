@@ -1,0 +1,614 @@
+/* ============================================================
+   ASSET METRIC CARD
+   Reusable ServiceNow Service Portal metric/status card
+   ============================================================ */
+
+.asset-metric-card {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 92px;
+
+    padding: 16px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e5e9ed;
+    border-radius: 4px;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.15s ease,
+        background-color 0.15s ease;
+}
+
+
+/* ============================================================
+   ICON CONTAINER
+   ============================================================ */
+
+.asset-metric-card__icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 44px;
+
+    width: 44px;
+    height: 44px;
+
+    margin-right: 14px;
+
+    border-radius: 4px;
+
+    background-color: #eef3f6;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   ICON
+   ============================================================ */
+
+.asset-metric-card__icon {
+    font-size: 20px;
+    line-height: 1;
+
+    color: #526777;
+}
+
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+
+.asset-metric-card__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    flex: 1 1 auto;
+
+    min-width: 0;
+}
+
+
+/* ============================================================
+   TITLE
+   ============================================================ */
+
+.asset-metric-card__title {
+    margin: 0 0 3px 0;
+
+    font-size: 12px;
+    line-height: 1.3;
+
+    font-weight: 500;
+
+    color: #52606d;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   CALLOUT
+   Main emphasized value
+   ============================================================ */
+
+.asset-metric-card__callout {
+    margin: 0;
+
+    font-size: 18px;
+    line-height: 1.25;
+
+    font-weight: 600;
+
+    color: #181c21;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   SUBTITLE
+   ============================================================ */
+
+.asset-metric-card__subtitle {
+    margin: 3px 0 0 0;
+
+    font-size: 12px;
+    line-height: 1.35;
+
+    font-weight: 400;
+
+    color: #74808c;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   OPTIONAL CHEVRON
+   ============================================================ */
+
+.asset-metric-card__chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    margin-left: 12px;
+
+    font-size: 12px;
+
+    color: #8b96a1;
+
+    pointer-events: none;
+
+    transition:
+        transform 0.15s ease,
+        color 0.15s ease;
+}
+
+
+/* ============================================================
+   FULL CARD LINK
+   Makes entire card clickable
+   ============================================================ */
+
+.asset-metric-card__link {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    z-index: 2;
+
+    border-radius: inherit;
+
+    text-decoration: none;
+}
+
+
+/* ============================================================
+   CLICKABLE CARD
+   ============================================================ */
+
+.asset-metric-card--clickable {
+    cursor: pointer;
+}
+
+
+.asset-metric-card--clickable:hover {
+    border-color: #cbd4dc;
+
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.04),
+        0 6px 14px rgba(0, 0, 0, 0.05);
+
+    transform: translateY(-1px);
+}
+
+
+.asset-metric-card--clickable:hover
+.asset-metric-card__chevron {
+    color: #52606d;
+
+    transform: translateX(2px);
+}
+
+
+/* ============================================================
+   KEYBOARD FOCUS
+   ============================================================ */
+
+.asset-metric-card__link:focus {
+    outline: none;
+}
+
+
+.asset-metric-card:has(.asset-metric-card__link:focus) {
+    border-color: #ce1126;
+
+    box-shadow:
+        0 0 0 3px rgba(206, 17, 38, 0.16);
+}
+
+
+/*
+Fallback for environments where :has() is unavailable.
+The anchor itself receives an inset focus ring.
+*/
+
+.asset-metric-card__link:focus {
+    box-shadow:
+        inset 0 0 0 2px #ce1126,
+        inset 0 0 0 5px rgba(206, 17, 38, 0.12);
+}
+
+
+/* ============================================================
+   COLOR SCHEMES / STATES
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   Neutral
+   ------------------------------------------------------------ */
+
+.asset-metric-card--neutral
+.asset-metric-card__icon-container {
+    background-color: #eef3f6;
+}
+
+
+.asset-metric-card--neutral
+.asset-metric-card__icon {
+    color: #526777;
+}
+
+
+/* ------------------------------------------------------------
+   Info / Blue
+   ------------------------------------------------------------ */
+
+.asset-metric-card--info
+.asset-metric-card__icon-container,
+
+.asset-metric-card--blue
+.asset-metric-card__icon-container {
+    background-color: #fae7e9;
+}
+
+
+.asset-metric-card--info
+.asset-metric-card__icon,
+
+.asset-metric-card--blue
+.asset-metric-card__icon {
+    color: #ce1126;
+}
+
+
+/* ------------------------------------------------------------
+   Success / Green
+   ------------------------------------------------------------ */
+
+.asset-metric-card--success
+.asset-metric-card__icon-container,
+
+.asset-metric-card--green
+.asset-metric-card__icon-container {
+    background-color: #e9f8ef;
+}
+
+
+.asset-metric-card--success
+.asset-metric-card__icon,
+
+.asset-metric-card--green
+.asset-metric-card__icon {
+    color: #18864b;
+}
+
+
+/* ------------------------------------------------------------
+   Warning / Amber
+   ------------------------------------------------------------ */
+
+.asset-metric-card--warning
+.asset-metric-card__icon-container,
+
+.asset-metric-card--amber
+.asset-metric-card__icon-container {
+    background-color: #fff3e3;
+}
+
+
+.asset-metric-card--warning
+.asset-metric-card__icon,
+
+.asset-metric-card--amber
+.asset-metric-card__icon {
+    color: #a95d00;
+}
+
+
+/* ------------------------------------------------------------
+   Danger / Red
+   ------------------------------------------------------------ */
+
+.asset-metric-card--danger
+.asset-metric-card__icon-container,
+
+.asset-metric-card--red
+.asset-metric-card__icon-container {
+    background-color: #fdecec;
+}
+
+
+.asset-metric-card--danger
+.asset-metric-card__icon,
+
+.asset-metric-card--red
+.asset-metric-card__icon {
+    color: #c53532;
+}
+
+
+/* ------------------------------------------------------------
+   Purple
+   ------------------------------------------------------------ */
+
+.asset-metric-card--purple
+.asset-metric-card__icon-container {
+    background-color: #f2eeff;
+}
+
+
+.asset-metric-card--purple
+.asset-metric-card__icon {
+    color: #7454c9;
+}
+
+
+/* ============================================================
+   CALLOUT STYLES
+   Optional semantic emphasis for main value
+   ============================================================ */
+
+.asset-metric-card__callout--default {
+    color: #181c21;
+}
+
+
+.asset-metric-card__callout--success {
+    color: #18864b;
+}
+
+
+.asset-metric-card__callout--warning {
+    color: #9a5700;
+}
+
+
+.asset-metric-card__callout--danger {
+    color: #c53532;
+}
+
+
+.asset-metric-card__callout--muted {
+    color: #66737f;
+}
+
+
+/* ============================================================
+   CARD STATES
+   Optional subtle state-specific border treatment
+   ============================================================ */
+
+.asset-metric-card--success {
+    border-color: #dfeae3;
+}
+
+
+.asset-metric-card--warning {
+    border-color: #efe3d1;
+}
+
+
+.asset-metric-card--danger {
+    border-color: #f0dcdc;
+}
+
+
+/*
+Info deliberately keeps a mostly-neutral border.
+This prevents a row of informational cards from becoming
+visually noisy.
+*/
+
+.asset-metric-card--info {
+    border-color: #f5cfd4;
+}
+
+
+/* ============================================================
+   LONG CONTENT
+   ============================================================ */
+
+.asset-metric-card--allow-wrap
+.asset-metric-card__title,
+
+.asset-metric-card--allow-wrap
+.asset-metric-card__callout,
+
+.asset-metric-card--allow-wrap
+.asset-metric-card__subtitle {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+}
+
+
+/* ============================================================
+   NO ICON
+   ============================================================ */
+
+.asset-metric-card__content:first-child {
+    margin-left: 0;
+}
+
+
+/* ============================================================
+   MOBILE / TABLET
+   ============================================================ */
+
+@media (max-width: 767px) {
+
+    .asset-metric-card {
+        min-height: 82px;
+
+        padding: 14px;
+
+        border-radius: 4px;
+    }
+
+
+    .asset-metric-card__icon-container {
+        flex-basis: 40px;
+
+        width: 40px;
+        height: 40px;
+
+        margin-right: 12px;
+
+        border-radius: 4px;
+    }
+
+
+    .asset-metric-card__icon {
+        font-size: 18px;
+    }
+
+
+    .asset-metric-card__title {
+        margin-bottom: 2px;
+
+        font-size: 12px;
+    }
+
+
+    .asset-metric-card__callout {
+        font-size: 17px;
+    }
+
+
+    .asset-metric-card__subtitle {
+        margin-top: 2px;
+
+        font-size: 12px;
+    }
+
+
+    .asset-metric-card__chevron {
+        margin-left: 10px;
+    }
+
+}
+
+
+/* ============================================================
+   EXTRA-SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 420px) {
+
+    .asset-metric-card {
+        padding: 12px;
+    }
+
+
+    .asset-metric-card__icon-container {
+        flex-basis: 38px;
+
+        width: 38px;
+        height: 38px;
+
+        margin-right: 10px;
+    }
+
+
+    .asset-metric-card__icon {
+        font-size: 17px;
+    }
+
+
+    .asset-metric-card__callout {
+        font-size: 16px;
+    }
+
+}
+
+
+/* ============================================================
+   COMPACT MOBILE OPTION
+   Applied by:
+       asset-metric-card--compact
+   ============================================================ */
+
+@media (max-width: 767px) {
+
+    .asset-metric-card--compact {
+        min-height: 72px;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+
+    .asset-metric-card--compact
+    .asset-metric-card__icon-container {
+        width: 38px;
+        height: 38px;
+
+        flex-basis: 38px;
+    }
+
+
+    .asset-metric-card--compact
+    .asset-metric-card__callout {
+        font-size: 16px;
+    }
+
+
+    .asset-metric-card--compact
+    .asset-metric-card__subtitle {
+        font-size: 11px;
+    }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   Respect browser accessibility preference
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .asset-metric-card,
+    .asset-metric-card__chevron {
+        transition: none;
+    }
+
+
+    .asset-metric-card--clickable:hover {
+        transform: none;
+    }
+
+
+    .asset-metric-card--clickable:hover
+    .asset-metric-card__chevron {
+        transform: none;
+    }
+
+}

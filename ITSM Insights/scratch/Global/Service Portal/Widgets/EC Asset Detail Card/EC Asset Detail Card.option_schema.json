@@ -1,0 +1,188 @@
+[
+  {
+    "name": "title",
+    "label": "Title",
+    "type": "string",
+    "default_value": ""
+  },
+  {
+    "name": "callout",
+    "label": "Bold callout",
+    "type": "string",
+    "default_value": ""
+  },
+  {
+    "name": "subtitle",
+    "label": "Subtitle",
+    "type": "string",
+    "default_value": ""
+  },
+  {
+    "name": "icon",
+    "label": "Icon name",
+    "type": "string",
+    "default_value": "info-circle",
+    "hint": "Enter a Font Awesome icon name without the 'fa fa-' prefix. Example: shield, calendar, desktop, check-circle."
+  },
+  {
+    "name": "icon_class",
+    "label": "Custom icon class",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional. Overrides Icon name. Example: fa fa-shield."
+  },
+  {
+    "name": "color_scheme",
+    "label": "Color scheme",
+    "type": "choice",
+    "default_value": "neutral",
+    "choices": [
+      {
+        "label": "Neutral",
+        "value": "neutral"
+      },
+      {
+        "label": "Blue / Info",
+        "value": "info"
+      },
+      {
+        "label": "Green / Success",
+        "value": "success"
+      },
+      {
+        "label": "Amber / Warning",
+        "value": "warning"
+      },
+      {
+        "label": "Red / Danger",
+        "value": "danger"
+      },
+      {
+        "label": "Purple",
+        "value": "purple"
+      }
+    ]
+  },
+  {
+    "name": "icon_color",
+    "label": "Custom icon color",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional CSS color. Example: #ce1126. Leave blank to use the selected color scheme."
+  },
+  {
+    "name": "icon_background",
+    "label": "Custom icon background",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional CSS color. Example: #fae7e9. Leave blank to use the selected color scheme."
+  },
+  {
+    "name": "title_color",
+    "label": "Custom title color",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional CSS color. Leave blank to use the widget default."
+  },
+  {
+    "name": "callout_color",
+    "label": "Custom callout color",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional CSS color. Leave blank to use the callout style or widget default."
+  },
+  {
+    "name": "subtitle_color",
+    "label": "Custom subtitle color",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional CSS color. Leave blank to use the widget default."
+  },
+  {
+    "name": "card_background",
+    "label": "Custom card background",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional CSS color. Leave blank for white."
+  },
+  {
+    "name": "border_color",
+    "label": "Custom border color",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional CSS color. Leave blank to use the state or widget default."
+  },
+  {
+    "name": "callout_style",
+    "label": "Callout style",
+    "type": "choice",
+    "default_value": "default",
+    "choices": [
+      {
+        "label": "Default",
+        "value": "default"
+      },
+      {
+        "label": "Success",
+        "value": "success"
+      },
+      {
+        "label": "Warning",
+        "value": "warning"
+      },
+      {
+        "label": "Danger",
+        "value": "danger"
+      },
+      {
+        "label": "Muted",
+        "value": "muted"
+      }
+    ]
+  },
+  {
+    "name": "card_link",
+    "label": "Card link",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional. Example: ?id=hardware_asset or /esc?id=hardware_asset."
+  },
+  {
+    "name": "open_in_new_window",
+    "label": "Open link in new window",
+    "type": "boolean",
+    "default_value": "false"
+  },
+  {
+    "name": "show_chevron",
+    "label": "Show chevron",
+    "type": "boolean",
+    "default_value": "false"
+  },
+  {
+    "name": "tooltip",
+    "label": "Tooltip",
+    "type": "string",
+    "default_value": ""
+  },
+  {
+    "name": "aria_label",
+    "label": "Accessibility label",
+    "type": "string",
+    "default_value": "",
+    "hint": "Optional. If blank, the widget automatically builds a label from the title, callout, and subtitle."
+  },
+  {
+    "name": "compact_mobile",
+    "label": "Compact mobile layout",
+    "type": "boolean",
+    "default_value": "false"
+  },
+  {
+    "name": "allow_wrap",
+    "label": "Allow text wrapping",
+    "type": "boolean",
+    "default_value": "false",
+    "hint": "Enable when titles, callouts, or subtitles may be longer than the available card width."
+  }
+]

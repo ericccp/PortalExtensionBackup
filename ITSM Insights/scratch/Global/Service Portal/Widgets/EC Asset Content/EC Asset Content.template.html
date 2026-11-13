@@ -1,0 +1,45 @@
+<!-- Empty state container -->
+<div class="empty-state-container" ng-if="!data.hasContent">
+  <i class="fa empty-icon" ng-class="data.emptyIcon"></i>
+  <span class="empty-title">{{data.emptyTitle}}</span>
+  <span class="empty-description">{{data.emptyDescription}}</span>
+  <a class="btn btn-default"
+     ng-if="data.showNewRequest"
+     ng-href="{{data.isHardwareTab ? data.hardwareRequestUrl : data.softwareRequestUrl}}">
+    ${Start a new request}
+  </a>
+</div>
+
+<!-- Disclaimer container -->
+<!-- <div class="banner-container" ng-if="data.hasContent">
+  <div ng-if="data.isSoftwareTab">
+    <span class="software-label">{{data.softwareLicesingDisclaimer}}</span>
+  </div>
+</div> -->
+
+<!-- Changed during offline mode, missing an 'S' on line 18 in ng-repeat -->
+<div class="assets-container" ng-class="{'software-assets-container': data.isSoftwareTab}" ng-if="data.hasContent && data.view === 'card'">
+  <div ng-repeat="assets in assetCards track by $index" class="asset-card-widget" id="assetCard-{{asset.data.sysID}}">
+    <sp-widget widget="assets"></sp-widget>
+  </div>
+</div>
+
+<!-- dropped  && data.assetListWidget from ng-if -->
+<div class="assets-list-container" ng-if="data.hasContent && data.view === 'list'">
+	<sp-widget widget="data.assetListWidget"></sp-widget> 
+</div>
+
+<!-- Skeleton loader container -->
+<div>
+  <div class="skeleton-loader-container" ng-if="isLoading">
+    <div ng-if="data.view == 'card'" ng-include="'card-skeleton-loader-ec-assets'"></div>
+    <div ng-if="data.view == 'list'" ng-include="'ec-asset-list-skeleton-loader'"></div>
+  </div>
+</div>
+
+<!-- Show more button container -->
+<div class="button-container" ng-if="c.data.showMore && !isLoading">
+  <button class="btn btn-default" ng-click="c.getMoreAssets()">
+    {{data.showMoreButtonText}}
+  </button>
+</div>

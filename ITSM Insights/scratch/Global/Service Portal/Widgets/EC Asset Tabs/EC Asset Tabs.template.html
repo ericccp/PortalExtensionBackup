@@ -1,0 +1,75 @@
+<!-- Tab Container -->
+<div class="tabs-container">
+  <div class="tab-container" ng-init="c.init()">
+    <div class="tabs" ng-ref="tabWrapper">
+      <ul class="nav nav-tabs">
+        <li ng-repeat="tab in c.tabs"
+            ng-class="{active: tab === c.activeTab}"
+            ng-attr-data-tab="{{tab.sys_id}}"
+            class="nav-tab">
+          <a href=""
+             ng-click="c.selectTab(tab)"
+             ec-multiline-ellipsis-tooltip
+             ec-ellipsis-tooltip-title="{{tab.label}}"
+             ec-ellipsis-tooltip-data-toggle="tooltip"
+             ec-ellipsis-tooltip-data-container="body">
+            {{ tab.label }}
+          </a>
+        </li>
+
+        <li class="dropdown" ng-if="c.data.overflowTabs.length > 0">
+          <a href="javascript:void(0)"
+             class="dropdown-toggle"
+             data-toggle="dropdown"
+             ng-click="c.toggleDropdown()">
+            More <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-open-left">
+            <li ng-repeat="tab in c.data.overflowTabs">
+              <a href=""
+                 ng-click="c.selectFromDropdown(tab)"
+                 ec-multiline-ellipsis-tooltip
+                 ec-ellipsis-tooltip-title="{{tab.label}}"
+                 ec-ellipsis-tooltip-data-toggle="tooltip"
+                 ec-ellipsis-tooltip-data-container="body">
+                {{ tab.label }}
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Tab Content -->
+  <div class="tab-content">
+    <div class="skeleton-loader-container" ng-if="(isLoading || isTabSwitching) && c.data.isTeamTab" role="status" aria-label="${Loading}">
+      <div ng-include="'ec-asset-list-skeleton-loader'" aria-hidden="true"></div>
+    </div>
+    <div class="alert alert-danger" ng-if="c.tabLoadError || c.data.teamError" role="alert">
+      <p>{{c.tabLoadError || c.data.teamError}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.loadTab(c.activeTab, true)">${Try again}</button>
+    </div>
+
+    <!-- My Team Tab -->
+    <div class="tab-team-content" ng-if="!isLoading && !isTabSwitching && c.data.isTeamTab && c.data.teamWidget">
+      <sp-widget widget="c.data.teamWidget"></sp-widget>
+    </div>
+
+    <!-- Hardware/Software Tab Content -->
+    <div class="tab-filter-content" ng-if="!isTabSwitching && !c.data.isTeamTab">
+      <sp-widget widget="c.data.assetFilters"></sp-widget>
+    </div>
+
+    <!-- Skeleton loader -->
+    <div ng-if="!c.data.isTeamTab">
+      <div class="skeleton-loader-container" ng-if="isLoading">
+        <div ng-if="c.data.currentView == 'card'" ng-include="'card-skeleton-loader-ec-assets'"></div>
+        <div ng-if="c.data.currentView == 'list'" ng-include="'ec-asset-list-skeleton-loader'"></div>
+      </div>
+      <div class="tab-asset-content" ng-if="!isLoading">
+        <sp-widget widget="c.data.assetContent"></sp-widget>
+      </div>
+    </div>
+  </div>
+</div>

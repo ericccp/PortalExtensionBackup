@@ -1,0 +1,96 @@
+$label-info-bg: #CBE9FC !default;
+$label-danger-bg: #FFCCD2 !default;
+$font-size-xs: 12px !default;
+$font-size-sm: 14px !default;
+$sp-space--xl: 24px !default;
+
+.software-label {
+  background-color: $label-danger-bg;
+  font-size: $font-size-xs;
+  color: $text-primary;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+}
+
+.banner-container {
+	width: 100%;
+	display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  box-sizing: border-box;
+}
+
+.assets-container {
+  display: grid;
+  gap: $sp-space--xl;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+// Stretch every card through the widget wrappers so cards in a row share the
+// tallest card's height and their bottoms align.
+.assets-container {
+  .asset-card-widget,
+  .asset-card-widget > *,
+  .asset-card-widget > * > * {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
+
+// Equalize software cards across all rows, not just within a row.
+.software-assets-container {
+  grid-auto-rows: 1fr;
+}
+
+@container (max-width: 25em) {
+  .assets-container {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)) !important;
+  }
+}
+
+.empty-state-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 80px;
+}
+
+.empty-title {
+  font-size: 18px;
+  color: $text-primary;
+  text-align: center;
+}
+
+.empty-description {
+  font-size: 16px;
+  color: $text-secondary;
+  text-align: center;
+  max-width: 500px;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: $text-tertiary;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.assets-list-container {
+  border: 1px solid $border-tertiary;
+  border-radius: $border-radius-large;
+  margin: 8px 0;
+  // Scroll a too-wide table instead of clipping cells (e.g. the Unsubscribe
+  // action button); overflow-x also clips overflow-y to keep the rounded corners.
+  overflow-x: auto;
+}

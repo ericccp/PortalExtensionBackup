@@ -156,6 +156,114 @@
         "CURRENT_SERVER_MOD_TIME": 1792689846000,
         "CURRENT_LOCAL_MOD_TIME": 1794411816388,
         "LOCAL_MOD_TIME": 1794411816388
+      },
+      "EC Assets": {
+        "sys_id": "843ba5e093cdc710600674418bba10c3",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1788914060000,
+        "CURRENT_SERVER_MOD_TIME": 1788914060000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581004184,
+        "LOCAL_MOD_TIME": 1794581004184
+      },
+      "EC Asset Notification": {
+        "sys_id": "a04d18af93030710600674418bba1086",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1788856345000,
+        "CURRENT_SERVER_MOD_TIME": 1788856345000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581004189,
+        "LOCAL_MOD_TIME": 1794581004189
+      },
+      "EC Asset Content": {
+        "sys_id": "26f9e56093cdc710600674418bba106b",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1793673170000,
+        "CURRENT_SERVER_MOD_TIME": 1793673170000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581004218,
+        "LOCAL_MOD_TIME": 1794581004218
+      },
+      "EC Asset Card": {
+        "sys_id": "b9ea29e093cdc710600674418bba105f",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1789584313000,
+        "CURRENT_SERVER_MOD_TIME": 1789584313000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581004223,
+        "LOCAL_MOD_TIME": 1794581004223
+      },
+      "EC Asset List Item": {
+        "sys_id": "f4a930a2930d4b50600674418bba10fb",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1789092958000,
+        "CURRENT_SERVER_MOD_TIME": 1789092958000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581004227,
+        "LOCAL_MOD_TIME": 1794581004227
+      },
+      "EC Asset Tabs": {
+        "sys_id": "6c9a69a093cdc710600674418bba1027",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1793673170000,
+        "CURRENT_SERVER_MOD_TIME": 1793673170000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581004229,
+        "LOCAL_MOD_TIME": 1794581004229
+      },
+      "EC Asset Filters V2": {
+        "sys_id": "15d735f993189750600674418bba1061",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1793658821000,
+        "CURRENT_SERVER_MOD_TIME": 1793658821000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581004259,
+        "LOCAL_MOD_TIME": 1794581004259
+      },
+      "EC Asset Filters": {
+        "sys_id": "d72a6d6093cdc710600674418bba106f",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1790571000000,
+        "CURRENT_SERVER_MOD_TIME": 1790571000000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581004261,
+        "LOCAL_MOD_TIME": 1794581004261
+      },
+      "EC Asset Detail Card": {
+        "sys_id": "f289033f93c30b10600674418bba1087",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1789105522000,
+        "CURRENT_SERVER_MOD_TIME": 1789105522000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581004266,
+        "LOCAL_MOD_TIME": 1794581004266
       }
     }
   },
@@ -172,6 +280,18 @@
         "CURRENT_SERVER_MOD_TIME": 1793307519000,
         "CURRENT_LOCAL_MOD_TIME": 1794336697731,
         "LOCAL_MOD_TIME": 1794336697731
+      },
+      "AssetWidgetUtilsExtension": {
+        "sys_id": "f05c692493cdc710600674418bba10da",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1790557977000,
+        "CURRENT_SERVER_MOD_TIME": 1790557977000,
+        "CURRENT_LOCAL_MOD_TIME": 1794581163013,
+        "LOCAL_MOD_TIME": 1794581163013
       }
     }
   }

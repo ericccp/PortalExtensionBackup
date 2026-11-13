@@ -1,0 +1,1 @@
+[{"name":"header_title","section":"Presentation","default_value":"My IT Assets","label":"Title","type":"string"},{"name":"limit","section":"Presentation","default_value":"3","label":"Number of items per page","type":"choice","choices":[{"label":"3","value":"3"},{"label":"6","value":"6"},{"label":"12","value":"12"},{"label":"15","value":"15"}]}]

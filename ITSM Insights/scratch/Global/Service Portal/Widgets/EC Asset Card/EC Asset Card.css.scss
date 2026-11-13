@@ -1,0 +1,479 @@
+$sp-space--lg: 16px !default;
+$text-primary: #181A1F !default;
+$font-size-base: 16px !default;
+$font-size-xs: 12px !default;
+$font-weight-semibold: 600 !default;
+$background-primary: #FFFFFF !default;
+$asset-card-background: $background-primary !default;
+$border-color: $border-tertiary !default;
+$label-info-bg: #CBE9FC !default;
+$label-default-bg: #C2C4CA !default;
+$label-primary-bg: #D1D2EE !default;
+$label-success-bg: #D2EABC !default;
+$label-warning-bg: #FBF7BC !default;
+$label-danger-bg: #FFCCD2 !default;
+
+.label-info-color {
+  background-color: $label-info-bg;
+}
+
+.label-warning-color {
+  background-color: $label-warning-bg;
+}
+
+.label-success-color {
+  background-color: $label-success-bg;
+}
+
+.label-danger-color {
+  background-color: $label-danger-bg;
+}
+
+.label-default-color {
+  background-color: $label-default-bg;
+}
+
+.label-primary-bg {
+  background-color: $label-primary-bg;
+}
+
+.card-icon {
+  color: $text-primary;
+  font-size: $font-size-base;
+}
+
+.asset-card-container,
+.asset-card,
+.asset-card-secondary {
+  min-width: 0;
+}
+
+.asset-card-container {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.asset-card {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px;
+
+  width: 100%;
+  height: auto;
+  padding: $sp-space--lg;
+  overflow: hidden;
+
+  background: $asset-card-background;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+}
+
+/* Hardware card uses a stretched anchor overlay for navigation, mirroring the software card. */
+.asset-card-click-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.asset-card-link {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.asset-card-link:focus {
+  outline: 2px solid #173b53;
+  outline-offset: 2px;
+}
+
+.asset-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #dadde2;
+  pointer-events: none;
+}
+
+.asset-card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.asset-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  font-size: $font-size-xs;
+}
+
+.asset-card-badge i {
+  line-height: 1;
+}
+
+.asset-card-category {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asset-card-label,
+.software-asset-card .software-license-badge,
+.software-asset-card .software-renewal-badge {
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  color: #17324d;
+  font-size: $font-size-xs;
+  font-weight: 600;
+}
+
+.asset-card-label {
+  flex: 0 0 auto;
+  pointer-events: none;
+}
+
+.asset-card-title,
+.asset-card-secondary-field-item {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  color: $text-primary;
+  pointer-events: none;
+}
+
+.asset-card-title {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+}
+
+.asset-card-container .asset-card-title:focus {
+  padding: 0;
+  border: 1.5px solid $input-border-focus;
+  box-shadow: none;
+}
+
+.asset-card-secondary {
+  display: grid;
+  gap: 0.4rem;
+  /* Absorb leftover vertical space so shorter cards match taller siblings. */
+  flex: 1 1 auto;
+  align-content: start;
+}
+
+.asset-card-secondary-field-item {
+  font-size: $font-size-xs;
+}
+
+.asset-card-divider {
+  width: 100%;
+  height: 1px;
+  margin: 8px 0 4px;
+  background: #DADDE2;
+}
+
+.asset-owner-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  margin-top: 8px;
+}
+
+.asset-owner-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.asset-owner-icon {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #EEF3F8;
+  color: #17324D;
+  font-size: 22px;
+}
+
+.asset-owner-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.asset-owner-label {
+  margin-bottom: 2px;
+  color: #5E6C7A;
+  font-size: $font-size-xs;
+  line-height: 1.2;
+}
+
+.asset-owner-name {
+  overflow: hidden;
+  color: $text-primary;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asset-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.asset-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  position: relative;
+  z-index: 2;
+
+  min-width: 0;
+  max-width: 180px;
+  padding: 8px 12px;
+  overflow: hidden;
+
+  background: #F2F5F8;
+  border-radius: 5px;
+  color: #243447;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.asset-meta-chip i {
+  flex: 0 0 auto;
+  color: #17324D;
+  font-size: 14px;
+}
+
+.asset-meta-chip span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asset-card-actions {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.asset-card-action-wrapper {
+  display: inline-flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  z-index: 2;
+}
+
+.asset-card-action-button {
+  width: 100%;
+  border-radius: 5px;
+  font-size: $font-size-small;
+  font-weight: normal;
+}
+
+.asset-card-action.is-disabled,
+.asset-card-action[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(1);
+}
+/* Software licenses use a content-sized layout so details never clip. */
+.software-asset-card {
+  .software-card-content { position: relative; }
+  .software-card-link {
+    display: block;
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+  }
+  .software-card-link:focus {
+    outline: 2px solid #173b53;
+    outline-offset: 2px;
+  }
+  // Inherit the hardware card's height, padding, and outer gap.
+  border-color: #929da5;
+  border-radius: 4px;
+
+  .software-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    flex: 1 0 auto;
+    overflow-wrap: anywhere;
+  }
+
+  .software-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dadde2;
+  }
+
+  .software-card-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .software-card-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: $font-size-xs;
+    color: $text-primary;
+
+    i { font-size: $font-size-base; }
+  }
+
+  .software-license-badge { background: #cbe4f2; }
+  .software-renewal-badge { background: #dce5ec; }
+
+  .software-assignment {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .software-assignment-copy,
+  .software-status-copy { min-width: 0; }
+
+  .software-product-title {
+    margin: 0;
+    font-size: $font-size-base;
+    line-height: 1.25;
+    font-weight: $font-weight-semibold;
+
+    color: $text-primary;
+  }
+
+  .software-muted {
+    margin: 0;
+    color: #5e6c7a;
+    font-size: $font-size-xs;
+    line-height: 1.5;
+  }
+
+  .software-assignment-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #edf3f7;
+    color: #173b53;
+    font-size: 22px;
+  }
+
+  // Keep cost center and unit cost at their natural widths.
+  .asset-meta-chip {
+    flex: 0 0 auto;
+    max-width: none;
+  }
+
+  // Size to the subscription text, shrinking to the remaining row space.
+  .asset-meta-chip-subscription {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .software-assignment-copy .asset-owner-name {
+    margin: 3px 0;
+  }
+
+  .software-license-status {
+    margin-top: auto;
+    padding: 12px;
+    border-radius: 5px;
+    background: #edf5fb;
+  }
+
+  .software-status-row {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .software-status-icon { color: #173b53; font-size: 22px; }
+  .software-status-copy {
+    flex: 1 1 100px;
+    strong { display: block; color: #17324d; font-size: $font-size-base; line-height: 1.3; }
+    .software-muted { margin-top: 5px; }
+  }
+
+  .software-status-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #d7e2eb;
+    color: #5e6c7a;
+    font-size: $font-size-xs;
+    line-height: 1.5;
+
+    i { color: #173b53; font-size: 22px; flex-shrink: 0; }
+    p { margin: 0; }
+  }
+
+  .asset-card-action-button {
+    border: 1px solid #788b99;
+    border-radius: 5px;
+    background: #fff;
+    color: #1675a9;
+    white-space: normal;
+
+    &:hover:not(:disabled) { background: #edf5fb; }
+    &:focus { outline: 2px solid #1875bb; outline-offset: 2px; }
+    &:disabled { opacity: 0.45; cursor: not-allowed; }
+  }
+}

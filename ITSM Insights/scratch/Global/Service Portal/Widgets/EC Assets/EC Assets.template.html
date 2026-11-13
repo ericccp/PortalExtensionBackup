@@ -1,0 +1,25 @@
+<div class="asset-container panel panel-default b panel-wrapper">
+  <!-- Panel Heading -->
+  <div class="panel-heading">
+    <div z-index="-1">
+      <h3 class="panel-title" id="widget-title">{{data.assetsHeader}}</h3>
+      <p class="panel-subtitle">{{data.panelSubtitle}}</p>
+    </div>
+    <div z-index="-1">
+      <button type="button" class="btn btn-default" ng-click="c.redirect(data.actionUrl)">
+        {{data.panelActionTitle}}
+      </button>
+    </div>
+  </div>
+  <!-- Content Container -->
+  <div class="asset-content-container">
+    <!-- Skeleton Loader -->
+    <div class="skeleton-loader-container" ng-if="c.isLoading">
+      <div ng-include="'header-skeleton-loader-ec-assets'"></div>
+    </div>
+    <div ng-class="{'content-loading': c.isLoading}">
+      <!-- Tab Widget -->
+      <sp-widget widget="c.data.widget"></sp-widget>
+    </div>
+  </div>
+</div>

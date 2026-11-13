@@ -1,0 +1,202 @@
+<div class="asset-card-container" tabindex="-1">
+  <div class="asset-card" ng-class="{'software-asset-card': c.data.isSoftware}" tabindex="-1">
+
+    <div class="software-card-content" ng-if="c.data.isSoftware">
+      <div class="software-card-header">
+        <div class="software-card-header-row">
+          <span class="software-card-category"><i class="fa fa-cog" aria-hidden="true"></i> ${Software}</span>
+          <span class="software-license-badge" ng-if="c.data.software.productType">{{c.data.software.productType}}</span>
+        </div>
+        <h3 class="software-product-title">{{c.data.softwareDisplayTitle}}</h3>
+        <a class="software-card-link" ng-href="{{c.data.url}}" aria-label="{{c.data.title || c.data.model}}"></a>
+        <p class="software-muted" ng-if="c.data.manufacturer">
+          <span>{{c.data.manufacturer}}</span>
+        </p>
+      </div>
+
+      <div class="software-assignment">
+        <div class="software-assignment-icon" aria-hidden="true">
+          <i class="fa" ng-class="c.data.software.isDeviceLicense ? 'fa-laptop' : 'fa-user-o'"></i>
+        </div>
+        <div class="software-assignment-copy">
+          <div class="software-muted">{{c.data.software.isDeviceLicense ? '${Assigned to device}' : '${Assigned to}'}}</div>
+          <div class="asset-owner-name">{{c.data.software.isDeviceLicense ? c.data.software.deviceName : (c.data.assigned_to || '${Not assigned}')}}</div>
+          <div class="software-muted" ng-if="c.data.software.deviceModel">{{c.data.software.deviceModel}}</div>
+        </div>
+      </div>
+
+      <div class="asset-meta-row" ng-if="c.data.unit_cost || c.data.cost_center">
+        <span class="asset-meta-chip"
+          ng-if="c.data.cost_center"
+          ec-multiline-ellipsis-tooltip
+          ec-ellipsis-tooltip-title="{{c.data.cost_center}}"
+          ec-ellipsis-tooltip-data-toggle="tooltip"
+          ec-ellipsis-tooltip-data-container="body">
+          <i class="fa fa-sitemap" aria-hidden="true"></i>
+          <span>{{c.data.cost_center}}</span>
+        </span>
+        <span class="asset-meta-chip"
+          ng-if="c.data.unit_cost"
+          ec-multiline-ellipsis-tooltip
+          ec-ellipsis-tooltip-title="${Cost}: {{c.data.unit_cost}}"
+          ec-ellipsis-tooltip-data-toggle="tooltip"
+          ec-ellipsis-tooltip-data-container="body">
+          <!-- <i class="fa fa-usd" aria-hidden="true"></i> -->
+          <span>{{c.data.unit_cost}}</span>
+        </span>
+        <span class="asset-meta-chip asset-meta-chip-subscription"
+          ng-if="c.data.software.subscriptionPeriod"
+          ec-multiline-ellipsis-tooltip
+          ec-ellipsis-tooltip-title="${Subscription period}: {{c.data.software.subscriptionPeriod}}"
+          ec-ellipsis-tooltip-data-toggle="tooltip"
+          ec-ellipsis-tooltip-data-container="body">
+          <span>{{c.data.software.subscriptionPeriod}}</span>
+        </span>
+      </div>
+
+      <!-- software license status container -->
+      <!-- <section class="software-license-status" aria-label="${License status}">
+        <div class="software-muted">${License status}</div>
+        <div class="software-status-row">
+          <i class="fa fa-info-circle software-status-icon" aria-hidden="true"></i>
+          <div class="software-status-copy">
+            <strong>{{c.data.software.status || '${Not available}'}}</strong>
+            <div class="software-muted" ng-if="c.data.software.renewal === 'manual'">${Non-renewing license}</div>
+            <div class="software-muted" ng-if="c.data.software.renewal === 'automatic'">${Automatically renewing license}</div>
+            <div class="software-muted" ng-if="c.data.software.expires">${Expires} {{c.data.software.expires}}</div>
+          </div>
+          <span class="software-renewal-badge" ng-if="c.data.software.renewal">{{c.data.software.renewal === 'manual' ? '${Manual renewal}' : '${Auto renewal}'}}</span>
+        </div>
+        <div class="software-status-note">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+          <p ng-if="c.data.software.renewal === 'manual'">${This license will not renew automatically. Submit a request if continued access is needed.}</p>
+          <p ng-if="c.data.software.renewal === 'automatic'">${This license is set to renew automatically.}</p>
+          <p ng-if="!c.data.software.renewal">${Renewal information is not available for this license.}</p>
+        </div>
+      </section> -->
+    </div>
+
+    <div class="asset-card-click-area"
+      ng-if="!c.data.isSoftware"
+      tabindex="-1">
+
+      <a class="asset-card-link" ng-href="{{c.data.url}}" aria-label="{{c.data.title}}"></a>
+
+      <div class="asset-card-header" tabindex="-1">
+        <div class="asset-card-header-row">
+          <div class="asset-card-badge" tabindex="-1">
+            <i class="{{getCardIcon(c.data.model_category)}} fa card-icon" aria-hidden="true"></i>
+            <span class="asset-card-category">{{c.data.model_category}}</span>
+          </div>
+
+          <span class="asset-card-label"
+            ng-class="getLabelBackground(c.data.status)"
+            id="asset-status-{{c.data.sysID}}"
+            tabindex="-1">
+            {{c.data.status}}
+          </span>
+        </div>
+
+        <div class="asset-card-title"
+          id="asset-card-title-{{c.data.sysID}}"
+          tabindex="-1"
+          aria-labelledby="asset-status-{{c.data.sysID}} asset-card-title-{{c.data.sysID}}"
+          ec-multiline-ellipsis-tooltip
+          ec-ellipsis-tooltip-title="{{c.data.title}}"
+          ec-ellipsis-tooltip-data-toggle="tooltip"
+          ec-ellipsis-tooltip-data-container="body">
+          {{c.data.title}}
+        </div>
+
+        <span ng-if="c.data.model" class="asset-card-secondary-field-item" tabindex="-1">
+          {{c.data.model}}
+        </span>
+
+        <span ng-if="c.data.manufacturer" class="asset-card-secondary-field-item" tabindex="-1">
+          {{c.data.manufacturer}}
+        </span>
+
+        <span ng-if="c.data.unit_cost" class="asset-card-secondary-field-item" tabindex="-1">
+          {{c.data.unit_cost}}
+        </span>
+      </div>
+
+      <div class="asset-card-secondary">
+        <div class="asset-owner-block"
+          ng-if="c.data.assigned_to || c.data.reserved_for || c.data.cost_center || c.data.location">
+
+          <div class="asset-owner-row" ng-if="c.data.assigned_to || c.data.reserved_for">
+            <div class="asset-owner-icon" aria-hidden="true">
+              <i class="fa fa-user-o"></i>
+            </div>
+
+            <div class="asset-owner-text">
+              <div class="asset-owner-label">
+                {{c.data.assigned_to ? '${Assigned to}' : '${Reserved for}'}}
+              </div>
+
+              <div class="asset-owner-name"
+                ec-multiline-ellipsis-tooltip
+                ec-ellipsis-tooltip-title="{{c.data.assigned_to || c.data.reserved_for}}"
+                ec-ellipsis-tooltip-data-toggle="tooltip"
+                ec-ellipsis-tooltip-data-container="body">
+                {{c.data.assigned_to || c.data.reserved_for}}
+              </div>
+            </div>
+          </div>
+
+          <div class="asset-meta-row" ng-if="c.data.cost_center || c.data.location">
+            <span ng-if="c.data.cost_center"
+              class="asset-meta-chip"
+              ec-multiline-ellipsis-tooltip
+              ec-ellipsis-tooltip-title="{{c.data.cost_center}}"
+              ec-ellipsis-tooltip-data-toggle="tooltip"
+              ec-ellipsis-tooltip-data-container="body">
+              <i class="fa fa-sitemap" aria-hidden="true"></i>
+              <span>{{c.data.cost_center}}</span>
+            </span>
+
+            <span ng-if="c.data.location"
+              class="asset-meta-chip"
+              ec-multiline-ellipsis-tooltip
+              ec-ellipsis-tooltip-title="{{c.data.location}}"
+              ec-ellipsis-tooltip-data-toggle="tooltip"
+              ec-ellipsis-tooltip-data-container="body">
+              <i class="fa fa-building-o" aria-hidden="true"></i>
+              <span>{{c.data.location}}</span>
+            </span>
+
+            <span ng-if="c.data.eligible_for_refresh"
+              class="asset-meta-chip"
+              ec-multiline-ellipsis-tooltip
+              ec-ellipsis-tooltip-title="{{c.data.eligible_for_refresh}}"
+              ec-ellipsis-tooltip-data-toggle="tooltip"
+              ec-ellipsis-tooltip-data-container="body">
+              <i class="fa fa-refresh-o" aria-hidden="true"></i>
+              <span>{{c.data.eligible_for_refresh}}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="asset-card-actions" ng-if="c.data.actionConfig && c.data.actionConfig.length">
+      <span class="asset-card-action-wrapper"
+        ng-repeat="action in c.data.actionConfig track by $index"
+        title="{{action.disabled === true ? action.disabledReason : ''}}">
+        <button type="button"
+          class="btn btn-default asset-card-action-button"
+          ng-class="{
+            'btn-primary': action.label == 'Receive' || action.label == 'Confirm',
+            'is-disabled': action.disabled === true
+          }"
+          ng-disabled="action.disabled === true"
+          ng-click="action.label=='Receive' ? c.openReceivePopup(c.data.cardData) : c.redirect(action.url)">
+          {{action.label}}
+        </button>
+        <!-- ng-click="c.handleActionClick($event, action)" -->
+      </span>
+    </div>
+
+  </div>
+</div>

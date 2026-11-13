@@ -1,0 +1,227 @@
+$sp-space--lg: 16px !default;
+$text-primary: #181A1F !default;
+$font-size-base: 16px !default;
+$font-size-xs: 12px !default;
+$font-weight-base: 400 !default;
+$font-weight-semibold: 600 !default;
+$border-color: $border-tertiary !default;
+$label-info-bg: #CBE9FC !default;
+$label-default-bg: #C2C4CA !default;
+$label-primary-bg: #D1D2EE !default;
+$label-success-bg: #D2EABC !default;
+$label-warning-bg: #FBF7BC !default;
+$label-danger-bg: #FFCCD2 !default;
+
+
+.label-info-color {
+  background-color: $label-info-bg; 
+}
+
+.label-warning-color {
+  background-color: $label-warning-bg;
+}
+
+.label-success-color {
+  background-color: $label-success-bg;
+}
+
+.label-danger-color {
+  background-color: $label-danger-bg;
+}
+
+.label-default-color {
+  background-color: $label-default-bg; 
+}
+
+.label-primary-bg {
+    background-color: $label-primary-bg;
+}
+
+
+.assets-list-table {
+  width: 100%;
+  // Keep columns readable in a narrow container; the list wrapper scrolls
+  // horizontally rather than crushing cells (see .assets-list-container).
+  min-width: 720px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+  .assets-list-table {
+    th:last-child,
+    td:last-child {
+      padding-right: 32px;
+    }
+
+    .asset-list-state {
+      display: inline-block;
+      box-sizing: border-box;
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      line-height: 1.4;
+    }
+  }
+}
+
+.asset-col-device {
+  width: auto;
+}
+
+.asset-col-model {
+  width: 15%;
+}
+
+.asset-col-assigned {
+  width: 16%;
+}
+
+.asset-col-cost-center {
+  width: 14%;
+}
+
+.asset-col-location {
+  width: 18%;
+}
+
+.asset-col-state {
+  width: 12%;
+}
+
+.asset-col-updated {
+  width: 8%;
+}
+
+.asset-col-action {
+  width: 18%;
+}
+
+.assets-list-header {
+  border-bottom: 1px solid $border-color;
+}
+
+.assets-list-header th {
+  padding: $sp-space--lg;
+  text-align: left;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-base;
+  color: $text-color;
+}
+
+.asset-list-row {
+  border-bottom: 1px solid $border-color;
+  cursor: pointer;
+}
+
+.asset-list-row:last-child {
+  border-bottom: none;
+}
+
+.asset-list-row td {
+  padding: $sp-space--lg;
+  vertical-align: middle;
+}
+
+.asset-list-title-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.asset-list-title {
+  color: $link-color;
+  text-decoration: none;
+  font-size: $font-size-base;
+  overflow-wrap: anywhere;
+  font-weight: $font-weight-base;
+}
+
+.asset-list-state {
+    border-radius: 3px;
+    pointer-events: none;
+}
+
+.asset-list-updated {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $font-size-base;
+  color: $text-primary;
+  white-space: nowrap;
+}
+
+.asset-list-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $font-size-base;
+  color: $text-primary;
+  min-width: 0;
+  text-align: left;
+  font-weight: $font-weight-base;
+  white-space: normal;
+  // break-word only splits a token when it can't fit on its own line, so
+  // short values like "Annually" stay intact instead of breaking mid-word.
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.asset-list-icon {
+  font-size: $font-size-xs;
+  color: $text-muted;
+}
+
+.asset-list-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.asset-list-secondary-field-item {
+  font-size: $font-size-xs;
+  color: $text-primary;
+  pointer-events: none;
+  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.assets-list-header th.asset-list-action-header {
+  text-align: center;
+}
+
+.asset-list-action {
+  text-align: center;
+  
+  .delete-icon {
+    color: $text-muted;
+    font-size: $font-size-base;
+    cursor: pointer;
+    padding: 8px;
+  }
+}
+
+.asset-list-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.asset-list-action-button {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  font-size: $font-size-small;
+  border-radius: $border-radius-base;
+}
+
+.asset-list-action-button.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

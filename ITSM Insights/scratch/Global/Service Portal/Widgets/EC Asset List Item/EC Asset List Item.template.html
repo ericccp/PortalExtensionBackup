@@ -1,0 +1,82 @@
+<table class="assets-list-table">
+  <colgroup>
+    <col class="asset-col-device">
+    <col class="asset-col-assigned">
+    <!-- <col class="asset-col-model"> -->
+    <col class="asset-col-cost-center">
+    <col class="asset-col-location">
+    <col class="asset-col-state">
+    <!-- <col class="asset-col-updated"> -->
+    <col class="asset-col-action" ng-if="c.data.hasActions">
+  </colgroup>
+  <thead class="assets-list-header">
+    <tr>
+      <th>{{c.data.deviceColumnLabel}}</th>
+      <th>${Assigned To}</th>
+      <!-- <th>${Model}</th> -->
+      <th>${Cost center}</th>
+      <th>{{c.data.isSoftwareTab ? '${Cost}' : '${Location}'}}</th>
+      <th>{{c.data.isSoftwareTab ? '${Period}' : '${State}'}}</th>
+      <!-- <th>${updated_capital}</th> -->
+      <th class="asset-list-action-header" ng-if="c.data.hasActions">${Actions}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="asset-list-row"
+        ng-repeat="asset in c.data.assets track by $index"
+        ng-click="c.navigateToRequest(asset.url, $event)"
+        ng-keydown="c.navigateToRequest(asset.url, $event)"
+        role="button"
+        tabindex="0"
+        aria-label="{{asset.title}}, Status: {{asset.status}}, Updated: {{asset.timestamp}}">
+      <td>
+        <div class="asset-list-title-cell">
+          <span class="asset-list-title">
+            {{asset.title}}
+          </span>
+          <div class="asset-list-secondary">
+            <span class="asset-list-secondary-field-item" ng-repeat="field in asset.description">{{field}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <span class="asset-list-text">{{asset.assigned_to || asset.reserved_for || '${Not assigned}'}}</span>
+      </td>
+      <!-- <td>
+        <span class="label asset-list-text">{{asset.model}}</span>
+      </td> -->
+      <td>
+        <span class="asset-list-text">{{asset.cost_center}}</span>
+      </td>
+      <td>
+        <span class="asset-list-text">{{c.data.isSoftwareTab ? asset.unit_cost : asset.location}}</span>
+      </td>
+      <td>
+        <span ng-if="c.data.isSoftwareTab" class="asset-list-text">{{asset.subscriptionPeriod}}</span>
+        <span ng-if="!c.data.isSoftwareTab" class="label asset-list-state" ng-class="getLabelBackground(asset.status)" id="asset-status-{{asset.sysID}}">{{asset.status}}</span>
+      </td>
+      <!-- <td>
+        <div class="asset-list-updated">
+          <i class="fa fa-clock-o asset-list-icon"></i>
+          <sn-time-ago timestamp="asset.timestamp" tabindex="-1"></sn-time-ago>
+        </div>
+      </td> -->
+      <!-- action table data -->
+      <td ng-if="c.data.hasActions" class="asset-list-action"
+          ng-click="$event.stopPropagation()"
+          ng-keydown="$event.stopPropagation()">
+        <div class="asset-list-actions">
+          <button type="button"
+                  class="btn btn-default asset-list-action-button"
+                  ng-repeat="action in asset.actionConfig track by $index"
+                  ng-class="{'btn-primary': action.type === 'receive' || action.type === 'confirm', 'is-disabled': action.disabled === true}"
+                  ng-disabled="action.disabled === true"
+                  ng-click="c.handleActionClick(asset, action, $event)"
+                  title="{{action.disabled === true ? action.disabledReason : ''}}">
+            {{action.label}}
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
