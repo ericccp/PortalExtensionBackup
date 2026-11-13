@@ -1,0 +1,68 @@
+<section class="itam-docs" aria-labelledby="itam-docs-title-{{::$id}}">
+  <header class="itam-docs__header">
+    <div>
+      <h2 class="itam-docs__title" id="itam-docs-title-{{::$id}}">{{::c.data.text.title}}</h2>
+      <p class="itam-docs__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+    </div>
+    <a class="itam-docs__view-all" ng-if="::c.data.viewAllUrl" ng-href="{{::c.data.viewAllUrl}}">
+      {{::c.data.text.viewAll}}<i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </header>
+
+  <div class="itam-docs__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-docs__empty" ng-if="::(!c.data.loadError && !c.data.docs.length)">
+    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+    <p>{{::c.data.text.noDocs}}</p>
+  </div>
+
+  <ul class="itam-docs__grid" ng-if="::c.data.docs.length">
+    <li class="itam-doc" ng-repeat="doc in ::c.data.docs track by doc.id" ng-class="'itam-doc--' + doc.type">
+      <div class="itam-doc__body">
+        <span class="itam-doc__type">
+          <i class="fa {{::doc.icon}}" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.typeLabel}}:</span>{{::doc.typeLabel}}
+        </span>
+        <h3 class="itam-doc__title">{{::doc.title}}</h3>
+        <p class="itam-doc__summary" itam-glossary-terms ng-if="::doc.summary">{{::doc.summary}}</p>
+
+        <div class="itam-doc__points" ng-if="::doc.keyPoints.length">
+          <button type="button"
+                  class="itam-doc__toggle"
+                  aria-expanded="{{!!c.open[doc.id]}}"
+                  aria-controls="itam-doc-points-{{::doc.id}}"
+                  ng-click="c.toggle(doc)">
+            <i class="fa" ng-class="c.open[doc.id] ? 'fa-angle-up' : 'fa-angle-down'" aria-hidden="true"></i>
+            {{c.open[doc.id] ? c.data.text.hidePoints : c.data.text.showPoints}}
+          </button>
+          <ul itam-glossary-terms id="itam-doc-points-{{::doc.id}}" ng-show="c.open[doc.id]" aria-label="{{::c.data.text.keyPoints}}">
+            <li ng-repeat="point in ::doc.keyPoints track by $index">{{::point}}</li>
+          </ul>
+        </div>
+
+        <dl class="itam-doc__meta" ng-if="::(doc.owner || doc.version || doc.approved || doc.nextReview)">
+          <div ng-if="::doc.owner"><dt>{{::c.data.text.ownerLabel}}</dt><dd>{{::doc.owner}}</dd></div>
+          <div ng-if="::doc.version"><dt>{{::c.data.text.versionLabel}}</dt><dd>{{::doc.version}}</dd></div>
+          <div ng-if="::doc.approved"><dt>{{::c.data.text.approvedLabel}}</dt><dd>{{::doc.approved}}</dd></div>
+          <div ng-if="::doc.nextReview"><dt>{{::c.data.text.reviewLabel}}</dt><dd>{{::doc.nextReview}}</dd></div>
+        </dl>
+      </div>
+
+      <div class="itam-doc__footer">
+        <a class="itam-doc__read"
+           ng-if="::doc.url"
+           ng-href="{{::doc.url}}"
+           ng-attr-target="{{::doc.external ? '_blank' : undefined}}"
+           ng-attr-rel="{{::doc.external ? 'noopener noreferrer' : undefined}}">
+          {{::c.data.text.read}}<span class="sr-only">: {{::doc.title}}</span>
+          <i class="fa" ng-class="::doc.external ? 'fa-external-link' : 'fa-arrow-right'" aria-hidden="true"></i>
+          <span class="sr-only" ng-if="::doc.external">({{::c.data.text.opensNewWindow}})</span>
+        </a>
+        <span class="itam-doc__soon" ng-if="::!doc.url">{{::c.data.text.comingSoon}}</span>
+      </div>
+    </li>
+  </ul>
+</section>

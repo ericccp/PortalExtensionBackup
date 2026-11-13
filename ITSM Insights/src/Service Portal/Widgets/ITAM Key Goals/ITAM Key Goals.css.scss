@@ -1,0 +1,315 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-success-darker: #306700 !default;
+$brand-warning-darker: #8a4b00 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-goals {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-goals .itam-goals__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.itam-goals .itam-goals__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-goals .itam-goals__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-goals .itam-goals__years {
+  display: flex;
+  gap: 8px;
+}
+
+.itam-goals .itam-goals__year {
+  min-height: 32px;
+  padding: 4px 14px;
+  border: 1px solid $hr-border;
+  border-radius: 16px;
+  background: $background-primary;
+  color: $text-primary;
+  font-size: 14px;
+}
+
+.itam-goals .itam-goals__year:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-goals .itam-goals__year.itam-goals__year--active {
+  border: 2px solid $brand-primary-darker;
+  padding: 3px 13px;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-weight: 600;
+}
+
+.itam-goals .itam-goals__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-goals .itam-goals__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 24px;
+  border: 1px dashed $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-tertiary;
+  text-align: center;
+}
+
+.itam-goals .itam-goals__empty p {
+  margin: 0;
+}
+
+.itam-goals .itam-goals__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// ---- Goal row ----
+.itam-goals .itam-goal {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 24px;
+  padding: 20px 24px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-goals .itam-goal__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.itam-goals .itam-goal__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.itam-goals .itam-goal__target {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $text-tertiary;
+}
+
+.itam-goals .itam-goal__name {
+  margin: 12px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.itam-goals .itam-goal__desc {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+.itam-goals .itam-goal__progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.itam-goals .itam-goal__bar {
+  flex: 1 1 auto;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e6eaeb;
+}
+
+.itam-goals .itam-goal__fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: $brand-primary-darker;
+}
+
+.itam-goals .itam-goal__percent {
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: $text-secondary;
+}
+
+.itam-goals .itam-goal__detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding-left: 24px;
+  border-left: 1px solid $hr-border;
+}
+
+.itam-goals .itam-goal__label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $text-tertiary;
+}
+
+.itam-goals .itam-goal__criteria {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.itam-goals .itam-goal__criteria li {
+  display: flex;
+  gap: 8px;
+}
+
+.itam-goals .itam-goal__criteria li + li {
+  margin-top: 6px;
+}
+
+.itam-goals .itam-goal__criteria i {
+  margin-top: 3px;
+  color: $brand-primary-darker;
+}
+
+.itam-goals .itam-goal__projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-goals .itam-goal__projects a,
+.itam-goals .itam-goal__projects span {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background: $background-secondary;
+  color: $brand-primary-darker;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.itam-goals .itam-goal__projects span {
+  color: $text-secondary;
+}
+
+.itam-goals .itam-goal__projects a:hover {
+  text-decoration: underline;
+}
+
+.itam-goals .itam-goal__none {
+  margin: 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+// ---- Status: chip and progress fill per state (icon and label carry the meaning too) ----
+.itam-goals .itam-goal--complete .itam-goal__status {
+  background: #e9f8ef;
+  color: $brand-success-darker;
+}
+
+.itam-goals .itam-goal--complete .itam-goal__fill {
+  background: $brand-success-darker;
+}
+
+.itam-goals .itam-goal--at_risk .itam-goal__status {
+  background: #fff3e0;
+  color: $brand-warning-darker;
+}
+
+.itam-goals .itam-goal--at_risk .itam-goal__fill {
+  background: #c77700;
+}
+
+.itam-goals .itam-goal--off_track .itam-goal__status {
+  background: #fdecec;
+  color: $brand-danger-darker;
+}
+
+.itam-goals .itam-goal--off_track .itam-goal__fill {
+  background: $brand-danger-darker;
+}
+
+.itam-goals .itam-goal--not_started .itam-goal__status {
+  background: $background-secondary;
+  color: $text-tertiary;
+}
+
+@media (max-width: 1000px) {
+  .itam-goals .itam-goal {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .itam-goals .itam-goal__detail {
+    padding: 16px 0 0;
+    border-left: 0;
+    border-top: 1px solid $hr-border;
+  }
+}
+
+@media (max-width: 767px) {
+  .itam-goals .itam-goal {
+    padding: 16px;
+  }
+
+  .itam-goals .itam-goal__detail {
+    grid-template-columns: 1fr;
+  }
+}

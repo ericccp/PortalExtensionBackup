@@ -1,0 +1,58 @@
+<section class="maintenance-windows" aria-labelledby="maintenance-windows-heading-{{::$id}}" aria-busy="{{c.loading}}">
+  <div class="maintenance-windows__header">
+    <div class="maintenance-windows__heading-group">
+      <h2 id="maintenance-windows-heading-{{::$id}}" class="maintenance-windows__heading">{{::c.data.messages.heading}}</h2>
+      <p ng-if="::c.data.messages.subHeading" class="maintenance-windows__subtitle">{{::c.data.messages.subHeading}}</p>
+    </div>
+    <a ng-if="c.data.viewAllUrl" class="maintenance-windows__view-all" ng-href="{{c.data.viewAllUrl}}" target="_blank">{{::c.data.messages.viewAll}}</a>
+  </div>
+
+  <ul ng-if="c.loading" class="maintenance-windows__list" aria-hidden="true">
+    <li ng-repeat="i in [1, 2, 3]" class="maintenance-window maintenance-window--loading">
+      <span class="maintenance-window__placeholder maintenance-window__placeholder--date"></span>
+      <span class="maintenance-window__body">
+        <span class="maintenance-window__placeholder maintenance-window__placeholder--title"></span>
+        <span class="maintenance-window__placeholder maintenance-window__placeholder--line"></span>
+      </span>
+    </li>
+  </ul>
+
+  <p ng-if="!c.loading && c.noLocation" class="maintenance-windows__empty">{{::c.data.messages.chooseLocation}}</p>
+  <p ng-if="!c.loading && !c.noLocation && !c.data.locationFound" class="maintenance-windows__empty">{{::c.data.messages.locationNotFound}}</p>
+  <p ng-if="!c.loading && !c.noLocation && c.data.locationFound && !c.data.windows.length" class="maintenance-windows__empty">{{::c.data.messages.empty}}</p>
+
+  <ul ng-if="!c.loading && c.data.windows.length" class="maintenance-windows__list">
+    <li ng-repeat="window in c.data.windows | limitTo:c.data.pageSize:c.page * c.data.pageSize track by window.id" class="maintenance-window">
+      <div class="maintenance-window__date" aria-hidden="true">
+        <span class="maintenance-window__weekday">{{window.weekday}}</span>
+        <span class="maintenance-window__day">{{window.dayOfMonth}}</span>
+      </div>
+      <div class="maintenance-window__body">
+        <h3 class="maintenance-window__title">
+          <a class="maintenance-window__link" ng-href="?id={{c.data.recordPage}}&table={{window.table}}&sys_id={{window.sysId}}">{{window.title}}</a>
+        </h3>
+        <p class="maintenance-window__time">
+          <span class="sr-only">{{window.dateLabel}},</span>
+          {{window.time}}
+          <span ng-if="window.inProgress" class="maintenance-window__badge">{{::c.data.messages.inProgress}}</span>
+        </p>
+        <p class="maintenance-window__meta">
+          <span class="maintenance-window__number">{{window.number}}</span><span ng-if="window.impact"> · {{window.impact}}</span>
+        </p>
+      </div>
+    </li>
+  </ul>
+
+  <nav ng-if="!c.loading && c.pageCount() > 1" class="maintenance-windows__pager" aria-label="{{::c.data.messages.pagerLabel}}">
+    <button type="button" class="maintenance-windows__page-button" ng-click="c.goToPage(c.page - 1)" ng-disabled="c.page === 0">{{::c.data.messages.previous}}</button>
+    <span class="maintenance-windows__page-status" aria-live="polite">{{c.pageLabel()}}</span>
+    <button type="button" class="maintenance-windows__page-button" ng-click="c.goToPage(c.page + 1)" ng-disabled="c.page >= c.pageCount() - 1">{{::c.data.messages.next}}</button>
+  </nav>
+
+  <div ng-if="!c.loading && c.data.windows.length" class="maintenance-windows__actions">
+    <button type="button" class="maintenance-windows__action" ng-click="c.addToCalendar()">
+      {{::c.data.messages.addToCalendar}}
+    </button>
+    <a ng-if="c.data.varianceUrl" class="maintenance-windows__action" ng-href="{{c.data.varianceUrl}}">{{::c.data.messages.requestVariance}}</a>
+  </div>
+</section>

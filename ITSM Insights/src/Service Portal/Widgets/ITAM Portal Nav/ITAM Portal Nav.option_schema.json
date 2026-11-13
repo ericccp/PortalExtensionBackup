@@ -1,0 +1,1 @@
+[{"name":"brand_label","label":"Wordmark","type":"string","default_value":"","section":"Presentation","hint":"Program name at the left of the tabs. Defaults to \"IT Asset Management Program\" when empty"},{"name":"show_icons","label":"Show tab icons","type":"boolean","default_value":"true","section":"Presentation","hint":"Shows an icon before each tab label on wide screens"}]

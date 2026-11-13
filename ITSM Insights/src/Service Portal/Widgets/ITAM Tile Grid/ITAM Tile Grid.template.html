@@ -1,0 +1,28 @@
+<section class="itam-tiles" ng-class="'itam-tiles--' + c.data.variant" aria-labelledby="itam-tiles-title-{{::$id}}">
+  <header class="itam-tiles__header">
+    <h2 class="itam-tiles__title" id="itam-tiles-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-tiles__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <!-- Link tiles: the whole card is one link -->
+  <ul class="itam-tiles__grid" ng-if="::c.data.variant === 'links'">
+    <li ng-repeat="tile in ::c.data.tiles track by tile.id">
+      <a class="itam-tile" ng-href="{{::tile.url}}" ng-attr-target="{{::tile.external ? '_blank' : undefined}}" ng-attr-rel="{{::tile.external ? 'noopener noreferrer' : undefined}}">
+        <span class="itam-tile__icon" aria-hidden="true"><i class="fa {{::tile.icon}}"></i></span>
+        <span class="itam-tile__title">{{::tile.title}}</span>
+        <span class="itam-tile__desc" ng-if="::tile.description">{{::tile.description}}</span>
+        <i class="fa fa-arrow-right itam-tile__arrow" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Steps: numbered, not links -->
+  <ol class="itam-tiles__grid" ng-if="::c.data.variant === 'steps'">
+    <li class="itam-step" ng-repeat="tile in ::c.data.tiles track by tile.id">
+      <span class="itam-step__number" aria-hidden="true">{{::$index + 1}}</span>
+      <span class="itam-step__icon" aria-hidden="true"><i class="fa {{::tile.icon}}"></i></span>
+      <h3 class="itam-step__title"><span class="sr-only">{{::tile.step}}: </span>{{::tile.title}}</h3>
+      <p class="itam-step__desc" itam-glossary-terms ng-if="::tile.description">{{::tile.description}}</p>
+    </li>
+  </ol>
+</section>

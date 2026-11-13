@@ -1,0 +1,22 @@
+<section class="itam-callout" ng-class="'itam-callout--' + c.data.style" aria-labelledby="itam-callout-title-{{::$id}}">
+  <span class="itam-callout__icon" aria-hidden="true" ng-if="::c.data.icon"><i class="fa {{::c.data.icon}}"></i></span>
+  <div class="itam-callout__content" itam-glossary-terms>
+    <p class="itam-callout__eyebrow" ng-if="::c.data.text.eyebrow">{{::c.data.text.eyebrow}}</p>
+    <h2 class="itam-callout__title" id="itam-callout-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-callout__body" ng-repeat="p in ::c.data.paragraphs track by $index">{{::p}}</p>
+
+    <div class="itam-callout__actions" ng-if="::c.data.buttons.length">
+      <a class="itam-callout__button"
+         ng-repeat="btn in ::c.data.buttons track by btn.id"
+         ng-class="{'itam-callout__button--secondary': btn.secondary}"
+         ng-href="{{::btn.url}}"
+         ng-attr-target="{{::btn.external ? '_blank' : undefined}}"
+         ng-attr-rel="{{::btn.external ? 'noopener noreferrer' : undefined}}">
+        <i class="fa {{::btn.icon}}" aria-hidden="true" ng-if="::btn.icon"></i>
+        <span>{{::btn.label}}</span>
+        <i class="fa fa-external-link" aria-hidden="true" ng-if="::btn.external"></i>
+        <span class="sr-only" ng-if="::btn.external">({{::c.data.text.opensNewWindow}})</span>
+      </a>
+    </div>
+  </div>
+</section>

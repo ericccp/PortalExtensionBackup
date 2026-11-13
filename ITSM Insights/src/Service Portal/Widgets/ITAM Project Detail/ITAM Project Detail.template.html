@@ -1,0 +1,157 @@
+<div class="itam-project">
+  <nav class="itam-project__breadcrumb" aria-label="{{::c.data.text.breadcrumbLabel}}">
+    <ol>
+      <li><a ng-href="?id={{::c.data.roadmapPage}}">{{::c.data.text.programLabel}}</a></li>
+      <li aria-current="page" ng-if="::c.data.project">{{::c.data.project.name}}</li>
+    </ol>
+  </nav>
+
+  <div class="itam-project__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <!-- Not found -->
+  <section class="itam-project__missing" ng-if="::(!c.data.loadError && !c.data.project)">
+    <i class="fa fa-map-o" aria-hidden="true"></i>
+    <h1>{{::c.data.text.notFoundTitle}}</h1>
+    <p>{{::c.data.text.notFound}}</p>
+    <a class="itam-project__button" ng-href="?id={{::c.data.roadmapPage}}">{{::c.data.text.viewRoadmap}}</a>
+  </section>
+
+  <article ng-if="::c.data.project" ng-init="p = c.data.project">
+    <!-- Header -->
+    <header class="itam-project__header" ng-class="'itam-project__header--' + p.workstream">
+      <div class="itam-project__chips">
+        <span class="itam-chip itam-chip--ws">
+          <i class="fa {{::p.workstreamIcon}}" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.workstreamLabel}}:</span>{{::p.workstreamLabel}}
+        </span>
+        <span class="itam-chip" ng-class="'itam-chip--' + p.status">
+          <i class="fa {{::p.statusIcon}}" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.statusLabel}}:</span>{{::p.statusLabel}}
+        </span>
+        <span class="itam-chip" ng-class="'itam-chip--health-' + p.health" ng-if="::p.health">
+          <i class="fa {{::p.healthIcon}}" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.healthLabel}}:</span>{{::p.healthLabel}}
+        </span>
+        <span class="itam-chip itam-chip--phase" ng-if="::p.phase">
+          <span class="sr-only">{{::c.data.text.phaseLabel}}:</span>{{::p.phase}}
+        </span>
+      </div>
+      <h1 class="itam-project__title">{{::p.name}}</h1>
+      <p class="itam-project__lead" itam-glossary-terms ng-if="::p.shortDescription">{{::p.shortDescription}}</p>
+
+      <div class="itam-project__actions" ng-if="::(p.statusReportUrl || p.moreInfoUrl)">
+        <a class="itam-project__button" ng-if="::p.statusReportUrl" ng-href="{{::p.statusReportUrl}}" target="_blank" rel="noopener noreferrer">
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          <span>{{::c.data.text.statusReport}}</span>
+          <span class="sr-only">({{::c.data.text.opensNewWindow}})</span>
+        </a>
+        <a class="itam-project__button itam-project__button--secondary" ng-if="::p.moreInfoUrl" ng-href="{{::p.moreInfoUrl}}" target="_blank" rel="noopener noreferrer">
+          <span>{{::c.data.text.moreInfo}}</span>
+          <i class="fa fa-external-link" aria-hidden="true"></i>
+          <span class="sr-only">({{::c.data.text.opensNewWindow}})</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="itam-project__layout">
+      <div class="itam-project__main">
+        <!-- Key facts -->
+        <dl class="itam-project__facts">
+          <div>
+            <dt>{{::c.data.text.startLabel}}</dt>
+            <dd>{{::(p.startDate || c.data.text.notScheduled)}}</dd>
+          </div>
+          <div>
+            <dt>{{::c.data.text.endLabel}}</dt>
+            <dd>{{::(p.endDate || c.data.text.notScheduled)}}</dd>
+          </div>
+          <div ng-if="::p.owner">
+            <dt>{{::c.data.text.ownerLabel}}</dt>
+            <dd>{{::p.owner.name}}</dd>
+          </div>
+          <div class="itam-project__progress" ng-if="::p.percentComplete !== null">
+            <dt>{{::c.data.text.progressLabel}}</dt>
+            <dd>
+              <span class="itam-project__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{::p.percentComplete}}" aria-label="{{::c.data.text.progressLabel}}">
+                <span class="itam-project__fill" ng-style="::{width: p.percentComplete + '%'}"></span>
+              </span>
+              <span>{{::c.percentText(p.percentComplete)}}</span>
+            </dd>
+          </div>
+        </dl>
+
+        <section class="itam-project__section" aria-labelledby="itam-project-about-{{::$id}}">
+          <h2 class="itam-project__heading" id="itam-project-about-{{::$id}}">{{::c.data.text.overviewHeading}}</h2>
+          <p class="itam-project__text" itam-glossary-terms ng-if="::p.description">{{::p.description}}</p>
+          <p class="itam-project__muted" ng-if="::!p.description">{{::c.data.text.noDescription}}</p>
+        </section>
+
+        <section class="itam-project__section" ng-if="::p.scope.length" aria-labelledby="itam-project-scope-{{::$id}}">
+          <h2 class="itam-project__heading" id="itam-project-scope-{{::$id}}">{{::c.data.text.scopeHeading}}</h2>
+          <ul class="itam-project__scope" itam-glossary-terms>
+            <li ng-repeat="item in ::p.scope track by $index">
+              <i class="fa fa-check" aria-hidden="true"></i>
+              <span>{{::item}}</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="itam-project__section" ng-if="::p.team.length" aria-labelledby="itam-project-team-{{::$id}}">
+          <h2 class="itam-project__heading" id="itam-project-team-{{::$id}}">{{::c.data.text.teamHeading}}</h2>
+          <ul class="itam-project__team">
+            <li class="itam-person" ng-repeat="person in ::p.team track by person.memberId">
+              <img class="itam-person__avatar" ng-if="::person.photo" ng-src="{{::person.photo}}" alt="" />
+              <span class="itam-person__avatar itam-person__avatar--initials" ng-if="::!person.photo" aria-hidden="true">{{::person.initials}}</span>
+              <span class="itam-person__body">
+                <span class="itam-person__name">{{::person.name}}</span>
+                <span class="itam-person__role" ng-if="::person.programRole">{{::person.programRole}}</span>
+                <a class="itam-person__email" ng-if="::person.email" ng-href="mailto:{{::person.email}}">
+                  <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                  <span class="sr-only">{{::c.emailLabel(person)}}</span>
+                </a>
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="itam-project__section" ng-if="::(p.previousPhase || p.nextPhases.length)" aria-labelledby="itam-project-phases-{{::$id}}">
+          <h2 class="itam-project__heading" id="itam-project-phases-{{::$id}}">{{::c.data.text.phasesHeading}}</h2>
+          <ul class="itam-project__phases">
+            <li ng-if="::p.previousPhase">
+              <span class="itam-project__phase-label"><i class="fa fa-arrow-left" aria-hidden="true"></i> {{::c.data.text.previousPhase}}</span>
+              <a ng-href="?id={{::c.data.projectPage}}&sys_id={{::p.previousPhase.id}}">{{::p.previousPhase.name}}</a>
+            </li>
+            <li ng-repeat="next in ::p.nextPhases track by next.id">
+              <span class="itam-project__phase-label">{{::c.data.text.nextPhase}} <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+              <a ng-href="?id={{::c.data.projectPage}}&sys_id={{::next.id}}">{{::next.name}}</a>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <aside class="itam-project__aside">
+        <section class="itam-project__card" ng-if="::p.goal" aria-labelledby="itam-project-goal-{{::$id}}">
+          <h2 class="itam-project__card-title" id="itam-project-goal-{{::$id}}">
+            <i class="fa fa-bullseye" aria-hidden="true"></i> {{::c.data.text.goalHeading}}
+          </h2>
+          <p class="itam-project__goal">{{::p.goal.name}}</p>
+          <a class="itam-project__link" ng-href="?id={{::c.data.roadmapPage}}&tab=goals">{{::c.data.text.viewGoals}}</a>
+        </section>
+
+        <section class="itam-project__card" ng-if="::c.data.related.length" aria-labelledby="itam-project-related-{{::$id}}">
+          <h2 class="itam-project__card-title" id="itam-project-related-{{::$id}}">{{::c.data.text.relatedHeading}}</h2>
+          <ul class="itam-project__related">
+            <li ng-repeat="r in ::c.data.related track by r.id">
+              <a ng-href="?id={{::c.data.projectPage}}&sys_id={{::r.id}}">{{::r.name}}</a>
+              <span>{{::r.workstreamLabel}}</span>
+            </li>
+          </ul>
+          <a class="itam-project__link" ng-href="?id={{::c.data.roadmapPage}}&tab=projects">{{::c.data.text.viewRoadmap}}</a>
+        </section>
+      </aside>
+    </div>
+  </article>
+</div>

@@ -1,0 +1,40 @@
+// Matches the corner rounding cap of Device Check-In / Check-Out
+$max-radius: 8px !default;
+
+.location-filter {
+  position: relative;
+  flex-shrink: 0;
+
+  // Bootstrap's pill badge is 10px
+  .badge {
+    border-radius: $max-radius;
+  }
+
+  .location-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 4px;
+    width: 360px;
+    max-width: 90vw;
+    z-index: 1000;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  }
+
+  .location-actions {
+    margin-top: 10px;
+  }
+
+  // Button takes a full-width row on phones
+  @media (max-width: 767px) {
+    > .btn {
+      width: 100%;
+    }
+
+    .location-menu {
+      left: 0;
+      width: auto;
+      max-width: none;
+    }
+  }
+}

@@ -1,0 +1,149 @@
+$text-primary: #181A1F !default;
+$text-muted: #656E81 !default;
+$header-background: #F4F5F7 !default;
+$border-tertiary: #DADDE2 !default;
+$select-primary: #007b58 !default;
+$sp-space--sm: 8px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+$font-size-base: 16px !default;
+$font-weight-semibold: 600 !default;
+
+// Same background and side padding as Site Status Header so the tabs read as part of it
+.w360-tabs {
+  background-color: $header-background;
+  padding-left: $sp-space--xl;
+  padding-right: $sp-space--xl;
+}
+
+// Status cards add their own 16px top padding below this
+.w360-tabs .w360-tabs__bar {
+  margin-bottom: $sp-space--sm;
+  border-bottom: 1px solid $border-tertiary;
+}
+
+// The bordered widgets (Incidents and Outages, Maintenance Windows, ...) carry an 8px side margin.
+// Pulling the row out by that much and dropping Bootstrap's column padding puts their edges on the
+// tab bar's edges, with a 16px gutter between columns that matches the status card grid.
+.w360-tabs .w360-tabs__row {
+  margin-left: -1 * $sp-space--sm;
+  margin-right: -1 * $sp-space--sm;
+}
+
+.w360-tabs .w360-tabs__col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// These two have 24px side padding instead of a margin; 8px lines their cards up with the widgets below.
+// Scoped here so the original warehouse_360 page keeps its spacing.
+.w360-tabs .site-status-cards,
+.w360-tabs .service-offerings {
+  padding-left: $sp-space--sm;
+  padding-right: $sp-space--sm;
+}
+
+// Priority Incident Trend (ITSM Insights) has no outer margin and smaller padding; match the
+// Site Status cards here without changing it on other pages. Corner radius comes from the widget itself.
+.w360-tabs .pit {
+  margin: 0 $sp-space--sm $sp-space--lg;
+  padding: $sp-space--xl;
+}
+
+// Warranty and End of Life (ITSM Insights) has the same spacing; same treatment as .pit above
+.w360-tabs .weol {
+  margin: 0 $sp-space--sm $sp-space--lg;
+  padding: $sp-space--xl;
+}
+
+// The Assets tab opens onto the Asset Action Toolbar, so it needs more room under the tab bar than the
+// status cards; its 16px bottom margin then spaces the cards below like the gaps between other cards
+.w360-tabs .w360-tabs__panel--assets .asset-action-toolbar {
+  margin-top: $sp-space--lg;
+}
+
+// Same for the Performance tab, which opens onto the Priority Incident Trend card
+.w360-tabs .w360-tabs__panel--performance .pit {
+  margin-top: $sp-space--lg;
+}
+
+// Scrolls sideways on narrow screens instead of wrapping
+.w360-tabs .w360-tabs__list {
+  display: flex;
+  gap: $sp-space--xl;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.w360-tabs .w360-tabs__tab {
+  flex-shrink: 0;
+  margin-bottom: -1px;
+  padding: $sp-space--sm 0 10px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: $text-muted;
+  font-size: $font-size-base;
+  white-space: nowrap;
+
+  &:hover {
+    color: $text-primary;
+    border-bottom-color: $border-tertiary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #1875bb;
+    outline-offset: 2px;
+  }
+}
+
+// Weight as well as color marks the active tab
+.w360-tabs .w360-tabs__tab.w360-tabs__tab--active {
+  color: $text-primary;
+  font-weight: $font-weight-semibold;
+  border-bottom-color: $select-primary;
+}
+
+.w360-tabs .w360-tabs__message {
+  margin: 0 0 $sp-space--xl;
+  padding: $sp-space--xl;
+  color: $text-muted;
+  text-align: center;
+
+  p {
+    margin: 0 0 $sp-space--lg;
+  }
+}
+
+// Same empty state as Approved Applications (Portal Extension), minus its Clear filters button.
+// No top border here: the tab bar's bottom border already sits directly above it.
+.w360-tabs .w360-tabs__empty {
+  padding: 48px $sp-space--xl;
+  text-align: center;
+
+  > i {
+    font-size: 24px;
+    color: $text-muted;
+  }
+
+  h3 {
+    margin: $sp-space--lg 0 $sp-space--sm;
+    font-size: 18px;
+  }
+
+  p {
+    margin: 0;
+    color: $text-muted;
+  }
+}
+
+@media (max-width: 767px) {
+  .w360-tabs {
+    padding-left: $sp-space--lg;
+    padding-right: $sp-space--lg;
+  }
+
+  .w360-tabs .w360-tabs__list {
+    gap: $sp-space--lg;
+  }
+}

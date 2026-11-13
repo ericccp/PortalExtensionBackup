@@ -1,0 +1,178 @@
+{
+  "Service Portal": {
+    "Widgets": {
+      "Maintenance Windows": {
+        "sys_id": "dd14e5ac938c9718600674418bba108f",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1793299084000,
+        "CURRENT_SERVER_MOD_TIME": 1793299084000,
+        "CURRENT_LOCAL_MOD_TIME": 1794336668030,
+        "LOCAL_MOD_TIME": 1794336668030
+      },
+      "Warranty and End of Life": {
+        "sys_id": "db5cc5bfbb7f4a46b84fda14713a3e3d",
+        "SYS_PACKAGE": "cfb5d57c2e6d44ac88db0ae711b54a71",
+        "packageName": "ITSM Insights",
+        "scopeId": "cfb5d57c2e6d44ac88db0ae711b54a71",
+        "scopeName": "ITSM Insights",
+        "scopeValue": "x_1026751_itsm_ins",
+        "SERVER_MOD_TIME": 1792534343000,
+        "CURRENT_SERVER_MOD_TIME": 1792534343000,
+        "CURRENT_LOCAL_MOD_TIME": 1794339424524,
+        "LOCAL_MOD_TIME": 1794339424524
+      },
+      "Site Status Header": {
+        "sys_id": "685629e093cc9718600674418bba10a8",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1793302641000,
+        "CURRENT_SERVER_MOD_TIME": 1793302641000,
+        "CURRENT_LOCAL_MOD_TIME": 1794340569598,
+        "LOCAL_MOD_TIME": 1794340569598
+      },
+      "Monitored Assets": {
+        "sys_id": "2275a8a593041358600674418bba10fd",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1793307519000,
+        "CURRENT_SERVER_MOD_TIME": 1793307519000,
+        "CURRENT_LOCAL_MOD_TIME": 1794341240411,
+        "LOCAL_MOD_TIME": 1794341240411
+      },
+      "Location Preference Selector": {
+        "sys_id": "cfc747119384df18600674418bba107f",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1792687662000,
+        "CURRENT_SERVER_MOD_TIME": 1792687662000,
+        "CURRENT_LOCAL_MOD_TIME": 1794344427256,
+        "LOCAL_MOD_TIME": 1794344427256
+      },
+      "Warehouse 360 Tabs": {
+        "sys_id": "288d282d93441358600674418bba101e",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1793380938000,
+        "CURRENT_SERVER_MOD_TIME": 1793380938000,
+        "CURRENT_LOCAL_MOD_TIME": 1794345059245,
+        "LOCAL_MOD_TIME": 1794345059245
+      },
+      "Approved Applications": {
+        "sys_id": "e0647afe935f8790600674418bba103a",
+        "SYS_PACKAGE": "293cfd9393284710600674418bba100b",
+        "packageName": "Portal Extension",
+        "scopeId": "293cfd9393284710600674418bba100b",
+        "scopeName": "Portal Extension",
+        "scopeValue": "x_1026751_portal_0",
+        "SERVER_MOD_TIME": 1789638309000,
+        "CURRENT_SERVER_MOD_TIME": 1789638309000,
+        "CURRENT_LOCAL_MOD_TIME": 1794345190377,
+        "LOCAL_MOD_TIME": 1794345190377
+      },
+      "breadcrumbs": {
+        "sys_id": "0fb269305b3212000d7ec7ad31f91ae2",
+        "SYS_PACKAGE": "ba3c9820f5c403100a22c0b3dfa15131",
+        "packageName": "Service Portal - Core",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1683157210000,
+        "CURRENT_SERVER_MOD_TIME": 1683157210000,
+        "CURRENT_LOCAL_MOD_TIME": 1794347046450,
+        "LOCAL_MOD_TIME": 1794347046450
+      },
+      "Known Problems": {
+        "sys_id": "ef07a5e493cc9718600674418bba10b9",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1792689846000,
+        "CURRENT_SERVER_MOD_TIME": 1792689846000,
+        "CURRENT_LOCAL_MOD_TIME": 1794347324526,
+        "LOCAL_MOD_TIME": 1794347324526
+      },
+      "Service Offerings": {
+        "sys_id": "005421ec938c9718600674418bba10ff",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1792689771000,
+        "CURRENT_SERVER_MOD_TIME": 1792689771000,
+        "CURRENT_LOCAL_MOD_TIME": 1794411708876,
+        "LOCAL_MOD_TIME": 1794411708876
+      },
+      "ITAM Document Cards": {
+        "sys_id": "263dff6c76f54c6da991cf6ab6ca9871",
+        "SYS_PACKAGE": "cfb5d57c2e6d44ac88db0ae711b54a71",
+        "packageName": "ITSM Insights",
+        "scopeId": "cfb5d57c2e6d44ac88db0ae711b54a71",
+        "scopeName": "ITSM Insights",
+        "scopeValue": "x_1026751_itsm_ins",
+        "SERVER_MOD_TIME": 1793596472000,
+        "CURRENT_SERVER_MOD_TIME": 1793596472000,
+        "CURRENT_LOCAL_MOD_TIME": 1794411751020,
+        "LOCAL_MOD_TIME": 1794411751020
+      },
+      "Site Status Cards": {
+        "sys_id": "e2e425ec938c9718600674418bba10ee",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1792689452000,
+        "CURRENT_SERVER_MOD_TIME": 1792689452000,
+        "CURRENT_LOCAL_MOD_TIME": 1794411751021,
+        "LOCAL_MOD_TIME": 1794411751021
+      },
+      "Incidents and Outages": {
+        "sys_id": "076aca4d93041f18600674418bba105a",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1792689846000,
+        "CURRENT_SERVER_MOD_TIME": 1792689846000,
+        "CURRENT_LOCAL_MOD_TIME": 1794411816388,
+        "LOCAL_MOD_TIME": 1794411816388
+      }
+    }
+  },
+  "Server Development": {
+    "Script Includes": {
+      "SiteStatusUtility": {
+        "sys_id": "d3592dac93cc9718600674418bba10a6",
+        "SYS_PACKAGE": "global",
+        "packageName": "Global",
+        "scopeId": "global",
+        "scopeName": "Global",
+        "scopeValue": "global",
+        "SERVER_MOD_TIME": 1793307519000,
+        "CURRENT_SERVER_MOD_TIME": 1793307519000,
+        "CURRENT_LOCAL_MOD_TIME": 1794336697731,
+        "LOCAL_MOD_TIME": 1794336697731
+      }
+    }
+  }
+}

@@ -1,0 +1,466 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-moderate-darker: #6245cc !default;
+$brand-info-darker: #005f9d !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-lib {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-lib .itam-lib__header {
+  margin-bottom: 16px;
+}
+
+.itam-lib .itam-lib__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-lib .itam-lib__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-lib .itam-lib__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-lib .itam-lib__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 24px;
+  border: 1px dashed $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-tertiary;
+  text-align: center;
+}
+
+.itam-lib .itam-lib__empty p {
+  margin: 0;
+}
+
+// ---- Toolbar: search + type chips ----
+.itam-lib .itam-lib__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.itam-lib .itam-lib__search {
+  position: relative;
+  flex: 1 1 320px;
+  max-width: 480px;
+}
+
+.itam-lib .itam-lib__search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: $text-tertiary;
+}
+
+.itam-lib .itam-lib__search-input {
+  height: 40px;
+  padding-left: 36px;
+  padding-right: 40px;
+  border-radius: 6px;
+}
+
+.itam-lib .itam-lib__search-clear {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  width: 32px;
+  height: 32px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: $text-tertiary;
+}
+
+.itam-lib .itam-lib__search-clear:hover {
+  background: $background-secondary;
+}
+
+.itam-lib .itam-lib__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.itam-lib .itam-lib__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 4px 14px;
+  border: 1px solid $hr-border;
+  border-radius: 999px;
+  background: $background-primary;
+  color: $text-secondary;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.itam-lib .itam-lib__chip:hover {
+  border-color: $brand-primary;
+}
+
+.itam-lib .itam-lib__chip.is-active {
+  border-color: $brand-primary-darker;
+  background: $brand-primary-darker;
+  color: #ffffff;
+}
+
+.itam-lib .itam-lib__chip:focus-visible,
+.itam-lib .itam-lib__sort:focus-visible,
+.itam-lib .itam-lib__expand:focus-visible,
+.itam-lib .itam-lib__scroll:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-lib .itam-lib__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin: 16px 0 8px;
+}
+
+.itam-lib .itam-lib__count {
+  margin: 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-lib .itam-lib__compact-sort {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.itam-lib .itam-lib__compact-sort label {
+  margin: 0;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.itam-lib .itam-lib__compact-sort select {
+  width: auto;
+}
+
+// ---- Table ----
+.itam-lib .itam-lib__scroll {
+  overflow-x: auto;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-lib .itam-lib__table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.itam-lib .itam-lib__table thead th {
+  padding: 0;
+  border-bottom: 1px solid $hr-border;
+  background: $background-secondary;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.itam-lib .itam-lib__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 16px;
+  border: 0;
+  background: transparent;
+  color: $text-secondary;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.itam-lib .itam-lib__sort:hover {
+  color: $brand-primary-darker;
+}
+
+.itam-lib .itam-lib__sort .fa-sort {
+  color: $text-tertiary;
+}
+
+.itam-lib .itam-lib__doc + .itam-lib__doc .itam-lib__row > * {
+  border-top: 1px solid $hr-border;
+}
+
+.itam-lib .itam-lib__row > th,
+.itam-lib .itam-lib__row > td {
+  padding: 12px 16px;
+  vertical-align: top;
+  text-align: left;
+  font-weight: 400;
+}
+
+.itam-lib .itam-lib__doc.is-open .itam-lib__row > * {
+  background: $brand-primary-opacity;
+}
+
+.itam-lib .itam-lib__cell-title {
+  width: 32%;
+}
+
+.itam-lib .itam-lib__expand {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $brand-primary-darker;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.itam-lib .itam-lib__expand:hover span {
+  text-decoration: underline;
+}
+
+.itam-lib .itam-lib__expand .fa {
+  width: 12px;
+  margin-top: 3px;
+  flex: none;
+}
+
+.itam-lib .itam-lib__label {
+  display: none;
+}
+
+.itam-lib .itam-lib__type {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #e6f0f8;
+  color: $brand-info-darker;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.itam-lib .itam-lib__type--policy {
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+}
+
+.itam-lib .itam-lib__type--guideline {
+  background: #f2eeff;
+  color: $brand-moderate-darker;
+}
+
+.itam-lib .itam-lib__type--procedure {
+  background: $background-secondary;
+  color: $text-secondary;
+}
+
+.itam-lib .itam-lib__overdue {
+  color: $brand-danger-darker;
+  font-weight: 600;
+}
+
+.itam-lib .itam-lib__overdue-tag {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 6px;
+  border: 1px solid $brand-danger-darker;
+  border-radius: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+// ---- Expanded details ----
+.itam-lib .itam-lib__detail-row > td {
+  padding: 0 16px 20px 36px;
+  background: $brand-primary-opacity;
+}
+
+.itam-lib .itam-lib__detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px 32px;
+  padding: 16px 20px;
+  border-radius: 6px;
+  background: $background-primary;
+}
+
+.itam-lib .itam-lib__detail-main {
+  flex: 1 1 420px;
+  max-width: 820px;
+}
+
+.itam-lib .itam-lib__detail-heading {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $text-tertiary;
+}
+
+.itam-lib .itam-lib__summary {
+  margin: 0 0 12px;
+  line-height: 1.6;
+  color: $text-secondary;
+}
+
+.itam-lib .itam-lib__points {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.55;
+  color: $text-secondary;
+}
+
+.itam-lib .itam-lib__points li + li {
+  margin-top: 4px;
+}
+
+.itam-lib .itam-lib__muted {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-style: italic;
+  color: $text-tertiary;
+}
+
+.itam-lib .itam-lib__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// ---- Phones: each document becomes a card ----
+@media (max-width: 767px) {
+  .itam-lib .itam-lib__search {
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .itam-lib .itam-lib__compact-sort {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .itam-lib .itam-lib__scroll {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+
+  .itam-lib .itam-lib__table {
+    display: block;
+    min-width: 0;
+  }
+
+  .itam-lib .itam-lib__table thead {
+    display: none;
+  }
+
+  .itam-lib .itam-lib__doc {
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid $hr-border;
+    border-radius: 8px;
+    background: $background-primary;
+    overflow: hidden;
+  }
+
+  .itam-lib .itam-lib__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .itam-lib .itam-lib__doc + .itam-lib__doc .itam-lib__row > * {
+    border-top: 0;
+  }
+
+  .itam-lib .itam-lib__row > th,
+  .itam-lib .itam-lib__row > td {
+    display: block;
+    width: auto;
+    padding: 8px 16px;
+  }
+
+  .itam-lib .itam-lib__row > th {
+    grid-column: 1 / -1;
+    padding-top: 14px;
+  }
+
+  .itam-lib .itam-lib__label {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $text-tertiary;
+  }
+
+  .itam-lib .itam-lib__detail-row {
+    display: block;
+  }
+
+  .itam-lib .itam-lib__detail-row.ng-hide {
+    display: none;
+  }
+
+  .itam-lib .itam-lib__detail-row > td {
+    display: block;
+    padding: 0 12px 12px;
+  }
+
+  .itam-lib .itam-lib__detail {
+    padding: 14px 16px;
+  }
+
+  .itam-lib .itam-lib__detail-main {
+    flex-basis: 100%;
+  }
+}

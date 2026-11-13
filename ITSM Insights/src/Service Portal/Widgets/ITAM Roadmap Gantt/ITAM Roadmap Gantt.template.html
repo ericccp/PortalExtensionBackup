@@ -1,0 +1,94 @@
+<section class="itam-gantt" aria-labelledby="itam-gantt-title-{{::$id}}">
+  <header class="itam-gantt__header">
+    <div>
+      <h2 class="itam-gantt__title" id="itam-gantt-title-{{::$id}}">{{::c.data.text.title}}</h2>
+      <p class="itam-gantt__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+    </div>
+    <ul class="itam-gantt__legend" aria-label="{{::c.data.text.legendLabel}}" ng-if="::c.data.lanes.length">
+      <li ng-repeat="s in ::c.data.statuses track by s.value" ng-class="'itam-gantt__legend--' + s.value">
+        <span class="itam-gantt__swatch" aria-hidden="true"><i class="fa {{::s.icon}}"></i></span>{{::s.label}}
+      </li>
+      <li class="itam-gantt__legend--today" ng-if="::c.data.todayPct !== null">
+        <span class="itam-gantt__today-key" aria-hidden="true"></span>{{::c.data.text.today}}
+      </li>
+    </ul>
+  </header>
+
+  <div class="itam-gantt__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-gantt__empty" ng-if="::(!c.data.loadError && !c.data.lanes.length)">
+    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+    <p>{{::c.data.text.noProjects}}</p>
+  </div>
+
+  <div class="itam-gantt__scroll" role="region" tabindex="0" aria-label="{{::c.data.text.chartLabel}}" ng-if="::c.data.lanes.length">
+    <div class="itam-gantt__chart">
+      <!-- Year and quarter scale -->
+      <div class="itam-gantt__row itam-gantt__row--head" aria-hidden="true">
+        <div class="itam-gantt__name itam-gantt__name--head">{{::c.data.text.projectColumn}}</div>
+        <div class="itam-gantt__track itam-gantt__track--head">
+          <div class="itam-gantt__years">
+            <span class="itam-gantt__year" ng-repeat="y in ::c.data.years track by y.id" ng-style="::{left: y.left + '%', width: y.width + '%'}">{{::y.label}}</span>
+          </div>
+          <div class="itam-gantt__quarters">
+            <span class="itam-gantt__quarter" ng-repeat="q in ::c.data.quarters track by q.id" ng-style="::{left: q.left + '%', width: q.width + '%'}">{{::q.label}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="itam-gantt__body">
+        <!-- Quarter gridlines and today marker sit behind the bars -->
+        <div class="itam-gantt__grid" aria-hidden="true">
+          <span class="itam-gantt__gridline" ng-repeat="q in ::c.data.quarters track by q.id" ng-style="::{left: q.left + '%'}"></span>
+          <span class="itam-gantt__today" ng-if="::c.data.todayPct !== null" ng-style="::{left: c.data.todayPct + '%'}">
+            <span class="itam-gantt__today-label">{{::c.data.text.today}}</span>
+          </span>
+        </div>
+
+        <section class="itam-gantt__lane" ng-repeat="lane in ::c.data.lanes track by lane.value" aria-labelledby="itam-gantt-lane-{{::$id}}">
+          <h3 class="itam-gantt__lane-title" id="itam-gantt-lane-{{::$id}}">
+            <i class="fa {{::lane.icon}}" aria-hidden="true"></i>
+            <span>{{::lane.label}}</span>
+          </h3>
+          <ul class="itam-gantt__items">
+            <li class="itam-gantt__row" ng-repeat="item in ::lane.items track by item.id">
+              <div class="itam-gantt__name">
+                <a ng-if="::c.data.projectPage" ng-href="?id={{::c.data.projectPage}}&sys_id={{::item.id}}">{{::item.name}}</a>
+                <span ng-if="::!c.data.projectPage">{{::item.name}}</span>
+                <span class="itam-gantt__meta">
+                  <i class="fa {{::item.statusIcon}}" aria-hidden="true"></i>
+                  {{::item.statusLabel}} · {{::item.datesText}}
+                </span>
+              </div>
+              <div class="itam-gantt__track">
+                <span class="itam-gantt__bar"
+                      ng-class="'itam-gantt__bar--' + item.status"
+                      ng-style="::{left: item.left + '%', width: item.width + '%'}"
+                      title="{{::item.name}}: {{::item.datesText}}"
+                      aria-hidden="true">
+                  <span class="itam-gantt__bar-progress" ng-if="::(item.percentComplete !== null && item.status === 'in_progress')" ng-style="::{width: item.percentComplete + '%'}"></span>
+                </span>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="itam-gantt__unscheduled" ng-if="::(c.data.showUnscheduled && c.data.unscheduled.length)">
+    <h3 class="itam-gantt__unscheduled-title">{{::c.data.text.unscheduledHeading}}</h3>
+    <p class="itam-gantt__unscheduled-intro">{{::c.data.text.unscheduledIntro}}</p>
+    <ul>
+      <li ng-repeat="item in ::c.data.unscheduled track by item.id">
+        <i class="fa {{::item.statusIcon}}" aria-hidden="true"></i>
+        <a ng-if="::c.data.projectPage" ng-href="?id={{::c.data.projectPage}}&sys_id={{::item.id}}">{{::item.name}}</a>
+        <span ng-if="::!c.data.projectPage">{{::item.name}}</span>
+        <span class="sr-only">({{::item.statusLabel}})</span>
+      </li>
+    </ul>
+  </div>
+</section>

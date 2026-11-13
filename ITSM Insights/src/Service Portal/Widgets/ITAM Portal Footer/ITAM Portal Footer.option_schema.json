@@ -1,0 +1,1 @@
+[{"name":"contact_intro","label":"Contact text","type":"string","default_value":"","section":"Presentation","hint":"Defaults to a short invitation to contact the program team when empty"}]

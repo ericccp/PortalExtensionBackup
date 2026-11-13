@@ -1,0 +1,249 @@
+// No verified --now-* tokens for status colors; hex fallback per styling guidance.
+$weol-color-green: #2e844a !default;
+$weol-color-yellow: #f2b51d !default;
+$weol-color-red: #c23934 !default;
+$weol-color-gray: #a0a4ab !default;
+$weol-text-primary: #181a1f !default;
+$weol-text-secondary: #62656d !default;
+$weol-border-color: #e5e5e5 !default;
+$weol-track-color: #f1f2f4 !default;
+$weol-link-color: #0b5cad !default;
+
+.weol {
+  padding: 16px;
+  background: #fff;
+  border: 1px solid $weol-border-color;
+  border-radius: 6px;
+}
+
+.weol .weol__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.weol .weol__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: $weol-text-primary;
+}
+
+.weol .weol__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $weol-text-secondary;
+}
+
+.weol .weol__link {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: $weol-link-color;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.weol .weol__alert {
+  padding: 12px;
+  border-radius: 4px;
+  background: lighten($weol-color-red, 42%);
+  color: $weol-text-primary;
+  font-size: 13px;
+}
+
+.weol .weol__empty-state {
+  padding: 24px;
+  text-align: center;
+  color: $weol-text-secondary;
+  font-size: 13px;
+}
+
+.weol .weol__empty-state p {
+  margin: 0;
+}
+
+.weol .weol__sections {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.weol .weol__section + .weol__section {
+  padding-top: 20px;
+  border-top: 1px solid $weol-border-color;
+}
+
+.weol .weol__section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.weol .weol__section-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: $weol-text-primary;
+}
+
+.weol .weol__total {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.weol .weol__total-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: $weol-text-primary;
+}
+
+.weol .weol__total-label {
+  font-size: 13px;
+  color: $weol-text-secondary;
+}
+
+.weol .weol__bar {
+  display: flex;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: $weol-track-color;
+}
+
+// 2px white gaps keep adjacent segments distinguishable without relying on hue alone
+.weol .weol__bar-segment {
+  display: block;
+  min-width: 4px;
+  height: 100%;
+  transition: opacity 0.15s ease;
+}
+
+// Hovering a linked segment dims the rest so the one being clicked stands out
+.weol .weol__bar:hover .weol__bar-segment[href] {
+  opacity: 0.45;
+}
+
+.weol .weol__bar .weol__bar-segment[href]:hover {
+  opacity: 1;
+}
+
+.weol .weol__bar-segment + .weol__bar-segment {
+  border-left: 2px solid #fff;
+}
+
+.weol .weol__bar-segment--covered,
+.weol .weol__swatch--covered,
+.weol .weol__bar-segment--supported,
+.weol .weol__swatch--supported {
+  background: $weol-color-green;
+}
+
+.weol .weol__bar-segment--expiringSoon,
+.weol .weol__swatch--expiringSoon,
+.weol .weol__bar-segment--refreshSoon,
+.weol .weol__swatch--refreshSoon {
+  background: $weol-color-yellow;
+}
+
+.weol .weol__bar-segment--expired,
+.weol .weol__swatch--expired,
+.weol .weol__bar-segment--pastEol,
+.weol .weol__swatch--pastEol {
+  background: $weol-color-red;
+}
+
+.weol .weol__bar-segment--unknown,
+.weol .weol__swatch--unknown {
+  background: $weol-color-gray;
+}
+
+.weol .weol__legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px 16px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.weol .weol__legend-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: $weol-text-secondary;
+}
+
+.weol .weol__swatch {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.weol .weol__legend-values {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 4px;
+  padding-left: 16px;
+}
+
+.weol .weol__legend-count {
+  font-size: 18px;
+  font-weight: 600;
+  color: $weol-text-primary;
+}
+
+.weol .weol__legend-count--link {
+  color: $weol-link-color;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.weol .weol__legend-count--link:hover,
+.weol .weol__legend-count--link:focus {
+  color: darken($weol-link-color, 10%);
+  text-decoration-thickness: 2px;
+}
+
+.weol .weol__legend-count--link:focus-visible {
+  outline: 2px solid $weol-link-color;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.weol .weol__legend-percent {
+  font-size: 13px;
+  color: $weol-text-secondary;
+}
+
+.weol .weol__legend-hint {
+  margin-top: 2px;
+  padding-left: 16px;
+  font-size: 12px;
+  color: $weol-text-secondary;
+}
+
+@media (max-width: 767px) {
+  .weol .weol__header {
+    flex-direction: column;
+  }
+
+  .weol .weol__legend {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .weol .weol__section-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

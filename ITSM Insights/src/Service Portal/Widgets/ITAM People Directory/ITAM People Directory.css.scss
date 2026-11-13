@@ -1,0 +1,234 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-people {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-people .itam-people__header {
+  margin-bottom: 20px;
+}
+
+.itam-people .itam-people__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-people .itam-people__count {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.itam-people .itam-people__intro {
+  max-width: 760px;
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: $text-tertiary;
+}
+
+.itam-people .itam-people__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-people .itam-people__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 24px;
+  border: 1px dashed $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-tertiary;
+  text-align: center;
+}
+
+.itam-people .itam-people__empty p {
+  margin: 0;
+}
+
+// ---- A-Z ----
+.itam-people .itam-people__az {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.itam-people .itam-people__letter {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border: 1px solid $hr-border;
+  border-radius: 6px;
+  background: $background-primary;
+  color: $text-primary;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.itam-people .itam-people__letter:hover:not([disabled]) {
+  border-color: $brand-primary;
+}
+
+.itam-people .itam-people__letter:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-people .itam-people__letter[disabled] {
+  border-style: dashed;
+  color: #9aa5ab;
+  cursor: not-allowed;
+}
+
+.itam-people .itam-people__letter.itam-people__letter--active {
+  border: 2px solid $brand-primary-darker;
+  background: $brand-primary-darker;
+  color: #ffffff;
+}
+
+// ---- Cards ----
+.itam-people .itam-people__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-people .itam-person {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-people .itam-person__avatar {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.itam-people .itam-person__avatar.itam-person__avatar--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.itam-people .itam-person__body {
+  min-width: 0;
+}
+
+.itam-people .itam-person__name {
+  margin: 2px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.itam-people .itam-person__title,
+.itam-people .itam-person__dept {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: $text-secondary;
+}
+
+.itam-people .itam-person__dept {
+  color: $text-tertiary;
+}
+
+.itam-people .itam-person__role {
+  display: inline-block;
+  margin: 10px 0 0;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background: $background-secondary;
+  color: $brand-primary-darker;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.itam-people .itam-person__bio {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+.itam-people .itam-person__email {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  margin-top: 10px;
+  color: $brand-primary-darker;
+  font-size: 13px;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+// ---- Compact list ----
+.itam-people.itam-people--compact .itam-people__grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px;
+}
+
+.itam-people.itam-people--compact .itam-person {
+  align-items: center;
+  padding: 12px;
+}
+
+.itam-people.itam-people--compact .itam-person__avatar {
+  flex-basis: 40px;
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.itam-people.itam-people--compact .itam-person__role {
+  margin-top: 4px;
+}
+
+@media (max-width: 480px) {
+  .itam-people .itam-people__grid {
+    grid-template-columns: 1fr;
+  }
+}

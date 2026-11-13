@@ -1,0 +1,93 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-tabs {
+  color: $text-primary;
+}
+
+// Segmented control: sits under the page hero and reads as a second level below the portal nav
+.itam-tabs .itam-tabs__bar {
+  margin-bottom: 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.itam-tabs .itam-tabs__bar::-webkit-scrollbar {
+  display: none;
+}
+
+.itam-tabs .itam-tabs__list {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid $hr-border;
+  border-radius: 10px;
+  background: $background-primary;
+}
+
+.itam-tabs .itam-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: $text-tertiary;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.itam-tabs .itam-tabs__tab:hover {
+  background: $brand-primary-opacity;
+  color: $text-primary;
+}
+
+.itam-tabs .itam-tabs__tab:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 1px;
+}
+
+// Selected: filled dark pill, so selection never relies on a subtle color change
+.itam-tabs .itam-tabs__tab.itam-tabs__tab--active {
+  background: $brand-primary-darker;
+  color: #ffffff;
+}
+
+.itam-tabs .itam-tabs__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .itam-tabs .itam-tabs__bar {
+    margin-right: -16px;
+    margin-bottom: 20px;
+  }
+
+  .itam-tabs .itam-tabs__tab {
+    padding: 8px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .itam-tabs .itam-tabs__tab {
+    transition: none;
+  }
+}

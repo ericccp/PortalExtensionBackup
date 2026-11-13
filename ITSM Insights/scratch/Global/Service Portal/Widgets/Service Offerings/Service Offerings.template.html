@@ -1,0 +1,46 @@
+<section class="service-offerings" aria-labelledby="service-offerings-title" aria-busy="{{c.loading}}">
+  <header class="service-offerings__header">
+    <div class="service-offerings__heading-group">
+      <h2 id="service-offerings-title" class="service-offerings__title">{{::c.data.messages.heading}}</h2>
+      <p ng-if="::c.data.messages.subHeading" class="service-offerings__subtitle">{{::c.data.messages.subHeading}}</p>
+    </div>
+    <ul ng-if="::c.data.showLegend" class="service-offerings__legend" aria-label="{{::c.data.messages.legendLabel}}">
+      <li ng-repeat="status in ::c.data.statuses track by status.id" class="service-offerings__legend-item"
+          tabindex="0" uib-tooltip="{{::status.description}}" tooltip-placement="bottom" tooltip-append-to-body="true">
+        <span class="service-offering-status__icon service-offering-status__icon--{{::status.id}}" aria-hidden="true"></span>
+        {{::status.label}}
+      </li>
+    </ul>
+  </header>
+  <p ng-if="!c.loading && c.noLocation" class="service-offerings__empty">{{::c.data.messages.chooseLocation}}</p>
+  <p ng-if="!c.loading && !c.noLocation && !c.data.locationFound" class="service-offerings__empty">{{::c.data.messages.locationNotFound}}</p>
+  <p ng-if="!c.loading && !c.noLocation && c.data.locationFound && !c.data.offerings.length" class="service-offerings__empty">{{::c.data.messages.empty}}</p>
+  <ul ng-if="c.loading || c.data.offerings.length" class="service-offerings__list">
+    <li ng-if="c.loading" ng-repeat="i in c.placeholders" class="service-offering" aria-hidden="true">
+      <span class="service-offering__placeholder service-offering__placeholder--name"></span>
+      <span class="service-offering__placeholder service-offering__placeholder--detail"></span>
+    </li>
+    <li ng-if="!c.loading" ng-repeat="offering in c.data.offerings track by offering.id" class="service-offering">
+      <div class="service-offering__header">
+        <h3 class="service-offering__name">
+          <a class="service-offering__link" ng-href="?id={{::c.data.offeringPage}}&service={{offering.id}}">{{offering.name}}</a>
+        </h3>
+        <span class="service-offering-status service-offering-status--{{offering.status}}">
+          <span class="service-offering-status__icon service-offering-status__icon--{{offering.status}}" aria-hidden="true"></span>
+          {{offering.statusLabel}}
+        </span>
+      </div>
+      <div class="service-offering__detail">
+        <p class="service-offering__summary" title="{{offering.summary || offering.detail}}">{{offering.summary || offering.detail}}</p>
+        <p ng-if="offering.when" class="service-offering__meta">
+          <i class="fa fa-clock-o service-offering__meta-icon" aria-hidden="true"></i>
+          <span>{{offering.when}}</span>
+        </p>
+        <p ng-if="offering.via" class="service-offering__meta">
+          <i class="fa fa-sitemap service-offering__meta-icon" aria-hidden="true"></i>
+          <span>{{offering.via}}</span>
+        </p>
+      </div>
+    </li>
+  </ul>
+</section>

@@ -1,0 +1,164 @@
+<section class="itam-lib" aria-labelledby="itam-lib-title-{{::$id}}">
+  <header class="itam-lib__header">
+    <h2 class="itam-lib__title" id="itam-lib-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-lib__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <div class="itam-lib__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-lib__empty" ng-if="::(!c.data.loadError && !c.data.docs.length)">
+    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+    <p>{{::c.data.text.noDocs}}</p>
+  </div>
+
+  <div ng-if="::c.data.docs.length">
+    <div class="itam-lib__toolbar">
+      <div class="itam-lib__search">
+        <label class="sr-only" for="itam-lib-search-{{::$id}}">{{::c.data.text.searchLabel}}</label>
+        <i class="fa fa-search itam-lib__search-icon" aria-hidden="true"></i>
+        <input type="search"
+               class="form-control itam-lib__search-input"
+               id="itam-lib-search-{{::$id}}"
+               placeholder="{{::c.data.text.searchPlaceholder}}"
+               autocomplete="off"
+               ng-model="c.search"
+               ng-model-options="{ debounce: 200 }"
+               ng-change="c.updateResults()">
+        <button type="button" class="itam-lib__search-clear" ng-if="c.search" ng-click="c.clearSearch()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.clearSearch}}</span>
+        </button>
+      </div>
+
+      <div class="itam-lib__chips" role="group" aria-label="{{::c.data.text.typeFilterLabel}}" ng-if="::c.data.types.length > 1">
+        <button type="button" class="itam-lib__chip" ng-class="{'is-active': !c.type}" aria-pressed="{{!c.type}}" ng-click="c.setType('')">
+          {{::c.data.text.allTypes}}
+        </button>
+        <button type="button"
+                class="itam-lib__chip"
+                ng-repeat="type in ::c.data.types track by type.value"
+                ng-class="{'is-active': c.type === type.value}"
+                aria-pressed="{{c.type === type.value}}"
+                ng-click="c.setType(type.value)">
+          <i class="fa {{::type.icon}}" aria-hidden="true"></i>{{::type.label}}
+        </button>
+      </div>
+    </div>
+
+    <div class="itam-lib__bar">
+      <p class="itam-lib__count" role="status" aria-live="polite">{{c.countText}}</p>
+      <!-- Column headers are hidden on phones, so sorting moves to a select -->
+      <div class="itam-lib__compact-sort">
+        <label for="itam-lib-sort-{{::$id}}">{{::c.data.text.sortBy}}</label>
+        <select class="form-control"
+                id="itam-lib-sort-{{::$id}}"
+                ng-model="c.sortKey"
+                ng-options="column.key as column.label for column in ::c.columns"
+                ng-change="c.descending = false; c.updateResults()">
+          <option value="">{{::c.data.text.defaultOrder}}</option>
+        </select>
+        <button type="button" class="btn btn-default" ng-if="c.sortKey" ng-click="c.sortBy(c.sortKey)">
+          <i class="fa" ng-class="c.descending ? 'fa-sort-amount-desc' : 'fa-sort-amount-asc'" aria-hidden="true"></i>
+          {{c.descending ? c.data.text.descending : c.data.text.ascending}}
+        </button>
+      </div>
+    </div>
+
+    <div class="itam-lib__empty" ng-if="!c.results.length">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <p>{{::c.data.text.noMatches}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.clearFilters()">{{::c.data.text.clearFilters}}</button>
+    </div>
+
+    <div class="itam-lib__scroll" role="region" tabindex="0" aria-label="{{::c.data.text.tableLabel}}" ng-if="c.results.length">
+      <table class="itam-lib__table">
+        <caption class="sr-only">{{::c.data.text.tableCaption}}</caption>
+        <thead>
+          <tr>
+            <th scope="col" ng-repeat="column in ::c.columns track by column.key" ng-attr-aria-sort="{{c.ariaSort(column.key)}}">
+              <button type="button" class="itam-lib__sort" ng-click="c.sortBy(column.key)">
+                {{::column.label}}
+                <i class="fa" aria-hidden="true"
+                   ng-class="c.sortKey === column.key ? (c.descending ? 'fa-sort-desc' : 'fa-sort-asc') : 'fa-sort'"></i>
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="doc in c.results track by doc.id" class="itam-lib__doc" ng-class="{'is-open': c.open[doc.id]}">
+          <tr class="itam-lib__row">
+            <th scope="row" class="itam-lib__cell-title">
+              <button type="button"
+                      class="itam-lib__expand"
+                      aria-expanded="{{!!c.open[doc.id]}}"
+                      aria-controls="itam-lib-detail-{{::$id}}-{{::doc.id}}"
+                      ng-click="c.toggle(doc)">
+                <i class="fa" ng-class="c.open[doc.id] ? 'fa-angle-down' : 'fa-angle-right'" aria-hidden="true"></i>
+                <span>{{::doc.title}}</span>
+                <span class="sr-only">: {{c.open[doc.id] ? c.data.text.hideDetails : c.data.text.showDetails}}</span>
+              </button>
+            </th>
+            <td>
+              <span class="itam-lib__label" aria-hidden="true">{{::c.data.text.colType}}</span>
+              <span class="itam-lib__type" ng-class="::'itam-lib__type--' + doc.type">
+                <i class="fa {{::doc.icon}}" aria-hidden="true"></i>{{::doc.typeLabel}}
+              </span>
+            </td>
+            <td>
+              <span class="itam-lib__label" aria-hidden="true">{{::c.data.text.colOwner}}</span>
+              {{::doc.owner || c.data.text.notSet}}
+            </td>
+            <td>
+              <span class="itam-lib__label" aria-hidden="true">{{::c.data.text.colVersion}}</span>
+              {{::doc.version || c.data.text.notSet}}
+            </td>
+            <td>
+              <span class="itam-lib__label" aria-hidden="true">{{::c.data.text.colApproved}}</span>
+              {{::doc.approved || c.data.text.notSet}}
+            </td>
+            <td>
+              <span class="itam-lib__label" aria-hidden="true">{{::c.data.text.colReview}}</span>
+              <span ng-class="::{'itam-lib__overdue': doc.reviewOverdue}">
+                <i class="fa fa-exclamation-circle" aria-hidden="true" ng-if="::doc.reviewOverdue"></i>
+                {{::doc.nextReview || c.data.text.notSet}}
+                <span class="itam-lib__overdue-tag" ng-if="::doc.reviewOverdue">{{::c.data.text.reviewDue}}</span>
+              </span>
+            </td>
+          </tr>
+          <tr class="itam-lib__detail-row" ng-show="c.open[doc.id]">
+            <td colspan="6" id="itam-lib-detail-{{::$id}}-{{::doc.id}}">
+              <div class="itam-lib__detail">
+                <div class="itam-lib__detail-main">
+                  <h3 class="itam-lib__detail-heading">{{::c.data.text.summary}}</h3>
+                  <p class="itam-lib__summary" itam-glossary-terms ng-if="::doc.summary">{{::doc.summary}}</p>
+                  <p class="itam-lib__muted" ng-if="::!doc.summary">{{::c.data.text.noSummary}}</p>
+
+                  <div ng-if="::doc.keyPoints.length">
+                    <h3 class="itam-lib__detail-heading">{{::c.data.text.keyPoints}}</h3>
+                    <ul class="itam-lib__points" itam-glossary-terms>
+                      <li ng-repeat="point in ::doc.keyPoints track by $index">{{::point}}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="itam-lib__detail-action">
+                  <a class="btn btn-primary itam-lib__read"
+                     ng-if="::doc.url"
+                     ng-href="{{::doc.url}}"
+                     ng-attr-target="{{::doc.external ? '_blank' : undefined}}"
+                     ng-attr-rel="{{::doc.external ? 'noopener noreferrer' : undefined}}">
+                    {{::c.data.text.read}}<span class="sr-only">: {{::doc.title}}</span>
+                    <i class="fa" ng-class="::doc.external ? 'fa-external-link' : 'fa-arrow-right'" aria-hidden="true"></i>
+                    <span class="sr-only" ng-if="::doc.external">({{::c.data.text.opensNewWindow}})</span>
+                  </a>
+                  <span class="itam-lib__muted" ng-if="::!doc.url">{{::c.data.text.comingSoon}}</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

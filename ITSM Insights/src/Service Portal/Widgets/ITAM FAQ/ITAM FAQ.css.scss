@@ -1,0 +1,237 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+$border-secondary: #616d74 !default;
+
+.itam-faq {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-faq .itam-faq__header {
+  margin-bottom: 16px;
+}
+
+.itam-faq .itam-faq__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-faq .itam-faq__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-faq .itam-faq__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-faq .itam-faq__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 24px;
+  border: 1px dashed $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-tertiary;
+  text-align: center;
+}
+
+.itam-faq .itam-faq__empty p {
+  margin: 0;
+}
+
+// ---- Toolbar ----
+.itam-faq .itam-faq__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.itam-faq .itam-faq__search {
+  position: relative;
+  flex: 1 1 320px;
+  max-width: 480px;
+}
+
+.itam-faq .itam-faq__search > .fa-search {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: $text-tertiary;
+}
+
+.itam-faq .itam-faq__search input {
+  width: 100%;
+  height: 42px;
+  padding: 0 36px;
+  border: 1px solid $border-secondary;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.itam-faq .itam-faq__search input:focus {
+  outline: none;
+  border-color: $brand-primary;
+  box-shadow: 0 0 0 3px rgba(0, 128, 163, 0.25);
+}
+
+.itam-faq .itam-faq__search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.itam-faq .itam-faq__clear {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: $text-tertiary;
+}
+
+.itam-faq .itam-faq__toggle-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: $brand-primary-darker;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.itam-faq .itam-faq__toggle-all:hover {
+  background: $brand-primary-opacity;
+}
+
+.itam-faq .itam-faq__toggle-all:focus-visible {
+  outline: 2px solid $brand-primary;
+}
+
+// ---- Groups and items ----
+.itam-faq .itam-faq__group + .itam-faq__group {
+  margin-top: 28px;
+}
+
+.itam-faq .itam-faq__group-title {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $text-tertiary;
+}
+
+.itam-faq .itam-faq__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-faq .itam-faq__item + .itam-faq__item {
+  border-top: 1px solid $hr-border;
+}
+
+.itam-faq .itam-faq__q {
+  margin: 0;
+}
+
+.itam-faq .itam-faq__q button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 18px;
+  border: 0;
+  background: transparent;
+  color: $text-primary;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.itam-faq .itam-faq__q button:hover {
+  color: $brand-primary-darker;
+}
+
+.itam-faq .itam-faq__q button:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: -2px;
+}
+
+.itam-faq .itam-faq__q .fa {
+  flex: 0 0 auto;
+  color: $brand-primary-darker;
+}
+
+.itam-faq .itam-faq__item.itam-faq__item--open .itam-faq__q button {
+  color: $brand-primary-darker;
+}
+
+.itam-faq .itam-faq__a {
+  padding: 0 18px 16px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: $text-secondary;
+}
+
+.itam-faq .itam-faq__a p {
+  margin: 0 0 10px;
+}
+
+.itam-faq .itam-faq__a p:last-child,
+.itam-faq .itam-faq__a ul:last-child {
+  margin-bottom: 0;
+}
+
+.itam-faq .itam-faq__a a {
+  color: $brand-primary-darker;
+  text-decoration: underline;
+}
+
+.itam-faq .itam-faq__more {
+  margin: 24px 0 0;
+  font-size: 14px;
+  color: $text-tertiary;
+}
+
+.itam-faq .itam-faq__more a {
+  color: $brand-primary-darker;
+  font-weight: 600;
+  text-decoration: underline;
+}

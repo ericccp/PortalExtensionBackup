@@ -1,0 +1,105 @@
+<div class="pit" aria-busy="{{c.loading}}">
+    <div class="pit__header">
+        <div class="pit__heading">
+            <h3 class="pit__title">{{c.data.text.title}}</h3>
+            <p class="pit__subtitle">{{c.data.text.subtitle}}</p>
+        </div>
+        <a class="pit__link" ng-href="{{c.data.incidentListUrl}}">{{c.data.text.openIncidentsLabel}}</a>
+    </div>
+
+    <div class="pit__empty-state" ng-if="c.loading" role="status" aria-live="polite">
+        <p>{{c.data.text.loadingMessage}}</p>
+    </div>
+
+    <div class="pit__alert" ng-if="!c.loading && c.data.loadError" role="alert">
+        {{c.data.text.loadError}}
+    </div>
+
+    <div class="pit__empty-state" ng-if="!c.loading && !c.data.loadError && c.data.noLocation">
+        <p>{{c.data.text.noLocationMessage}}</p>
+    </div>
+
+    <div ng-if="!c.loading && !c.data.loadError && !c.data.noLocation">
+        <div class="pit__stats" role="list">
+            <div class="pit__stat" role="listitem">
+                <div class="pit__stat-value">{{c.data.stats.openNow}}</div>
+                <div class="pit__stat-label">{{c.data.text.openNowLabel}}</div>
+            </div>
+            <div class="pit__stat" role="listitem">
+                <div class="pit__stat-value">{{c.data.stats.mttrDisplay}}</div>
+                <div class="pit__stat-label">{{c.data.text.mttrLabel}}</div>
+            </div>
+            <div class="pit__stat" role="listitem">
+                <div class="pit__stat-value pit__stat-value--accent">{{c.data.stats.trendDisplay}}</div>
+                <div class="pit__stat-label">{{c.data.text.trendLabel}}</div>
+            </div>
+        </div>
+
+        <div class="pit__chart" ng-if="c.data.weeks.length" role="img" aria-label="{{c.data.text.subtitle}}">
+            <div class="pit__chart-plot">
+                <div class="pit__chart-grid" aria-hidden="true">
+                    <div class="pit__chart-row" ng-repeat="line in c.data.gridLines track by $index">
+                        <span class="pit__chart-gridline-label">{{line}}</span>
+                        <span class="pit__chart-gridline"></span>
+                    </div>
+                </div>
+                <div class="pit__chart-bars" aria-hidden="true">
+                    <div class="pit__chart-col" ng-repeat="week in c.data.weeks track by $index">
+                        <div class="pit__chart-bar-group">
+                            <span class="pit__bar pit__bar--p1" ng-if="week.p1"
+                                ng-style="{height: week.p1Height + '%'}"></span>
+                            <span class="pit__bar pit__bar--p2" ng-if="week.p2"
+                                ng-style="{height: week.p2Height + '%'}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pit__chart-labels">
+                <div class="pit__chart-col" ng-repeat="week in c.data.weeks track by $index">
+                    <span class="pit__chart-label"
+                        ng-class="{'pit__chart-label--current': week.isCurrent}">{{week.label}}</span>
+                </div>
+            </div>
+
+            <table class="sr-only">
+                <caption>{{c.data.text.subtitle}}</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">${Week}</th>
+                        <th scope="col">{{c.data.text.legendP1}}</th>
+                        <th scope="col">{{c.data.text.legendP2}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="week in c.data.weeks track by $index">
+                        <td>{{week.label}}</td>
+                        <td>{{week.p1}}</td>
+                        <td>{{week.p2}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pit__empty-state" ng-if="!c.data.weeks.length">
+            <p>{{c.data.text.noIncidentsMessage}}</p>
+        </div>
+
+        <div class="pit__footer-row">
+            <div class="pit__legend">
+                <span class="pit__legend-item"><span class="pit__swatch pit__swatch--p1"
+                        aria-hidden="true"></span>{{c.data.text.legendP1}}</span>
+                <span class="pit__legend-item"><span class="pit__swatch pit__swatch--p2"
+                        aria-hidden="true"></span>{{c.data.text.legendP2}}</span>
+            </div>
+            <div class="pit__top-cause" ng-if="c.data.topCause">
+                {{c.data.text.topCausePrefix}}: {{c.data.topCause.label}} ({{c.data.topCause.count}} of
+                {{c.data.topCause.total}})
+            </div>
+        </div>
+    </div>
+
+    <div class="pit__meta">
+        <span class="pit__meta-source">{{c.data.footer.source}} &middot; {{c.data.footer.time}}</span>
+        <span class="pit__meta-note" ng-if="c.data.footer.note">{{c.data.footer.note}}</span>
+    </div>
+</div>

@@ -1,0 +1,247 @@
+// No verified --now-* tokens for priority status colors; hex fallback per styling guidance.
+$pit-color-p1: #c0392b !default;
+$pit-color-p2: #e9a23b !default;
+$pit-text-primary: #181a1f !default;
+$pit-text-secondary: #62656d !default;
+$pit-border-color: #e5e5e5 !default;
+$pit-link-color: #116758 !default;
+
+.pit {
+  padding: 16px;
+  background: #fff;
+  border: 1px solid $pit-border-color;
+  border-radius: 6px;
+}
+
+.pit .pit__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.pit .pit__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: $pit-text-primary;
+}
+
+.pit .pit__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $pit-text-secondary;
+}
+
+.pit .pit__link {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: $pit-link-color;
+  white-space: nowrap;
+}
+
+.pit .pit__link:hover,
+.pit .pit__link:focus {
+  text-decoration: underline;
+}
+
+.pit .pit__alert {
+  padding: 12px;
+  border-radius: 4px;
+  background: lighten($pit-color-p1, 42%);
+  color: $pit-text-primary;
+  font-size: 13px;
+}
+
+.pit .pit__stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.pit .pit__stat {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid $pit-border-color;
+  border-radius: 6px;
+}
+
+.pit .pit__stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: $pit-text-primary;
+  line-height: 1.2;
+}
+
+.pit .pit__stat-value.pit__stat-value--accent {
+  color: $pit-color-p2;
+}
+
+.pit .pit__stat-label {
+  margin-top: 2px;
+  font-size: 13px;
+  color: $pit-text-secondary;
+}
+
+.pit .pit__chart {
+  margin-bottom: 16px;
+}
+
+.pit .pit__chart-plot {
+  position: relative;
+  height: 180px;
+}
+
+.pit .pit__chart-grid {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pit .pit__chart-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pit .pit__chart-gridline-label {
+  width: 16px;
+  text-align: right;
+  font-size: 12px;
+  color: $pit-text-secondary;
+}
+
+.pit .pit__chart-gridline {
+  flex: 1;
+  border-top: 1px solid $pit-border-color;
+}
+
+.pit .pit__chart-bars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 24px;
+}
+
+.pit .pit__chart-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.pit .pit__chart-bar-group {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+.pit .pit__bar {
+  width: 14px;
+  min-height: 2px;
+  border-radius: 2px 2px 0 0;
+}
+
+.pit .pit__bar.pit__bar--p1 {
+  background: $pit-color-p1;
+}
+
+.pit .pit__bar.pit__bar--p2 {
+  background: $pit-color-p2;
+}
+
+.pit .pit__chart-labels {
+  display: flex;
+  padding-left: 24px;
+  margin-top: 8px;
+}
+
+.pit .pit__chart-label {
+  font-size: 12px;
+  color: $pit-text-secondary;
+}
+
+.pit .pit__chart-label.pit__chart-label--current {
+  font-weight: 700;
+  color: $pit-text-primary;
+}
+
+.pit .pit__empty-state {
+  padding: 24px;
+  text-align: center;
+  color: $pit-text-secondary;
+  font-size: 13px;
+}
+
+.pit .pit__footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid $pit-border-color;
+  font-size: 13px;
+}
+
+.pit .pit__legend {
+  display: flex;
+  gap: 16px;
+}
+
+.pit .pit__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: $pit-text-secondary;
+}
+
+.pit .pit__swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.pit .pit__swatch.pit__swatch--p1 {
+  background: $pit-color-p1;
+}
+
+.pit .pit__swatch.pit__swatch--p2 {
+  background: $pit-color-p2;
+}
+
+.pit .pit__top-cause {
+  color: $pit-text-secondary;
+}
+
+.pit .pit__meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid $pit-border-color;
+  font-size: 12px;
+  color: $pit-text-secondary;
+}
+
+@media (max-width: 767px) {
+  .pit .pit__stats {
+    flex-direction: column;
+  }
+
+  .pit .pit__header {
+    flex-direction: column;
+  }
+}

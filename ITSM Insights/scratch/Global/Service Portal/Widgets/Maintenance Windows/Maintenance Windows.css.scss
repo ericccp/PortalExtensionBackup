@@ -1,0 +1,310 @@
+$text-primary: #181A1F !default;
+$text-secondary: #2C323F !default;
+$text-muted: #545B68 !default;
+$card-background: #FFFFFF !default;
+$card-border: #DADDE3 !default;
+$divider: #E6E8EC !default;
+$date-background: #E9EEF6 !default;
+$date-weekday: #24386B !default;
+$badge-background: #FDF0D5 !default;
+$badge-text: #7A4B00 !default;
+$button-border: #C3C8D1 !default;
+$button-hover: #F4F5F7 !default;
+$focus-ring: #4F7FF0 !default;
+$link: #24386B !default;
+$placeholder-background: #E6E8EC !default;
+$sp-space--xs: 4px !default;
+$sp-space--sm: 8px !default;
+$sp-space--md: 12px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+
+// Selectors are written out in full: the instance SCSS compiler drops &__ / &-- suffix rules
+// Half the card grid gap on each side; the page's .site-status-row supplies the rest of the outer gutter
+.maintenance-windows {
+  margin: 0 $sp-space--sm $sp-space--lg;
+  padding: $sp-space--xl;
+  background-color: $card-background;
+  border: 1px solid $card-border;
+  border-radius: 7px;
+  color: $text-primary;
+}
+
+// Grid so View all stays in the top-right corner, on the heading's first line, however narrow the card gets
+.maintenance-windows .maintenance-windows__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: $sp-space--sm $sp-space--lg;
+  padding-bottom: $sp-space--md;
+}
+
+.maintenance-windows .maintenance-windows__heading {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+// Keeps the subtitle under the heading while the View all link stays beside them
+.maintenance-windows .maintenance-windows__heading-group {
+  min-width: 0;
+}
+
+.maintenance-windows .maintenance-windows__subtitle {
+  margin: $sp-space--xs 0 0;
+  color: $text-secondary;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.maintenance-windows .maintenance-windows__view-all {
+  color: $link;
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: underline;
+}
+
+.maintenance-windows .maintenance-windows__view-all:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+.maintenance-windows .maintenance-windows__empty {
+  margin: $sp-space--lg 0 0;
+  color: $text-secondary;
+  font-size: 16px;
+}
+
+.maintenance-windows .maintenance-windows__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.maintenance-windows .maintenance-window {
+  display: flex;
+  gap: $sp-space--lg;
+  padding: $sp-space--lg 0;
+}
+
+.maintenance-windows .maintenance-window + .maintenance-window {
+  border-top: 1px solid $divider;
+}
+
+.maintenance-windows .maintenance-window__date {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 64px;
+  border-radius: 4px;
+  background-color: $date-background;
+}
+
+.maintenance-windows .maintenance-window__weekday {
+  color: $date-weekday;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.maintenance-windows .maintenance-window__day {
+  color: $text-primary;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.maintenance-windows .maintenance-window__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.maintenance-windows .maintenance-window__title,
+.maintenance-windows .maintenance-window__time,
+.maintenance-windows .maintenance-window__meta {
+  margin: 0;
+}
+
+.maintenance-windows .maintenance-window__title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.maintenance-windows .maintenance-window__link {
+  color: $link;
+  text-decoration: none;
+}
+
+.maintenance-windows .maintenance-window__link:hover {
+  text-decoration: underline;
+}
+
+.maintenance-windows .maintenance-window__link:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+.maintenance-windows .maintenance-window__time {
+  margin-top: $sp-space--xs;
+  color: $text-secondary;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.maintenance-windows .maintenance-window__badge {
+  display: inline-block;
+  margin-left: $sp-space--xs;
+  padding: 1px $sp-space--sm;
+  border-radius: 999px;
+  background-color: $badge-background;
+  color: $badge-text;
+  font-size: 12px;
+  font-weight: 600;
+  vertical-align: 1px;
+}
+
+// Long impact text is clamped so one change cannot stretch the card
+.maintenance-windows .maintenance-window__meta {
+  display: -webkit-box;
+  margin-top: $sp-space--xs;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: $text-muted;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+.maintenance-windows .maintenance-window__number {
+  font-weight: 600;
+}
+
+// Buttons share the row equally and stack once the card is too narrow for both labels.
+// Spacing above each button comes from its own margin, so the row gap is horizontal only.
+.maintenance-windows .maintenance-windows__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 $sp-space--sm;
+}
+
+.maintenance-windows .maintenance-windows__action {
+  display: block;
+  flex: 1 1 180px;
+  margin-top: $sp-space--lg;
+  padding: $sp-space--md $sp-space--lg;
+  border: 1px solid $button-border;
+  border-radius: 4px;
+  background-color: $card-background;
+  color: $text-primary;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+}
+
+.maintenance-windows .maintenance-windows__action:hover {
+  background-color: $button-hover;
+  color: $text-primary;
+  text-decoration: none;
+}
+
+.maintenance-windows .maintenance-windows__action:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+// Pager, matching the Incidents and Outages widget
+.maintenance-windows .maintenance-windows__pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $sp-space--md;
+  margin-top: $sp-space--sm;
+  padding-top: $sp-space--lg;
+  border-top: 1px solid $divider;
+}
+
+.maintenance-windows .maintenance-windows__page-status {
+  color: $text-muted;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.maintenance-windows .maintenance-windows__page-button {
+  padding: $sp-space--sm $sp-space--lg;
+  border: 1px solid $button-border;
+  border-radius: 8px;
+  background-color: $card-background;
+  color: $text-primary;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.maintenance-windows .maintenance-windows__page-button:hover:not([disabled]) {
+  background-color: $button-hover;
+}
+
+.maintenance-windows .maintenance-windows__page-button:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+.maintenance-windows .maintenance-windows__page-button[disabled] {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.maintenance-windows .maintenance-window__placeholder {
+  display: block;
+  border-radius: 4px;
+  background-color: $placeholder-background;
+}
+
+.maintenance-windows .maintenance-window__placeholder--date {
+  flex: none;
+  width: 60px;
+  height: 64px;
+  border-radius: 4px;
+}
+
+.maintenance-windows .maintenance-window__placeholder--title {
+  width: 60%;
+  height: 20px;
+}
+
+.maintenance-windows .maintenance-window__placeholder--line {
+  width: 40%;
+  height: 18px;
+  margin-top: $sp-space--sm;
+}
+
+@media (max-width: 767px) {
+  .maintenance-windows {
+    padding: $sp-space--lg;
+  }
+
+  .maintenance-windows .maintenance-window {
+    gap: $sp-space--md;
+  }
+
+  .maintenance-windows .maintenance-window__date,
+  .maintenance-windows .maintenance-window__placeholder--date {
+    width: 52px;
+    height: 56px;
+  }
+
+  .maintenance-windows .maintenance-window__day {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,105 @@
+$text-primary: #181A1F !default;
+$text-secondary: #2C323F !default;
+$header-background: #F4F5F7 !default;
+$button-border: #C3C8D1 !default;
+$button-background: #FFFFFF !default;
+$button-hover: #F4F5F7 !default;
+$title-margin-top: 20px !default;
+$font-size-h1: 40px !default;
+$font-size-base: 18px !default;
+$sp-space--sm: 8px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+$sp-space--xxxl: 40px !default;
+
+.site-status-header {
+  background-color: $header-background;
+  padding-left: $sp-space--xl;
+  padding-right: $sp-space--xl;
+
+  // Title block on the left, location selector on the right
+  .site-status-header__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $sp-space--lg;
+  }
+
+  .site-status-header__text {
+    min-width: 0;
+  }
+
+  // Matches the title's Bootstrap h1 top margin and line box so the button centers on the
+  // heading; the border override stays scoped to this header so other pages embedding
+  // Location Preference Selector keep Bootstrap's default
+  .site-status-header__locations {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-top: $title-margin-top;
+    min-height: $font-size-h1 * 1.2;
+
+    // Same white/hover treatment as the page buttons in Known Problems; Bootstrap's
+    // btn-default otherwise stays grey after a click
+    .location-filter > .btn {
+      &,
+      &:focus,
+      &:active {
+        border-color: $button-border;
+        background-color: $button-background;
+      }
+
+      &:hover {
+        border-color: $button-border;
+        background-color: $button-hover;
+      }
+    }
+  }
+
+  &__title {
+    margin: 0 0 $sp-space--lg;
+    color: $text-primary;
+    font-size: $font-size-h1;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  &__subtitle {
+    margin: 0;
+    color: $text-secondary;
+    font-size: $font-size-base;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-status-header {
+    padding-left: $sp-space--lg;
+    padding-right: $sp-space--lg;
+
+    // Selector takes its own full-width row under the title
+    .site-status-header__top {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__title {
+      font-size: 28px;
+      margin-bottom: $sp-space--sm;
+    }
+
+    // Stacked under the subtitle, so drop the heading alignment. Block layout lets
+    // .location-filter fill the row, which its own mobile rules need for the full-width
+    // button and the left/right-anchored menu
+    .site-status-header__locations {
+      display: block;
+      margin-top: 0;
+      margin-bottom: $sp-space--sm;
+      min-height: 0;
+    }
+
+    &__subtitle {
+      font-size: 16px;
+    }
+  }
+}

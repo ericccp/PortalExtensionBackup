@@ -1,0 +1,254 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+$border-secondary: #616d74 !default;
+
+.itam-resources {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-resources .itam-resources__header {
+  margin-bottom: 16px;
+}
+
+.itam-resources .itam-resources__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-resources .itam-resources__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-resources .itam-resources__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-resources .itam-resources__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 24px;
+  border: 1px dashed $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-tertiary;
+  text-align: center;
+}
+
+.itam-resources .itam-resources__empty p {
+  margin: 0;
+}
+
+// ---- Toolbar ----
+.itam-resources .itam-resources__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 24px;
+}
+
+.itam-resources .itam-resources__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.itam-resources .itam-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 4px 14px;
+  border: 1px solid $hr-border;
+  border-radius: 16px;
+  background: $background-primary;
+  color: $text-primary;
+  font-size: 14px;
+}
+
+.itam-resources .itam-chip:hover {
+  border-color: $brand-primary;
+}
+
+.itam-resources .itam-chip:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-resources .itam-chip.itam-chip--active {
+  border: 2px solid $brand-primary-darker;
+  padding: 3px 13px;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-weight: 600;
+}
+
+.itam-resources .itam-resources__search {
+  position: relative;
+  flex: 0 1 300px;
+}
+
+.itam-resources .itam-resources__search > .fa-search {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: $text-tertiary;
+}
+
+.itam-resources .itam-resources__search input {
+  width: 100%;
+  height: 38px;
+  padding: 0 36px;
+  border: 1px solid $border-secondary;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.itam-resources .itam-resources__search input:focus {
+  outline: none;
+  border-color: $brand-primary;
+  box-shadow: 0 0 0 3px rgba(0, 128, 163, 0.25);
+}
+
+.itam-resources .itam-resources__search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.itam-resources .itam-resources__clear {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  width: 30px;
+  height: 30px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: $text-tertiary;
+}
+
+// ---- Groups ----
+.itam-resources .itam-resources__group + .itam-resources__group {
+  margin-top: 28px;
+}
+
+.itam-resources .itam-resources__group-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: $brand-primary-darker;
+}
+
+.itam-resources .itam-resources__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-resources .itam-resource {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-resources .itam-resource__title {
+  margin: 0;
+  padding: 16px 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.itam-resources .itam-resource__desc {
+  flex: 1 1 auto;
+  margin: 6px 0 0;
+  padding: 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+.itam-resources .itam-resource__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 12px 0 0;
+  padding: 0 16px;
+  font-size: 13px;
+  color: $text-secondary;
+}
+
+.itam-resources .itam-resource__meta div {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.itam-resources .itam-resource__meta dd {
+  margin: 0;
+}
+
+.itam-resources .itam-resource__footer {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 16px;
+  padding: 4px 16px;
+  border-top: 1px solid $hr-border;
+  border-radius: 0 0 8px 8px;
+  background: $background-secondary;
+}
+
+.itam-resources .itam-resource__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $brand-primary-darker;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.itam-resources .itam-resource__soon {
+  font-size: 13px;
+  font-style: italic;
+  color: $text-tertiary;
+}
+
+@media (max-width: 767px) {
+  .itam-resources .itam-resources__search {
+    flex-basis: 100%;
+  }
+}

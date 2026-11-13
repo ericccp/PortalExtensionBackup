@@ -1,0 +1,26 @@
+[
+    {
+        "name": "default_tab",
+        "label": "Default tab",
+        "type": "string",
+        "default_value": "overview",
+        "section": "Data",
+        "hint": "Id of the tab shown when the URL has no valid tab_id. Defaults to the first tab when empty or not found"
+    },
+    {
+        "name": "tabs_json",
+        "label": "Tabs (JSON)",
+        "type": "string",
+        "default_value": "",
+        "section": "Data",
+        "hint": "Replaces the built-in Overview, Assets and Performance tabs. Array of {\"id\", \"label\", \"rows\": [{\"columns\": [{\"size\": 1-12, \"stretch\": true to fill the row height (optional), \"widgets\": [{\"id\": \"<widget id or sys_id>\", \"options\": {}}]}]}]}"
+    },
+    {
+        "name": "tab_list_label",
+        "label": "Tab list label",
+        "type": "string",
+        "default_value": "",
+        "section": "Presentation",
+        "hint": "Screen reader name for the tab bar. Defaults to \"Site views\" when empty"
+    }
+]

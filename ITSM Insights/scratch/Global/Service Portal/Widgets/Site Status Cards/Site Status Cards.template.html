@@ -1,0 +1,19 @@
+<section class="site-status-cards" aria-label="${Site status summary}" aria-busy="{{c.loading}}">
+  <p ng-if="!c.loading && c.noLocation" class="site-status-cards__empty">{{::c.data.messages.chooseLocation}}</p>
+  <p ng-if="!c.loading && !c.noLocation && !c.data.locationFound" class="site-status-cards__empty">{{::c.data.messages.locationNotFound}}</p>
+  <ul ng-if="c.loading || (c.data.locationFound && !c.noLocation)" class="site-status-cards__list">
+    <li ng-if="c.loading" ng-repeat="i in [1, 2, 3, 4, 5]" class="site-status-card site-status-card--loading" aria-hidden="true">
+      <span class="site-status-card__placeholder site-status-card__placeholder--label"></span>
+      <span class="site-status-card__placeholder site-status-card__placeholder--value"></span>
+      <span class="site-status-card__placeholder site-status-card__placeholder--detail"></span>
+    </li>
+    <li ng-if="!c.loading" ng-repeat="card in c.data.cards track by card.id" class="site-status-card site-status-card--{{card.id}}">
+      <h2 class="site-status-card__label">{{card.label}}</h2>
+      <p class="site-status-card__value">
+        <a ng-if="card.url" class="site-status-card__link" ng-href="{{card.url}}" target="_blank" aria-label="{{card.linkLabel}}">{{card.value | number}}</a>
+        <span ng-if="!card.url">{{card.value | number}}</span>
+      </p>
+      <p class="site-status-card__detail">{{card.detail}}</p>
+    </li>
+  </ul>
+</section>

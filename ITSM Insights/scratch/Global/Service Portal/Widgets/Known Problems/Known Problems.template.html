@@ -1,0 +1,45 @@
+<section class="known-problems" aria-labelledby="known-problems-heading-{{::$id}}" aria-busy="{{c.loading}}">
+  <div class="known-problems__header">
+    <div class="known-problems__heading-group">
+      <h2 id="known-problems-heading-{{::$id}}" class="known-problems__heading">{{::c.data.messages.heading}}</h2>
+      <p ng-if="::c.data.messages.subHeading" class="known-problems__subtitle">{{::c.data.messages.subHeading}}</p>
+    </div>
+    <a ng-if="c.data.viewAllUrl" class="known-problems__view-all" ng-href="{{c.data.viewAllUrl}}" target="_blank">{{::c.data.messages.viewAll}}</a>
+  </div>
+
+  <ul ng-if="c.loading" class="known-problems__list" aria-hidden="true">
+    <li ng-repeat="i in [1, 2]" class="known-problem known-problem--loading">
+      <span class="known-problem__placeholder known-problem__placeholder--meta"></span>
+      <span class="known-problem__placeholder known-problem__placeholder--title"></span>
+      <span class="known-problem__placeholder known-problem__placeholder--line"></span>
+    </li>
+  </ul>
+
+  <p ng-if="!c.loading && c.noLocation" class="known-problems__empty">{{::c.data.messages.chooseLocation}}</p>
+  <p ng-if="!c.loading && !c.noLocation && !c.data.locationFound" class="known-problems__empty">{{::c.data.messages.locationNotFound}}</p>
+  <p ng-if="!c.loading && !c.noLocation && c.data.locationFound && !c.data.problems.length" class="known-problems__empty">{{::c.data.messages.empty}}</p>
+
+  <ul ng-if="!c.loading && c.data.problems.length" class="known-problems__list">
+    <li ng-repeat="problem in c.data.problems | limitTo:c.data.pageSize:c.page * c.data.pageSize track by problem.id" class="known-problem">
+      <p class="known-problem__meta">
+        <span class="known-problem__number">{{problem.number}}</span><span ng-if="problem.state"> · {{problem.state}}</span>
+      </p>
+      <h3 class="known-problem__title">
+        <a class="known-problem__link" ng-href="?id={{c.data.problemPage}}&table=problem&sys_id={{problem.id}}">{{problem.title}}</a>
+      </h3>
+      <p ng-if="problem.affects" class="known-problem__affects">{{::c.data.messages.affects}} {{problem.affects}}</p>
+      <p class="known-problem__workaround">
+        <span ng-if="problem.workaround">{{::c.data.messages.workaround}} {{problem.workaround}}</span>
+        <span ng-if="!problem.workaround">{{::c.data.messages.noWorkaround}}</span>
+        <a ng-if="problem.article" class="known-problem__article"
+           ng-href="?id={{c.data.kbPage}}&sys_id={{problem.article.id}}">{{problem.article.number}}</a>
+      </p>
+    </li>
+  </ul>
+
+  <nav ng-if="!c.loading && c.pageCount() > 1" class="known-problems__pager" aria-label="{{::c.data.messages.pagerLabel}}">
+    <button type="button" class="known-problems__page-button" ng-click="c.goToPage(c.page - 1)" ng-disabled="c.page === 0">{{::c.data.messages.previous}}</button>
+    <span class="known-problems__page-status" aria-live="polite">{{c.pageLabel()}}</span>
+    <button type="button" class="known-problems__page-button" ng-click="c.goToPage(c.page + 1)" ng-disabled="c.page >= c.pageCount() - 1">{{::c.data.messages.next}}</button>
+  </nav>
+</section>

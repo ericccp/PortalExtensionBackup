@@ -1,0 +1,39 @@
+<section class="itam-overview" itam-glossary-terms ng-class="'itam-overview--' + c.data.layout" aria-labelledby="itam-overview-title-{{::$id}}">
+  <header class="itam-overview__header">
+    <h2 class="itam-overview__title" id="itam-overview-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-overview__intro" ng-if="::c.data.showIntro">{{::c.data.text.intro}}</p>
+  </header>
+
+  <div class="itam-overview__block" ng-if="::c.data.showAreas">
+    <h3 class="itam-overview__block-title">{{::c.data.text.areasHeading}}</h3>
+    <ul class="itam-overview__areas">
+      <li class="itam-area" ng-repeat="area in ::c.data.areas track by area.id" ng-class="'itam-area--' + area.id">
+        <span class="itam-area__icon" aria-hidden="true"><i class="fa {{::area.icon}}"></i></span>
+        <div class="itam-area__content">
+          <h4 class="itam-area__title">{{::area.title}}</h4>
+          <p class="itam-area__summary">{{::area.summary}}</p>
+          <div class="itam-area__includes itam-glossary-skip" ng-if="::(c.data.layout === 'full' && area.includes.length)">
+            <span class="sr-only">{{::c.data.text.includesLabel}}:</span>
+            <ul>
+              <li ng-repeat="inc in ::area.includes track by $index">{{::inc}}</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="itam-overview__block" ng-if="::c.data.showObjectives">
+    <h3 class="itam-overview__block-title">{{::c.data.text.objectivesHeading}}</h3>
+    <p class="itam-overview__lead">{{::c.data.text.objectivesIntro}}</p>
+    <ul class="itam-overview__objectives">
+      <li class="itam-objective" ng-repeat="obj in ::c.data.objectives track by obj.id">
+        <span class="itam-objective__icon" aria-hidden="true"><i class="fa {{::obj.icon}}"></i></span>
+        <div>
+          <h4 class="itam-objective__title">{{::obj.title}}</h4>
+          <p class="itam-objective__summary">{{::obj.summary}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

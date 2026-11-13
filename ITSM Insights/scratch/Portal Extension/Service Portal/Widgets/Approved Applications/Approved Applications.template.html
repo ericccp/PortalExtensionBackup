@@ -1,0 +1,179 @@
+<div class="approved-applications">
+  <header class="aa-header">
+    <h2>{{c.data.text.title}}</h2>
+    <p>{{c.data.text.description}}</p>
+  </header>
+
+  <!-- Filter dropdowns and search share one row (EC Asset Filters pattern); pills follow below. -->
+  <div class="filter-container">
+    <div class="filter-bar" ng-class="{'mg-bt-sm': c.filterPills.length > 0, 'mg-bt-xl': c.filterPills.length == 0}">
+      <div class="filter-group" ng-if="c.data.showFilters &amp;&amp; c.total">
+        <p class="filter-label">{{c.data.text.filterBy}}</p>
+
+        <div ng-repeat="field in c.filterFields">
+          <div class="dropdown" data-filter-key="{{field.key}}" ng-class="{open: c.openFilter === field.key}"
+               ng-keydown="$event.key === 'Escape' &amp;&amp; c.openFilter === field.key &amp;&amp; c.clearFilterFocus(field.key)">
+            <button type="button" id="filter-{{field.key}}"
+                    class="btn btn-link dropdown-toggle filter-group-button"
+                    aria-haspopup="true"
+                    ng-attr-aria-expanded="{{c.openFilter === field.key}}"
+                    data-filter-grp-id="{{field.key}}"
+                    aria-label="{{c.data.text.filterBy}} {{field.label}}"
+                    ng-click="c.toggleFilter(field.key)">
+              {{field.label}}
+              <span ng-show="c.filters[field.key].length > 0">({{c.filters[field.key].length}})</span>
+              <span class="caret"></span>
+            </button>
+
+            <div class="dropdown-menu" ng-if="c.openFilter === field.key">
+              <ul class="list-group filter-container-style">
+                <li ng-repeat="option in c.filterOptions[field.key]"
+                    class="list-group-item {{!$last ? 'mg-bt-sm' : ''}} {{$last &amp;&amp; c.isScrollable(field.key) ? 'mg-bt-lg' : ''}}">
+                  <span class="filter-style standalone-filter-style">
+                    <input type="checkbox"
+                           id="{{field.key + '-' + option.value}}"
+                           name="{{field.key}}"
+                           ng-model="c.draft[field.key][option.value]"
+                           aria-label="{{option.label}}">
+                    <label for="{{field.key + '-' + option.value}}" title="{{option.label}}">{{option.label}}</label>
+                  </span>
+                </li>
+              </ul>
+
+              <div class="dropdown-footer">
+                <hr class="action-separator-style" ng-hide="!c.isScrollable(field.key)" />
+                <div class="filter-actions display-flex space-between mg-tp-lg">
+                  <button type="button" class="clearBtn btn btn-link btn-sm pd-initial" ng-click="c.clearFilter(field.key)"
+                          ng-disabled="!c.draftCount(field.key)" aria-label="{{c.data.text.clearFilter}}">{{c.data.text.clear}}</button>
+                  <button type="button" class="applyBtn btn btn-primary btn-sm" data-filter-grp-apply="filter-desktop-apply"
+                          data-filter-grp-apply-id="{{field.key}}" ng-click="c.applyFilter(field.key)"
+                          ng-disabled="!c.draftChanged(field.key)" aria-label="{{c.data.text.applyFilter}}">{{c.data.text.apply}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="asset-search-control">
+        <label class="sr-only" for="aa-search-input">{{c.data.text.searchLabel}}</label>
+        <input id="aa-search-input" type="text" class="search-input-container" ng-model="c.query"
+               ng-change="c.updateResults()" placeholder="{{c.data.text.searchPlaceholder}}">
+        <button type="button" class="fa fa-search search-icon" ng-if="!c.query" ng-click="c.updateResults()"
+                aria-label="{{c.data.text.searchLabel}}"></button>
+        <button type="button" class="fa fa-times cross-icon" ng-if="c.query" ng-click="c.resetSearch()"
+                aria-label="{{c.data.text.resetSearch}}"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pills-container-separator" ng-if="c.data.showFilters &amp;&amp; c.filterPills.length"></div>
+  <div class="filter-pills-container" ng-if="c.data.showFilters &amp;&amp; c.filterPills.length">
+    <div class="filter-pill-display-flex" role="group" aria-label="{{c.data.text.currentlyFilteredBy}}">
+      <div ng-repeat="pill in c.filterPills track by pill.key + ':' + pill.value">
+        <div class="pill rounded">
+          <span class="pill-text" title="{{pill.label}}">{{pill.label}}</span>
+          <button type="button" class="pill-button" ng-click="c.clearPill(pill)" aria-label="{{pill.clearLabel}}">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-link btn-sm" ng-click="c.clearAllFilters()"
+              aria-label="{{c.data.text.clearAppliedFilters}}">{{c.data.text.clearAll}}</button>
+    </div>
+  </div>
+
+  <div class="aa-compact-sort" ng-if="c.total">
+    <label class="aa-sort-field">
+      <span>{{c.data.text.sortBy}}</span>
+      <select class="form-control" ng-model="c.sortKey"
+              ng-options="column.key as column.label for column in c.columns"
+              ng-change="c.descending = false; c.updateResults()"></select>
+    </label>
+    <button type="button" class="btn btn-default" ng-click="c.sortBy(c.sortKey)"
+            ng-attr-aria-label="{{c.descending ? c.data.text.descendingHint : c.data.text.ascendingHint}}">
+      <i class="fa" aria-hidden="true" ng-class="c.descending ? 'fa-sort-amount-desc' : 'fa-sort-amount-asc'"></i>
+      {{c.descending ? c.data.text.descending : c.data.text.ascending}}
+    </button>
+  </div>
+
+  <nav class="aa-pagination" aria-label="{{c.data.text.paginationLabel}}" ng-if="c.results.length">
+    <p class="aa-page-summary" role="status" aria-live="polite" aria-atomic="true">
+      {{c.data.text.showingLabel}} {{c.firstResult}}–{{c.lastResult}} {{c.data.text.countOf}} {{c.results.length}} {{c.data.text.countApplications}}
+      <span class="aa-filtered-note" ng-if="c.results.length !== c.total">({{c.data.text.filteredFrom}} {{c.total}})</span>
+      <span class="aa-page-number">{{c.data.text.pageLabel}} {{c.currentPage}} {{c.data.text.countOf}} {{c.pageCount}}</span>
+    </p>
+    <div class="aa-page-actions">
+      <button type="button" class="btn btn-default" ng-click="c.setPage(c.currentPage - 1)" ng-disabled="c.currentPage === 1">
+        {{c.data.text.previousPage}}
+      </button>
+      <button type="button" class="btn btn-default" ng-click="c.setPage(c.currentPage + 1)" ng-disabled="c.currentPage === c.pageCount">
+        {{c.data.text.nextPage}}
+      </button>
+    </div>
+  </nav>
+
+  <!-- Compact views share the desktop table's filtered and sorted results. -->
+  <ul class="aa-compact-list" ng-if="c.results.length" aria-label="{{c.data.text.title}}">
+    <li class="aa-compact-card" ng-repeat="app in c.pageResults track by app.id">
+      <div class="aa-compact-heading">
+        <div>
+          <h3 class="aa-name">{{app.name}}</h3>
+          <span class="aa-vendor">{{app.vendor}}</span>
+        </div>
+        <span class="aa-status" ng-class="{'aa-status-approved': app.status === 'Approved'}">{{app.status}}</span>
+      </div>
+      <p class="aa-purpose">{{app.purpose}}</p>
+      <dl class="aa-compact-details">
+        <div><dt>${Category}</dt><dd>{{app.category}}</dd></div>
+        <div><dt>${Licensable}</dt><dd>{{c.licensableLabel(app.licensable)}}</dd></div>
+        <div><dt>${Platforms}</dt><dd>{{app.platforms.split('/').join(' / ')}}</dd></div>
+        <div><dt>${How to get access}</dt><dd>{{app.requestProcess}}</dd></div>
+      </dl>
+    </li>
+  </ul>
+
+  <div class="aa-table-scroll" role="region" aria-label="{{c.data.text.tableLabel}}" tabindex="0" ng-if="c.results.length">
+    <table class="table aa-table">
+      <caption class="sr-only">{{c.data.text.tableCaption}}</caption>
+      <thead>
+        <tr>
+          <th ng-repeat="column in c.columns" scope="col"
+              ng-attr-aria-sort="{{c.sortKey === column.key ? (c.descending ? 'descending' : 'ascending') : 'none'}}">
+            <button type="button" ng-click="c.sortBy(column.key)">
+              {{column.label}}
+              <i class="fa" aria-hidden="true" ng-class="c.sortKey === column.key ? (c.descending ? 'fa-sort-desc' : 'fa-sort-asc') : 'fa-sort'"></i>
+              <span class="sr-only">{{c.sortKey === column.key &amp;&amp; !c.descending ? c.data.text.sortDescending : c.data.text.sortAscending}}</span>
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="app in c.pageResults track by app.id">
+          <th scope="row" class="aa-application">
+            <span class="aa-name">{{app.name}}</span>
+            <span class="aa-purpose">{{app.purpose}}</span>
+          </th>
+          <td>{{app.vendor}}</td>
+          <td>{{app.category}}</td>
+          <td><span class="aa-status" ng-class="{'aa-status-approved': app.status === 'Approved'}">{{app.status}}</span></td>
+          <td>{{c.licensableLabel(app.licensable)}}</td>
+          <td class="aa-platforms">{{app.platforms.split('/').join(' / ')}}</td>
+          <td>{{app.requestProcess}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="aa-empty" role="alert" ng-if="c.data.loadError">
+    <p>{{c.data.text.loadError}}</p>
+  </div>
+
+  <div class="aa-empty" ng-if="!c.results.length &amp;&amp; !c.data.loadError">
+    <i class="fa fa-search" aria-hidden="true"></i>
+    <h3>{{c.total ? c.data.text.noMatches : c.data.text.noApplications}}</h3>
+    <p ng-if="c.total">{{c.data.text.searchHelp}}</p>
+    <button type="button" class="btn btn-default" ng-if="c.hasActiveFilters()" ng-click="c.clearFilters()">{{c.data.text.clearFilters}}</button>
+  </div>
+</div>

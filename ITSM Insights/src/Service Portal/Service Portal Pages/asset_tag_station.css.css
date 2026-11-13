@@ -1,0 +1,3 @@
+
+.asset-tag-station-body { padding-top: 32px; padding-bottom: 48px; }
+@media (max-width: 767px) { .asset-tag-station-body { padding-top: 20px; } }

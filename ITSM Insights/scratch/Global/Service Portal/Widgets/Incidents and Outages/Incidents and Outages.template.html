@@ -1,0 +1,61 @@
+<section class="incidents-outages" aria-labelledby="incidents-outages-heading-{{::$id}}" aria-busy="{{c.loading}}">
+  <div class="incidents-outages__header">
+    <div class="incidents-outages__heading-group">
+      <h2 id="incidents-outages-heading-{{::$id}}" class="incidents-outages__heading">{{::c.data.messages.heading}}</h2>
+      <p ng-if="::c.data.messages.subHeading" class="incidents-outages__subtitle">{{::c.data.messages.subHeading}}</p>
+    </div>
+    <a ng-if="c.data.viewAllUrl" class="incidents-outages__view-all" ng-href="{{c.data.viewAllUrl}}" target="_blank">{{::c.data.messages.viewAll}}</a>
+  </div>
+
+  <ul ng-if="c.loading" class="incidents-outages__list" aria-hidden="true">
+    <li ng-repeat="i in [1, 2]" class="incident-outage incident-outage--loading">
+      <span class="incident-outage__placeholder incident-outage__placeholder--meta"></span>
+      <span class="incident-outage__placeholder incident-outage__placeholder--title"></span>
+      <span class="incident-outage__placeholder incident-outage__placeholder--line"></span>
+    </li>
+  </ul>
+
+  <p ng-if="!c.loading && c.noLocation" class="incidents-outages__empty">{{::c.data.messages.chooseLocation}}</p>
+  <p ng-if="!c.loading && !c.noLocation && c.data.loadFailed" class="incidents-outages__empty">{{::c.data.messages.loadFailed}}</p>
+  <p ng-if="!c.loading && !c.noLocation && !c.data.loadFailed && !c.data.locationFound" class="incidents-outages__empty">{{::c.data.messages.locationNotFound}}</p>
+  <p ng-if="!c.loading && !c.noLocation && !c.data.loadFailed && c.data.locationFound && !c.data.items.length" class="incidents-outages__empty">{{::c.data.messages.empty}}</p>
+
+  <ul ng-if="!c.loading && c.data.items.length" class="incidents-outages__list">
+    <li ng-repeat="item in c.data.items | limitTo:c.data.pageSize:c.page * c.data.pageSize track by item.id" class="incident-outage">
+      <div class="incident-outage__body">
+        <p class="incident-outage__meta">
+          <span ng-if="item.major" class="incident-outage__status incident-outage__status--major-{{item.major}}">{{::c.data.messages.majorIncident}}</span>
+          <span ng-if="item.status" class="incident-outage__status incident-outage__status--{{item.status}}">
+            <span class="incident-outage__icon incident-outage__icon--{{item.status}}" aria-hidden="true"></span>
+            {{item.statusLabel}}
+          </span>
+          <span class="incident-outage__number">{{item.number}}</span><span ng-if="item.number && item.priority"> · </span><span ng-if="item.priority">{{item.priority}}</span><span ng-if="(item.number || item.priority) && item.state"> · </span><span ng-if="item.state">{{item.state}}</span>
+        </p>
+        <h3 class="incident-outage__title">
+          <a class="incident-outage__link" ng-href="?id={{c.data.recordPage}}&table={{item.table}}&sys_id={{item.id}}">{{item.title}}</a>
+        </h3>
+        <p ng-if="item.affects" class="incident-outage__affects">{{::c.data.messages.affects}} {{item.affects}}</p>
+        <p ng-if="item.detail" class="incident-outage__detail">{{item.detail}}</p>
+        <p class="incident-outage__footer">
+          <time datetime="{{item.since}}">{{item.sinceLabel}}</time><span ng-if="item.group && !item.sla"> · {{item.group}}</span>
+        </p>
+      </div>
+      <div ng-if="item.sla" class="incident-outage__sla">
+        <p class="incident-outage__sla-header">
+          <span class="incident-outage__sla-label" title="{{item.sla.name}}">{{::c.data.messages.slaLabel}}</span>
+          <span ng-if="item.sla.timeLabel" class="incident-outage__sla-time">{{item.sla.timeLabel}}</span>
+        </p>
+        <div class="incident-outage__sla-bar" role="progressbar" aria-label="{{::c.data.messages.slaLabel}}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{item.sla.percent}}" aria-valuetext="{{item.sla.valueText}}">
+          <span class="incident-outage__sla-fill incident-outage__sla-fill--{{item.sla.level}}" ng-style="{width: item.sla.percent + '%'}"></span>
+        </div>
+        <p ng-if="item.group" class="incident-outage__sla-assigned">{{::c.data.messages.assigned}} {{item.group}}</p>
+      </div>
+    </li>
+  </ul>
+
+  <nav ng-if="!c.loading && c.pageCount() > 1" class="incidents-outages__pager" aria-label="{{::c.data.messages.pagerLabel}}">
+    <button type="button" class="incidents-outages__page-button" ng-click="c.goToPage(c.page - 1)" ng-disabled="c.page === 0">{{::c.data.messages.previous}}</button>
+    <span class="incidents-outages__page-status" aria-live="polite">{{c.pageLabel()}}</span>
+    <button type="button" class="incidents-outages__page-button" ng-click="c.goToPage(c.page + 1)" ng-disabled="c.page >= c.pageCount() - 1">{{::c.data.messages.next}}</button>
+  </nav>
+</section>

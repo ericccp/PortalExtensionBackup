@@ -1,0 +1,21 @@
+<section class="itam-stats" ng-class="'itam-stats--' + c.data.layout" aria-label="{{::(c.data.text.title || c.data.text.statsLabel)}}">
+  <h2 class="itam-stats__title" ng-if="::c.data.text.title">{{::c.data.text.title}}</h2>
+
+  <div class="itam-stats__alert" role="alert" ng-if="c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <ul class="itam-stats__grid" ng-if="!c.data.loadError">
+    <li class="metric-card" ng-repeat="tile in ::c.data.tiles track by tile.id" ng-class="'metric-card--' + tile.state">
+      <span class="metric-card__icon-container" aria-hidden="true">
+        <i class="fa {{::tile.icon}} metric-card__icon"></i>
+      </span>
+      <div class="metric-card__content">
+        <span class="metric-card__title">{{::tile.label}}</span>
+        <span class="metric-card__callout">{{::tile.value}}</span>
+        <span class="metric-card__subtitle" ng-if="::tile.subtitle">{{::tile.subtitle}}</span>
+      </div>
+    </li>
+  </ul>
+</section>

@@ -1,0 +1,112 @@
+<section class="itam-timeline" aria-labelledby="itam-timeline-title-{{::$id}}">
+  <header class="itam-timeline__header">
+    <h2 class="itam-timeline__title" id="itam-timeline-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-timeline__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <div class="itam-timeline__alert" role="alert" ng-if="c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div ng-if="!c.data.loadError">
+    <div class="itam-timeline__chips"
+         role="group"
+         aria-label="{{::c.data.text.filterLabel}}"
+         ng-if="::(c.data.showFilters && c.data.workstreams.length > 1)">
+      <button type="button"
+              class="itam-chip"
+              ng-class="{'itam-chip--active': c.workstream === 'all'}"
+              aria-pressed="{{c.workstream === 'all'}}"
+              ng-click="c.setWorkstream('all')">{{::c.data.text.allWorkstreams}}</button>
+      <button type="button"
+              class="itam-chip"
+              ng-repeat="ws in c.data.workstreams track by ws.value"
+              ng-class="{'itam-chip--active': c.workstream === ws.value}"
+              aria-pressed="{{c.workstream === ws.value}}"
+              ng-click="c.setWorkstream(ws.value)">
+        <i class="fa {{::ws.icon}}" aria-hidden="true"></i>
+        <span>{{::ws.label}}</span>
+      </button>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite">{{c.resultMessage}}</p>
+
+    <div class="itam-timeline__empty" ng-if="c.data.total === 0">
+      <i class="fa fa-map-o" aria-hidden="true"></i>
+      <p>{{::c.data.text.noProjects}}</p>
+    </div>
+
+    <div class="itam-timeline__empty" ng-if="c.data.total > 0 && c.visibleTotal === 0">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <p>{{::c.data.text.noMatches}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.clearAll()">{{::c.data.text.clearFilters}}</button>
+    </div>
+
+    <div class="itam-timeline__groups" ng-if="c.visibleTotal > 0">
+      <section class="itam-timeline__group"
+               ng-repeat="group in c.data.groups track by group.value"
+               ng-if="group.visible.length"
+               ng-class="'itam-timeline__group--' + group.value"
+               aria-labelledby="itam-tl-group-{{::$id}}">
+        <h3 class="itam-timeline__group-title" id="itam-tl-group-{{::$id}}">
+          <i class="fa {{::group.icon}} itam-timeline__group-icon" aria-hidden="true"></i>
+          <span>{{::group.label}}</span>
+          <span class="itam-timeline__count">
+            <span aria-hidden="true">{{group.visible.length}}</span>
+            <span class="sr-only">{{c.countLabel(group)}}</span>
+          </span>
+        </h3>
+
+        <ol class="itam-timeline__list">
+          <li class="itam-timeline__item" ng-repeat="item in group.visible | limitTo: c.limitFor(group) track by item.id">
+            <span class="itam-timeline__marker" aria-hidden="true">
+              <i class="fa {{::item.statusIcon}}"></i>
+            </span>
+            <div class="itam-timeline__content">
+              <div class="itam-timeline__meta">
+                <span class="itam-tag" ng-class="'itam-tag--' + item.workstream">
+                  <i class="fa {{::item.workstreamIcon}}" aria-hidden="true"></i>
+                  <span class="sr-only">{{::c.data.text.workstreamLabel}}:</span>
+                  {{::item.workstreamLabel}}
+                </span>
+                <span class="itam-timeline__phase" ng-if="::item.phase">
+                  <span class="sr-only">{{::c.data.text.phaseLabel}}:</span>{{::item.phase}}
+                </span>
+                <span class="itam-timeline__dates" ng-if="::(item.startDate || item.endDate)">
+                  <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                  <span ng-if="::item.startDate"><span class="sr-only">{{::c.data.text.startLabel}}:</span>{{::item.startDate}}</span>
+                  <span ng-if="::(item.startDate && item.endDate)" aria-hidden="true">–</span>
+                  <span ng-if="::item.endDate"><span class="sr-only">{{::c.data.text.endLabel}}:</span>{{::item.endDate}}</span>
+                </span>
+              </div>
+              <h4 class="itam-timeline__item-title">
+                <a class="itam-timeline__item-link" ng-if="::c.data.projectPage" ng-href="?id={{::c.data.projectPage}}&sys_id={{::item.id}}">{{::item.name}}</a>
+                <span ng-if="::!c.data.projectPage">{{::item.name}}</span>
+              </h4>
+              <p class="itam-timeline__desc" itam-glossary-terms ng-if="::item.shortDescription">{{::item.shortDescription}}</p>
+              <p class="itam-timeline__desc" itam-glossary-terms ng-if="::item.description">{{::item.description}}</p>
+              <a class="itam-timeline__link"
+                 ng-if="::item.moreInfoUrl"
+                 ng-href="{{::item.moreInfoUrl}}"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                {{::c.data.text.moreInfo}}
+                <i class="fa fa-external-link" aria-hidden="true"></i>
+                <span class="sr-only">({{::c.data.text.opensNewWindow}})</span>
+              </a>
+            </div>
+          </li>
+        </ol>
+
+        <button type="button"
+                class="itam-timeline__show-all"
+                ng-if="c.data.collapseAfter && group.visible.length > c.data.collapseAfter"
+                aria-expanded="{{!!c.showAll[group.value]}}"
+                ng-click="c.toggleShowAll(group)">
+          {{c.showAll[group.value] ? c.data.text.showFewer : c.showAllLabel(group)}}
+        </button>
+      </section>
+    </div>
+  </div>
+</section>

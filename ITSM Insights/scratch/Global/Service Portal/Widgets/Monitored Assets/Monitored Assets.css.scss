@@ -1,0 +1,538 @@
+$text-primary: #181A1F !default;
+$text-secondary: #2C323F !default;
+$text-muted: #545B68 !default;
+$card-background: #FFFFFF !default;
+$card-border: #DADDE3 !default;
+$divider: #E6E8EC !default;
+$table-rule: #C3C8D1 !default;
+$link: #24386B !default;
+$focus-ring: #4F7FF0 !default;
+$placeholder-background: #E6E8EC !default;
+$tooltip-background: #181A1F !default;
+$sp-space--xs: 4px !default;
+$sp-space--sm: 8px !default;
+$sp-space--md: 12px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+$sp-space--xxl: 32px !default;
+
+// Operational status marks, validated as a set for color-vision separation; legend shapes carry
+// status too, so no pair relies on hue alone. Other is a deliberately neutral gray
+$status-operational: #2F8A4C !default;
+$status-repair: #D9822B !default;
+$status-non-operational: #C53532 !default;
+$status-standby: #3B5BBE !default;
+$status-ready: #B0479B !default;
+$status-other: #8790A1 !default;
+
+// Vendor colors in fixed slot order, validated as a set for adjacent stacked segments; the largest
+// vendor at the site takes slot 1. Other vendors reuses the neutral gray, No vendor is a lighter hatched gray
+$vendor-1: #2A78D6 !default;
+$vendor-2: #EB6834 !default;
+$vendor-3: #1BAF7A !default;
+$vendor-4: #EDA100 !default;
+$vendor-5: #E87BA4 !default;
+$vendor-6: #008300 !default;
+$vendor-none: #A3AAB7 !default;
+$vendor-none-fill: #E6E8EC !default;
+
+// Selectors are written out in full: the instance SCSS compiler drops &__ / &-- suffix rules
+// Half the card grid gap on each side; the page's .site-status-row supplies the rest of the outer gutter
+.monitored-assets {
+  position: relative;
+  // Lets the header respond to the card's width, which depends on the page column rather than the screen
+  container-type: inline-size;
+  container-name: monitored-assets;
+  margin: 0 $sp-space--sm $sp-space--lg;
+  padding: $sp-space--xl;
+  background-color: $card-background;
+  border: 1px solid $card-border;
+  border-radius: 7px;
+  color: $text-primary;
+}
+
+// Grid so View all stays in the top-right corner however narrow the card gets; the View as
+// control sits on its own row below the subtitle until the card is wide enough to stack it under View all
+.monitored-assets .monitored-assets__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: $sp-space--md $sp-space--lg;
+  padding-bottom: $sp-space--lg;
+}
+
+.monitored-assets .monitored-assets__heading-group {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.monitored-assets .monitored-assets__heading {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.monitored-assets .monitored-assets__subtitle {
+  margin: $sp-space--xs 0 0;
+  color: $text-secondary;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.monitored-assets .monitored-assets__view-control {
+  display: flex;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  flex-wrap: wrap;
+  justify-self: end;
+  justify-content: flex-end;
+  align-items: center;
+  gap: $sp-space--sm;
+}
+
+@container monitored-assets (min-width: 640px) {
+  .monitored-assets .monitored-assets__heading-group {
+    grid-row: 1 / span 2;
+  }
+
+  .monitored-assets .monitored-assets__view-control {
+    grid-column: 2;
+  }
+}
+
+.monitored-assets .monitored-assets__view-label {
+  margin: 0;
+  color: $text-secondary;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+// Styling comes from the portal's select2 theme; only the width is set here
+.monitored-assets .monitored-assets__view-select {
+  min-width: 160px;
+}
+
+.monitored-assets .monitored-assets__view-select .select2-container {
+  width: 100%;
+}
+
+// Links stay plain until hovered, matching the other Site Status widgets; bar segments are
+// links too but keep their status color
+.monitored-assets a:not(.monitored-assets__segment) {
+  color: $link;
+  text-decoration: none;
+}
+
+.monitored-assets a:not(.monitored-assets__segment):hover {
+  color: $link;
+  text-decoration: underline;
+}
+
+// a.-qualified to outrank the plain-link rule above, whose :not() class adds to its specificity
+.monitored-assets a.monitored-assets__view-all {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: underline;
+}
+
+.monitored-assets a:focus,
+.monitored-assets .monitored-assets__table-scroll:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+.monitored-assets .monitored-assets__empty {
+  margin: $sp-space--sm 0 0;
+  color: $text-secondary;
+  font-size: 16px;
+}
+
+.monitored-assets .monitored-assets__placeholder {
+  display: block;
+  height: 20px;
+  margin-top: $sp-space--lg;
+  border-radius: 4px;
+  background-color: $placeholder-background;
+}
+
+// Status colors: marks paint with currentColor, so one class themes bars, donut segments and shapes
+.monitored-assets .monitored-assets__tone--operational { color: $status-operational; }
+.monitored-assets .monitored-assets__tone--repair { color: $status-repair; }
+.monitored-assets .monitored-assets__tone--non_operational { color: $status-non-operational; }
+.monitored-assets .monitored-assets__tone--standby { color: $status-standby; }
+.monitored-assets .monitored-assets__tone--ready { color: $status-ready; }
+.monitored-assets .monitored-assets__tone--other { color: $status-other; }
+.monitored-assets .monitored-assets__tone--vendor-1 { color: $vendor-1; }
+.monitored-assets .monitored-assets__tone--vendor-2 { color: $vendor-2; }
+.monitored-assets .monitored-assets__tone--vendor-3 { color: $vendor-3; }
+.monitored-assets .monitored-assets__tone--vendor-4 { color: $vendor-4; }
+.monitored-assets .monitored-assets__tone--vendor-5 { color: $vendor-5; }
+.monitored-assets .monitored-assets__tone--vendor-6 { color: $vendor-6; }
+.monitored-assets .monitored-assets__tone--none { color: $vendor-none; }
+
+// Status shapes, so status never relies on color alone
+.monitored-assets .monitored-assets__shape {
+  display: inline-block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.monitored-assets .monitored-assets__shape--repair {
+  border: 2px solid currentColor;
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+
+.monitored-assets .monitored-assets__shape--non_operational {
+  width: 9px;
+  height: 9px;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+
+.monitored-assets .monitored-assets__shape--standby {
+  border-radius: 1px;
+}
+
+.monitored-assets .monitored-assets__shape--ready {
+  border: 2px solid currentColor;
+  background: transparent;
+}
+
+.monitored-assets .monitored-assets__shape--other {
+  height: 3px;
+  border-radius: 2px;
+}
+
+// Vendors are identities rather than states, so they share one square swatch and the legend names them
+.monitored-assets .monitored-assets__shape--swatch {
+  border-radius: 2px;
+}
+
+// Hatching sets CIs with no vendor apart from Other vendors without needing another hue
+.monitored-assets .monitored-assets__shape--none {
+  border-radius: 2px;
+}
+
+// background-image so the segment's own background-color and data-end rounding still apply
+.monitored-assets .monitored-assets__shape--none,
+.monitored-assets .monitored-assets__segment.monitored-assets__tone--none {
+  background-color: $vendor-none-fill;
+  background-image: repeating-linear-gradient(45deg, currentColor 0, currentColor 2px, transparent 2px, transparent 5px);
+}
+
+.monitored-assets .monitored-assets__body--bar {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-space--lg;
+}
+
+.monitored-assets .monitored-assets__body--donut {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: $sp-space--xl $sp-space--xxl;
+}
+
+.monitored-assets .monitored-assets__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $sp-space--sm $sp-space--xl;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.monitored-assets .monitored-assets__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: $sp-space--sm;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.monitored-assets .monitored-assets__legend-label {
+  color: $text-secondary;
+}
+
+.monitored-assets .monitored-assets__legend-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.monitored-assets .monitored-assets__legend-percent {
+  color: $text-muted;
+  font-variant-numeric: tabular-nums;
+}
+
+// Beside the donut the legend reads as a list, after the chart
+.monitored-assets .monitored-assets__body--donut .monitored-assets__key {
+  order: 2;
+}
+
+.monitored-assets .monitored-assets__body--donut .monitored-assets__legend {
+  flex-direction: column;
+}
+
+.monitored-assets .monitored-assets__key-title {
+  margin: 0 0 $sp-space--sm;
+  color: $text-secondary;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.monitored-assets .monitored-assets__bars {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.monitored-assets .monitored-assets__bar-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 28%) minmax(0, 1fr);
+  align-items: center;
+  gap: $sp-space--md;
+  padding: 6px 0;
+}
+
+.monitored-assets .monitored-assets__bar-label {
+  overflow: hidden;
+  color: $text-secondary;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.monitored-assets .monitored-assets__bar-track {
+  display: flex;
+  align-items: center;
+  gap: $sp-space--sm;
+  min-width: 0;
+}
+
+// Width is the share of the largest class, measured against the track minus room for the total
+// label, so the longest bar and its total still fit; the 2px gap separates status segments
+.monitored-assets .monitored-assets__bar {
+  display: flex;
+  flex: none;
+  gap: 2px;
+  width: calc(var(--bar-share, 0) * (100% - 4em - #{$sp-space--sm}));
+  min-width: 4px;
+  height: 20px;
+}
+
+.monitored-assets .monitored-assets__segment {
+  display: block;
+  flex: 1 1 0;
+  min-width: 2px;
+  background-color: currentColor;
+  transition: opacity 0.15s ease;
+}
+
+// Rounded only at the data end; the start stays square against the baseline
+.monitored-assets .monitored-assets__segment:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.monitored-assets .monitored-assets__bar:hover .monitored-assets__segment {
+  opacity: 0.45;
+}
+
+.monitored-assets .monitored-assets__bar .monitored-assets__segment:hover {
+  opacity: 1;
+}
+
+.monitored-assets .monitored-assets__bar-value {
+  flex: none;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.monitored-assets .monitored-assets__donut {
+  position: relative;
+  flex: none;
+  width: 200px;
+  height: 200px;
+}
+
+.monitored-assets .monitored-assets__donut-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.monitored-assets .monitored-assets__donut-segment {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 18;
+  transition: opacity 0.15s ease;
+}
+
+.monitored-assets .monitored-assets__donut-svg:hover .monitored-assets__donut-segment {
+  opacity: 0.45;
+}
+
+.monitored-assets .monitored-assets__donut-svg .monitored-assets__donut-segment:hover {
+  opacity: 1;
+}
+
+.monitored-assets .monitored-assets__donut-center {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  pointer-events: none;
+}
+
+.monitored-assets .monitored-assets__donut-total {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.monitored-assets .monitored-assets__donut-caption {
+  color: $text-muted;
+  font-size: 13px;
+}
+
+.monitored-assets .monitored-assets__table-scroll {
+  overflow-x: auto;
+}
+
+.monitored-assets .monitored-assets__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.monitored-assets .monitored-assets__table thead th {
+  padding: $sp-space--sm $sp-space--md $sp-space--md;
+  border-bottom: 1px solid $table-rule;
+  color: $text-secondary;
+  font-weight: 600;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.monitored-assets .monitored-assets__table tbody th,
+.monitored-assets .monitored-assets__table tbody td {
+  padding: $sp-space--md;
+  border-bottom: 1px solid $divider;
+  font-weight: 400;
+  text-align: left;
+}
+
+.monitored-assets .monitored-assets__table tfoot th,
+.monitored-assets .monitored-assets__table tfoot td {
+  padding: $sp-space--md;
+  border-top: 1px solid $table-rule;
+  font-weight: 600;
+  text-align: left;
+}
+
+.monitored-assets .monitored-assets__table .monitored-assets__number {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.monitored-assets .monitored-assets__table .monitored-assets__total {
+  font-weight: 600;
+}
+
+.monitored-assets .monitored-assets__column-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.monitored-assets .monitored-assets__zero {
+  color: $text-muted;
+}
+
+// Positioned by the link function; visibility rather than display so its width can be measured
+.monitored-assets .monitored-assets__tooltip {
+  position: absolute;
+  z-index: 5;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: $tooltip-background;
+  color: #FFFFFF;
+  font-size: 13px;
+  line-height: 1.3;
+  white-space: nowrap;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-50%, calc(-100% - 10px));
+  transition: opacity 0.1s ease;
+}
+
+.monitored-assets .monitored-assets__tooltip--visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .monitored-assets .monitored-assets__segment,
+  .monitored-assets .monitored-assets__donut-segment,
+  .monitored-assets .monitored-assets__tooltip {
+    transition: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .monitored-assets {
+    padding: $sp-space--lg;
+  }
+
+  // Controls take their own full-width row under the heading, even if the card is wide enough
+  // for the side-by-side layout; each label/select pair is a row with the selects lined up
+  .monitored-assets .monitored-assets__heading-group {
+    grid-row: 1;
+  }
+
+  .monitored-assets .monitored-assets__view-control {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: auto minmax(0, 1fr);
+    justify-self: stretch;
+  }
+
+  .monitored-assets .monitored-assets__view-select {
+    min-width: 0;
+  }
+
+  // Labels move above their bars so the bars keep the full width
+  .monitored-assets .monitored-assets__bar-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: $sp-space--xs;
+  }
+
+  .monitored-assets .monitored-assets__body--donut {
+    flex-direction: column;
+  }
+
+  .monitored-assets .monitored-assets__donut {
+    width: 160px;
+    height: 160px;
+  }
+}

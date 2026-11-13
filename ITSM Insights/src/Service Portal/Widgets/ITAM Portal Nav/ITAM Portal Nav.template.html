@@ -1,0 +1,22 @@
+<nav class="itam-nav" aria-label="{{::c.data.text.navLabel}}">
+  <div class="itam-nav__inner">
+    <a class="itam-nav__brand" ng-href="?id={{::c.data.homePage}}">
+      <span class="itam-nav__mark" aria-hidden="true"><i class="fa fa-cubes"></i></span>
+      <span class="itam-nav__brand-text">{{::c.data.text.brand}}</span>
+    </a>
+
+    <div class="itam-nav__scroller">
+      <ul class="itam-nav__list">
+        <li class="itam-nav__item" ng-repeat="item in ::c.data.items track by item.id">
+          <a class="itam-nav__link"
+             ng-class="{'itam-nav__link--active': item.active}"
+             ng-href="?id={{::item.page}}"
+             ng-attr-aria-current="{{::item.active ? 'page' : undefined}}">
+            <i class="fa {{::item.icon}} itam-nav__icon" aria-hidden="true" ng-if="::c.data.showIcons"></i>
+            <span>{{::item.label}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

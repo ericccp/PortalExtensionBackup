@@ -1,0 +1,65 @@
+<section class="itam-faq" aria-labelledby="itam-faq-title-{{::$id}}">
+  <header class="itam-faq__header">
+    <h2 class="itam-faq__title" id="itam-faq-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-faq__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <div class="itam-faq__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-faq__empty" ng-if="::(!c.data.loadError && !c.data.total)">
+    <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+    <p>{{::c.data.text.noFaqs}}</p>
+  </div>
+
+  <div ng-if="::c.data.total">
+    <div class="itam-faq__toolbar">
+      <div class="itam-faq__search" role="search">
+        <label class="sr-only" for="itam-faq-search-{{::$id}}">{{::c.data.text.searchLabel}}</label>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input id="itam-faq-search-{{::$id}}" type="search" autocomplete="off" placeholder="{{::c.data.text.searchLabel}}" ng-model="c.term" ng-change="c.apply()" />
+        <button type="button" class="itam-faq__clear" ng-if="c.term" ng-click="c.clearSearch()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.clearSearch}}</span>
+        </button>
+      </div>
+      <button type="button" class="itam-faq__toggle-all" ng-if="c.visibleTotal" ng-click="c.toggleAll()">
+        <i class="fa" ng-class="c.allOpen() ? 'fa-compress' : 'fa-expand'" aria-hidden="true"></i>
+        {{c.allOpen() ? c.data.text.collapseAll : c.data.text.expandAll}}
+      </button>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite">{{c.resultMessage}}</p>
+
+    <div class="itam-faq__empty" ng-if="!c.visibleTotal">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <p>{{::c.data.text.noMatches}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.clearSearch()">{{::c.data.text.clearSearch}}</button>
+    </div>
+
+    <section class="itam-faq__group" ng-repeat="group in ::c.data.groups track by group.value" ng-if="group.visible.length" aria-labelledby="itam-faq-group-{{::$id}}">
+      <h3 class="itam-faq__group-title" id="itam-faq-group-{{::$id}}">{{::group.label}}</h3>
+      <ul class="itam-faq__list">
+        <li class="itam-faq__item" ng-repeat="item in group.visible track by item.id" ng-class="{'itam-faq__item--open': c.open[item.id]}">
+          <h4 class="itam-faq__q">
+            <button type="button"
+                    aria-expanded="{{!!c.open[item.id]}}"
+                    aria-controls="itam-faq-a-{{::item.id}}"
+                    ng-click="c.toggle(item)">
+              <span>{{::item.question}}</span>
+              <i class="fa" ng-class="c.open[item.id] ? 'fa-minus' : 'fa-plus'" aria-hidden="true"></i>
+            </button>
+          </h4>
+          <div class="itam-faq__a" itam-glossary-terms id="itam-faq-a-{{::item.id}}" ng-show="c.open[item.id]" ng-bind-html="::item.answer"></div>
+        </li>
+      </ul>
+    </section>
+
+    <p class="itam-faq__more">
+      {{::c.data.text.stillStuck}}
+      <a ng-href="?id={{::c.data.helpPage}}">{{::c.data.text.getHelp}}</a>
+    </p>
+  </div>
+</section>

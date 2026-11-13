@@ -1,0 +1,29 @@
+<div class="location-filter">
+  <button type="button" class="btn btn-default" ng-click="c.toggleLocations()" aria-haspopup="true" aria-expanded="{{c.showLocations}}">
+    <i class="fa fa-map-marker m-r-sm" aria-hidden="true"></i>
+    <span ng-if="!c.locationCount()">{{::c.data.text.allLocations}}</span>
+    <span ng-if="c.locationCount()">{{::c.data.text.locations}} <span class="badge">{{c.locationCount()}}</span></span>
+    <i class="fa fa-caret-down m-l-sm" aria-hidden="true"></i>
+  </button>
+
+  <div class="location-menu panel panel-default" ng-if="c.showLocations">
+    <div class="panel-body">
+      <label for="locations">{{::c.data.text.filterLabel}}</label>
+      <sn-record-picker id="locations"
+                        field="c.locationField"
+                        table="'cmn_location'"
+                        display-field="'name'"
+                        search-fields="'name'"
+                        value-field="'sys_id'"
+                        multiple="true"
+                        page-size="50"></sn-record-picker>
+      <div class="location-actions">
+        <button type="button" class="btn btn-link" ng-click="c.clearLocations()" ng-disabled="!c.locationField.value">{{::c.data.text.clearAll}}</button>
+        <span class="pull-right">
+          <button type="button" class="btn btn-default" ng-click="c.cancelLocations()">{{::c.data.text.cancel}}</button>
+          <button type="button" class="btn btn-primary" ng-click="c.saveLocations()" ng-disabled="c.saving || !c.locationsDirty()">{{::c.data.text.save}}</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

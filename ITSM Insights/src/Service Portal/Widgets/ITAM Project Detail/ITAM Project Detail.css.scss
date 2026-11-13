@@ -1,0 +1,475 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-darkest: #002d39 !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-moderate-darker: #6245cc !default;
+$brand-success-darker: #306700 !default;
+$brand-info-darker: #005f9d !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-project {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+// ---- Breadcrumb ----
+.itam-project .itam-project__breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.itam-project .itam-project__breadcrumb li {
+  color: $text-tertiary;
+}
+
+.itam-project .itam-project__breadcrumb li + li::before {
+  content: "/";
+  margin: 0 8px;
+}
+
+.itam-project .itam-project__breadcrumb a {
+  color: $brand-primary-darker;
+  text-decoration: underline;
+}
+
+.itam-project .itam-project__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-project .itam-project__missing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 56px 24px;
+  border: 1px dashed $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  text-align: center;
+  color: $text-tertiary;
+}
+
+.itam-project .itam-project__missing > i {
+  font-size: 28px;
+}
+
+.itam-project .itam-project__missing h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.itam-project .itam-project__missing p {
+  margin: 0;
+  max-width: 480px;
+}
+
+// ---- Header ----
+.itam-project .itam-project__header {
+  margin-bottom: 24px;
+  padding: 28px 32px 32px;
+  border-radius: 8px;
+  background: linear-gradient(120deg, $brand-primary-darkest 0%, $brand-primary-darker 100%);
+  color: #ffffff;
+}
+
+.itam-project .itam-project__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.itam-project .itam-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: $brand-primary-darkest;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.itam-project .itam-chip.itam-chip--completed {
+  color: $brand-success-darker;
+}
+
+.itam-project .itam-chip.itam-chip--planned {
+  color: $brand-moderate-darker;
+}
+
+.itam-project .itam-chip.itam-chip--health-at_risk {
+  background: #fff3e0;
+  color: #8a4b00;
+}
+
+.itam-project .itam-chip.itam-chip--health-off_track {
+  background: #fdecec;
+  color: $brand-danger-darker;
+}
+
+.itam-project .itam-chip.itam-chip--phase {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+}
+
+.itam-project .itam-project__title {
+  margin: 16px 0 8px;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.itam-project .itam-project__lead {
+  max-width: 760px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.itam-project .itam-project__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.itam-project .itam-project__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 2px solid $brand-primary-darker;
+  border-radius: 6px;
+  background: $brand-primary-darker;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.itam-project .itam-project__button:hover {
+  text-decoration: underline;
+}
+
+.itam-project .itam-project__button:focus-visible {
+  outline: 3px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+// Buttons on the dark header invert
+.itam-project .itam-project__header .itam-project__button {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: $brand-primary-darkest;
+}
+
+.itam-project .itam-project__header .itam-project__button.itam-project__button--secondary {
+  border-color: rgba(255, 255, 255, 0.8);
+  background: transparent;
+  color: #ffffff;
+}
+
+.itam-project .itam-project__header .itam-project__button:focus-visible {
+  outline-color: #ffffff;
+}
+
+// ---- Layout ----
+.itam-project .itam-project__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.itam-project .itam-project__main {
+  padding: 24px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-project .itam-project__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin: 0 0 8px;
+  padding: 0 0 20px;
+  border-bottom: 1px solid $hr-border;
+}
+
+.itam-project .itam-project__facts dt {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $text-tertiary;
+}
+
+.itam-project .itam-project__facts dd {
+  margin: 4px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.itam-project .itam-project__progress dd {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.itam-project .itam-project__bar {
+  display: block;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e6eaeb;
+}
+
+.itam-project .itam-project__fill {
+  display: block;
+  height: 100%;
+  background: $brand-primary-darker;
+}
+
+.itam-project .itam-project__section {
+  padding-top: 20px;
+}
+
+.itam-project .itam-project__heading {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-project .itam-project__text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  white-space: pre-line;
+  color: $text-secondary;
+}
+
+.itam-project .itam-project__muted {
+  margin: 0;
+  font-size: 15px;
+  color: $text-tertiary;
+}
+
+.itam-project .itam-project__scope {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.itam-project .itam-project__scope li {
+  display: flex;
+  gap: 10px;
+}
+
+.itam-project .itam-project__scope i {
+  margin-top: 4px;
+  color: $brand-primary-darker;
+}
+
+// ---- Team ----
+.itam-project .itam-project__team {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-project .itam-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+}
+
+.itam-project .itam-person__avatar {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.itam-project .itam-person__avatar.itam-person__avatar--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.itam-project .itam-person__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  min-width: 0;
+}
+
+.itam-project .itam-person__name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.itam-project .itam-person__role {
+  flex-basis: 100%;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-project .itam-person__email {
+  color: $brand-primary-darker;
+}
+
+// ---- Phases ----
+.itam-project .itam-project__phases {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-project .itam-project__phases li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: $background-secondary;
+}
+
+.itam-project .itam-project__phase-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $text-tertiary;
+}
+
+.itam-project .itam-project__phases a,
+.itam-project .itam-project__related a,
+.itam-project .itam-project__link {
+  color: $brand-primary-darker;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+// ---- Aside ----
+.itam-project .itam-project__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itam-project .itam-project__card {
+  padding: 20px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-project .itam-project__card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.itam-project .itam-project__goal {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.itam-project .itam-project__related {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-project .itam-project__related li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 0;
+  border-bottom: 1px solid $hr-border;
+  font-size: 14px;
+}
+
+.itam-project .itam-project__related li:first-child {
+  padding-top: 0;
+}
+
+.itam-project .itam-project__related span {
+  font-size: 12px;
+  color: $text-tertiary;
+}
+
+.itam-project .itam-project__link {
+  font-size: 14px;
+}
+
+@media (max-width: 1000px) {
+  .itam-project .itam-project__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .itam-project .itam-project__header {
+    padding: 20px 16px 24px;
+  }
+
+  .itam-project .itam-project__title {
+    font-size: 26px;
+  }
+
+  .itam-project .itam-project__main {
+    padding: 16px;
+  }
+}

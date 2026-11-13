@@ -1,0 +1,315 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-moderate-darker: #6245cc !default;
+$brand-success-darker: #306700 !default;
+$brand-info-darker: #005f9d !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-timeline {
+  margin-bottom: 32px;
+  padding: 24px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-primary;
+}
+
+// ---- Header ----
+.itam-timeline .itam-timeline__header {
+  margin-bottom: 16px;
+}
+
+.itam-timeline .itam-timeline__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-timeline .itam-timeline__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-timeline .itam-timeline__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+// ---- Workstream chips ----
+.itam-timeline .itam-timeline__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.itam-timeline .itam-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 4px 14px;
+  border: 1px solid $hr-border;
+  border-radius: 16px;
+  background: $background-primary;
+  color: $text-primary;
+  font-size: 14px;
+}
+
+.itam-timeline .itam-chip:hover {
+  border-color: $brand-primary;
+}
+
+.itam-timeline .itam-chip:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-timeline .itam-chip.itam-chip--active {
+  border: 2px solid $brand-primary-darker;
+  padding: 3px 13px;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-weight: 600;
+}
+
+// ---- Empty states ----
+.itam-timeline .itam-timeline__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  color: $text-tertiary;
+}
+
+.itam-timeline .itam-timeline__empty > i {
+  font-size: 24px;
+}
+
+.itam-timeline .itam-timeline__empty p {
+  margin: 0;
+}
+
+// ---- Groups ----
+.itam-timeline .itam-timeline__group + .itam-timeline__group {
+  margin-top: 32px;
+}
+
+.itam-timeline .itam-timeline__group-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.itam-timeline .itam-timeline__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+// ---- Rail and markers ----
+.itam-timeline .itam-timeline__list {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 44px;
+  list-style: none;
+}
+
+.itam-timeline .itam-timeline__list::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 15px;
+  width: 2px;
+  background: $hr-border;
+}
+
+.itam-timeline .itam-timeline__item {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.itam-timeline .itam-timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.itam-timeline .itam-timeline__marker {
+  position: absolute;
+  top: 0;
+  left: -44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid $hr-border;
+  border-radius: 50%;
+  background: $background-primary;
+  font-size: 16px;
+}
+
+.itam-timeline .itam-timeline__group--in_progress .itam-timeline__marker,
+.itam-timeline .itam-timeline__group--in_progress .itam-timeline__group-icon {
+  border-color: $brand-primary;
+  color: $brand-primary-darker;
+}
+
+.itam-timeline .itam-timeline__group--planned .itam-timeline__marker,
+.itam-timeline .itam-timeline__group--planned .itam-timeline__group-icon {
+  border-color: $brand-moderate-darker;
+  color: $brand-moderate-darker;
+}
+
+.itam-timeline .itam-timeline__group--completed .itam-timeline__marker,
+.itam-timeline .itam-timeline__group--completed .itam-timeline__group-icon {
+  border-color: $brand-success-darker;
+  color: $brand-success-darker;
+}
+
+// The in-progress rail is solid brand color to show active work
+.itam-timeline .itam-timeline__group--in_progress .itam-timeline__list::before {
+  background: $brand-primary;
+}
+
+// ---- Item content ----
+.itam-timeline .itam-timeline__content {
+  padding: 4px 0 0;
+}
+
+.itam-timeline .itam-timeline__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+}
+
+.itam-timeline .itam-timeline__phase,
+.itam-timeline .itam-timeline__dates {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: $text-tertiary;
+}
+
+.itam-timeline .itam-timeline__item-title {
+  margin: 8px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.itam-timeline .itam-timeline__desc {
+  margin: 4px 0 0;
+  max-width: 720px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+.itam-timeline .itam-timeline__link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: $brand-primary-darker;
+  text-decoration: underline;
+}
+
+.itam-timeline .itam-timeline__show-all {
+  margin: 16px 0 0 44px;
+  padding: 8px 14px;
+  border: 1px solid $hr-border;
+  border-radius: 6px;
+  background: $background-primary;
+  color: $brand-primary-darker;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.itam-timeline .itam-timeline__show-all:hover {
+  background: $brand-primary-opacity;
+}
+
+.itam-timeline .itam-timeline__show-all:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+// ---- Workstream tags ----
+.itam-timeline .itam-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: #eef1f3;
+  color: #29353b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.itam-timeline .itam-tag.itam-tag--ham {
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+}
+
+.itam-timeline .itam-tag.itam-tag--sam {
+  background: #f2eeff;
+  color: $brand-moderate-darker;
+}
+
+.itam-timeline .itam-tag.itam-tag--service_mapping {
+  background: #e6f0f8;
+  color: $brand-info-darker;
+}
+
+@media (max-width: 767px) {
+  .itam-timeline {
+    padding: 16px;
+  }
+}
+
+// ---- Project detail link ----
+.itam-timeline .itam-timeline__item-link {
+  color: $text-primary;
+  text-decoration: none;
+}
+
+.itam-timeline .itam-timeline__item-link:hover {
+  color: $brand-primary-darker;
+  text-decoration: underline;
+}
+
+.itam-timeline .itam-timeline__item-link:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+  border-radius: 2px;
+}

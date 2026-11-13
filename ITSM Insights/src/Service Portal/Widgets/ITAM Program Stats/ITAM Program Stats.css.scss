@@ -1,0 +1,132 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-moderate-darker: #6245cc !default;
+$brand-success-darker: #306700 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-stats {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-stats .itam-stats__title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-stats .itam-stats__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-stats .itam-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-stats.itam-stats--stack .itam-stats__grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+// ---- Metric card ----
+// Icon and text sit at the top so every card reads from the same line, whatever its height
+.itam-stats .metric-card {
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid $hr-border;
+  border-radius: 4px;
+  background: $background-primary;
+  box-sizing: border-box;
+}
+
+.itam-stats .metric-card__icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+  border-radius: 4px;
+  background: #eef3f6;
+}
+
+.itam-stats .metric-card__icon {
+  font-size: 18px;
+  color: #526777;
+}
+
+.itam-stats .metric-card__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// Title line height matches the icon's top edge
+.itam-stats .metric-card__title {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  color: $text-tertiary;
+}
+
+.itam-stats .metric-card__callout {
+  margin-top: 4px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: $text-primary;
+  text-wrap: balance;
+}
+
+.itam-stats .metric-card__subtitle {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: $text-tertiary;
+}
+
+// One block per state, written out in full for the instance SCSS compiler
+.itam-stats .metric-card--info .metric-card__icon-container {
+  background: $brand-primary-opacity;
+}
+
+.itam-stats .metric-card--info .metric-card__icon {
+  color: $brand-primary-darker;
+}
+
+.itam-stats .metric-card--success .metric-card__icon-container {
+  background: #e9f8ef;
+}
+
+.itam-stats .metric-card--success .metric-card__icon {
+  color: $brand-success-darker;
+}
+
+.itam-stats .metric-card--purple .metric-card__icon-container {
+  background: #f2eeff;
+}
+
+.itam-stats .metric-card--purple .metric-card__icon {
+  color: $brand-moderate-darker;
+}

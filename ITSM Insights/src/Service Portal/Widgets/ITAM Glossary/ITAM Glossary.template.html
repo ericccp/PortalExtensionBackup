@@ -1,0 +1,66 @@
+<section class="itam-glossary" aria-labelledby="itam-glossary-title-{{::$id}}">
+  <header class="itam-glossary__header">
+    <h2 class="itam-glossary__title" id="itam-glossary-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-glossary__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <div class="itam-glossary__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-glossary__empty" ng-if="::(!c.data.loadError && !c.data.terms.length)">
+    <i class="fa fa-book" aria-hidden="true"></i>
+    <p>{{::c.data.text.noTerms}}</p>
+  </div>
+
+  <div ng-if="::c.data.terms.length">
+    <div class="itam-glossary__tools">
+      <div class="itam-glossary__search" role="search">
+        <label class="sr-only" for="itam-glossary-search-{{::$id}}">{{::c.data.text.searchLabel}}</label>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input id="itam-glossary-search-{{::$id}}" type="search" autocomplete="off" placeholder="{{::c.data.text.searchLabel}}" ng-model="c.term" ng-change="c.apply()" />
+        <button type="button" class="itam-glossary__clear" ng-if="c.term" ng-click="c.clearSearch()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.clearSearch}}</span>
+        </button>
+      </div>
+      <nav class="itam-glossary__az" aria-label="{{::c.data.text.azLabel}}">
+        <button type="button"
+                class="itam-glossary__letter"
+                ng-repeat="l in c.letters track by l.value"
+                ng-disabled="!l.enabled"
+                aria-label="{{c.jumpLabel(l.value)}}"
+                ng-click="c.jumpToLetter(l.value)">{{l.value}}</button>
+      </nav>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite">{{c.resultMessage}}</p>
+
+    <div class="itam-glossary__empty" ng-if="!c.count">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <p>{{::c.data.text.noMatches}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.clearSearch()">{{::c.data.text.clearSearch}}</button>
+    </div>
+
+    <div class="itam-glossary__group" ng-repeat="group in c.groups track by group.letter">
+      <h3 class="itam-glossary__letter-heading" id="{{c.domId('letter', group.letter)}}" tabindex="-1">{{group.letter}}</h3>
+      <dl class="itam-glossary__list">
+        <div class="itam-glossary__entry"
+             ng-repeat="t in group.items track by t.id"
+             ng-class="{'itam-glossary__entry--highlight': c.highlight === t.id}">
+          <dt class="itam-glossary__term" id="{{c.domId('term', t.id)}}" tabindex="-1">{{::t.term}}</dt>
+          <dd class="itam-glossary__definition">
+            <div ng-bind-html="::t.definition"></div>
+            <p class="itam-glossary__see" ng-if="::t.seeAlso.length">
+              <span class="itam-glossary__see-label">{{::c.data.text.seeAlso}}:</span>
+              <span ng-repeat="rel in ::t.seeAlso track by rel.id">
+                <button type="button" class="itam-glossary__see-link" ng-click="c.jumpToTerm(rel.id)">{{::rel.term}}</button><span ng-if="::!$last">, </span>
+              </span>
+            </p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>

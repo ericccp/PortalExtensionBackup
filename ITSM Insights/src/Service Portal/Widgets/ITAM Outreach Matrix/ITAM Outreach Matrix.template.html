@@ -1,0 +1,82 @@
+<section class="itam-outreach" aria-labelledby="itam-outreach-title-{{::$id}}">
+  <header class="itam-outreach__header">
+    <h2 class="itam-outreach__title" id="itam-outreach-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-outreach__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <div class="itam-outreach__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-outreach__empty" ng-if="::(!c.data.loadError && !c.data.matrix.departments.length)">
+    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+    <p>{{::c.data.text.noRows}}</p>
+  </div>
+
+  <div ng-if="::c.data.matrix.departments.length">
+    <div class="itam-outreach__toolbar">
+      <!-- Legend doubles as the status filter -->
+      <div class="itam-outreach__legend" role="group" aria-label="{{::c.data.text.statusFilterLabel}}">
+        <button type="button"
+                class="itam-status-chip"
+                ng-repeat="s in ::c.data.matrix.statuses track by s.value"
+                ng-class="['itam-status-chip--' + s.value, {'itam-status-chip--active': c.status === s.value}]"
+                aria-pressed="{{c.status === s.value}}"
+                ng-click="c.setStatus(s.value)">
+          <i class="fa {{::s.icon}}" aria-hidden="true"></i>
+          <span>{{::s.label}}</span>
+        </button>
+      </div>
+      <div class="itam-outreach__search" role="search">
+        <label class="sr-only" for="itam-outreach-search-{{::$id}}">{{::c.data.text.searchLabel}}</label>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input id="itam-outreach-search-{{::$id}}"
+               type="search"
+               autocomplete="off"
+               placeholder="{{::c.data.text.searchLabel}}"
+               ng-model="c.term"
+               ng-change="c.apply()" />
+        <button type="button" class="itam-outreach__clear" ng-if="c.term" ng-click="c.clearSearch()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.clearSearch}}</span>
+        </button>
+      </div>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite">{{c.resultMessage}}</p>
+
+    <div class="itam-outreach__empty" ng-if="!c.rows.length">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <p>{{::c.data.text.noMatches}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.clearAll()">{{::c.data.text.clearFilters}}</button>
+    </div>
+
+    <div class="itam-outreach__scroll" role="region" tabindex="0" aria-label="{{::c.data.text.tableLabel}}" ng-if="c.rows.length">
+      <table class="itam-outreach__table">
+        <thead>
+          <tr>
+            <th scope="col" class="itam-outreach__dept">{{::c.data.text.departmentColumn}}</th>
+            <th scope="col" ng-repeat="ws in ::c.data.matrix.workstreams track by ws.value">{{::ws.label}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="dept in c.rows track by dept.name">
+            <th scope="row" class="itam-outreach__dept">{{::dept.name}}</th>
+            <td ng-repeat="cell in ::dept.cells track by $index" ng-class="{'itam-outreach__cell--dim': c.isDimmed(cell)}">
+              <span class="itam-status" ng-if="::cell" ng-class="'itam-status--' + cell.status" title="{{::cell.notes}}">
+                <i class="fa {{::cell.icon}}" aria-hidden="true"></i>
+                <span>{{::cell.label}}</span>
+              </span>
+              <span class="itam-outreach__date" ng-if="::(cell && cell.date)">{{::cell.date}}</span>
+              <span class="itam-outreach__none" ng-if="::!cell">
+                <span aria-hidden="true">—</span>
+                <span class="sr-only">{{::c.data.text.notRecorded}}</span>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

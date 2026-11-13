@@ -1,0 +1,63 @@
+<section class="itam-issues" aria-labelledby="itam-issues-title-{{::$id}}">
+  <header class="itam-issues__header">
+    <div>
+      <h2 class="itam-issues__title" id="itam-issues-title-{{::$id}}">
+        {{::c.data.text.title}}
+        <span class="itam-issues__count" ng-if="::c.data.openCount">{{::c.openCountLabel()}}</span>
+      </h2>
+      <p class="itam-issues__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+    </div>
+    <button type="button"
+            class="itam-issues__resolved-toggle"
+            ng-if="::(c.data.allowResolved && c.data.resolvedCount)"
+            aria-pressed="{{c.showResolved}}"
+            ng-click="c.toggleResolved()">{{c.resolvedLabel()}}</button>
+  </header>
+
+  <div class="itam-issues__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <p class="itam-issues__clear" ng-if="::(!c.data.loadError && !c.data.openCount)">
+    <i class="fa fa-check-circle" aria-hidden="true"></i>
+    <span>{{::c.data.text.noOpen}}</span>
+  </p>
+
+  <ul class="itam-issues__list" ng-if="::c.data.issues.length">
+    <li class="itam-issue"
+        ng-repeat="issue in ::c.data.issues track by issue.id"
+        ng-if="c.visible(issue)"
+        ng-class="'itam-issue--' + issue.status">
+      <div class="itam-issue__top">
+        <span class="itam-issue__status">
+          <i class="fa {{::issue.statusIcon}}" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.statusLabel}}:</span>{{::issue.statusLabel}}
+        </span>
+        <span class="itam-issue__area" ng-if="::issue.area">
+          <span class="sr-only">{{::c.data.text.areaLabel}}:</span>{{::issue.area}}
+        </span>
+        <span class="itam-issue__date" ng-if="::issue.opened">{{::c.data.text.openedLabel}} {{::issue.opened}}</span>
+        <span class="itam-issue__date" ng-if="::issue.resolved">{{::c.data.text.resolvedLabel}} {{::issue.resolved}}</span>
+      </div>
+      <h3 class="itam-issue__title">{{::issue.title}}</h3>
+
+      <div class="itam-issue__workaround" ng-if="::issue.workaround">
+        <strong><i class="fa fa-wrench" aria-hidden="true"></i> {{::c.data.text.workaround}}:</strong>
+        <span itam-glossary-terms>{{::issue.workaround}}</span>
+      </div>
+
+      <div ng-if="::issue.description">
+        <button type="button"
+                class="itam-issue__toggle"
+                aria-expanded="{{!!c.expanded[issue.id]}}"
+                aria-controls="itam-issue-{{::issue.id}}"
+                ng-click="c.toggle(issue)">
+          <i class="fa" ng-class="c.expanded[issue.id] ? 'fa-angle-up' : 'fa-angle-down'" aria-hidden="true"></i>
+          {{c.expanded[issue.id] ? c.data.text.hideDetails : c.data.text.details}}
+        </button>
+        <p class="itam-issue__desc" itam-glossary-terms id="itam-issue-{{::issue.id}}" ng-show="c.expanded[issue.id]">{{::issue.description}}</p>
+      </div>
+    </li>
+  </ul>
+</section>

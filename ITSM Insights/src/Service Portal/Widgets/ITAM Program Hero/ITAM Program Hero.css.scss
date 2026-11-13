@@ -1,0 +1,247 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-darkest: #002d39 !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$text-primary: #10171a !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$hr-border: #cfd5d7 !default;
+$border-secondary: #616d74 !default;
+
+.itam-hero {
+  padding: 24px 0 40px;
+  color: $text-primary;
+}
+
+.itam-hero .itam-hero__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.itam-hero .itam-hero__breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.itam-hero .itam-hero__breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  color: $text-tertiary;
+}
+
+.itam-hero .itam-hero__breadcrumb li + li::before {
+  content: "/";
+  margin: 0 8px;
+  color: $text-tertiary;
+}
+
+.itam-hero .itam-hero__breadcrumb a {
+  color: $brand-primary-darker;
+  text-decoration: underline;
+}
+
+.itam-hero .itam-hero__body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.itam-hero .itam-hero__copy {
+  flex: 1 1 auto;
+  max-width: 760px;
+}
+
+.itam-hero .itam-hero__eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $brand-primary-darker;
+}
+
+.itam-hero .itam-hero__title {
+  margin: 0 0 12px;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.itam-hero .itam-hero__intro {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: $text-tertiary;
+}
+
+.itam-hero .itam-hero__search {
+  position: relative;
+  flex: 0 0 320px;
+}
+
+.itam-hero .itam-hero__search-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: $text-tertiary;
+  pointer-events: none;
+}
+
+.itam-hero .itam-hero__search-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 40px 0 40px;
+  border: 1px solid $border-secondary;
+  border-radius: 6px;
+  background: $background-primary;
+  color: $text-primary;
+  font-size: 16px;
+}
+
+.itam-hero .itam-hero__search-input:focus {
+  outline: none;
+  border-color: $brand-primary;
+  box-shadow: 0 0 0 3px rgba(0, 128, 163, 0.25);
+}
+
+// Hide the native clear control; the widget provides its own
+.itam-hero .itam-hero__search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.itam-hero .itam-hero__search-clear {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: $text-tertiary;
+}
+
+.itam-hero .itam-hero__search-clear:hover {
+  background: $brand-primary-opacity;
+}
+
+.itam-hero .itam-hero__search-clear:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 1px;
+}
+
+// ---- Call-to-action buttons ----
+.itam-hero .itam-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.itam-hero .itam-hero__action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 2px solid $brand-primary-darker;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.itam-hero .itam-hero__action.itam-hero__action--primary {
+  background: $brand-primary-darker;
+  color: #ffffff;
+}
+
+.itam-hero .itam-hero__action.itam-hero__action--secondary {
+  background: $background-primary;
+  color: $brand-primary-darker;
+}
+
+.itam-hero .itam-hero__action:hover {
+  text-decoration: underline;
+}
+
+.itam-hero .itam-hero__action:focus-visible {
+  outline: 3px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+// Brand variant: dark banner with white text
+.itam-hero.itam-hero--brand {
+  margin: 16px 0 8px;
+  padding: 24px 32px 40px;
+  border-radius: 8px;
+  background: linear-gradient(120deg, $brand-primary-darkest 0%, $brand-primary-darker 100%);
+  color: #ffffff;
+}
+
+.itam-hero.itam-hero--brand .itam-hero__eyebrow,
+.itam-hero.itam-hero--brand .itam-hero__intro,
+.itam-hero.itam-hero--brand .itam-hero__breadcrumb li,
+.itam-hero.itam-hero--brand .itam-hero__breadcrumb li + li::before,
+.itam-hero.itam-hero--brand .itam-hero__breadcrumb a {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.itam-hero.itam-hero--brand .itam-hero__action.itam-hero__action--primary {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: $brand-primary-darkest;
+}
+
+.itam-hero.itam-hero--brand .itam-hero__action.itam-hero__action--secondary {
+  border-color: rgba(255, 255, 255, 0.8);
+  background: transparent;
+  color: #ffffff;
+}
+
+.itam-hero.itam-hero--brand .itam-hero__action:focus-visible {
+  outline-color: #ffffff;
+}
+
+.itam-hero.itam-hero--brand .itam-hero__search-input {
+  border-color: transparent;
+}
+
+.itam-hero.itam-hero--brand .itam-hero__search-input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 767px) {
+  .itam-hero {
+    padding: 16px 0 24px;
+  }
+
+  .itam-hero .itam-hero__breadcrumb ol {
+    margin-bottom: 20px;
+  }
+
+  .itam-hero .itam-hero__body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .itam-hero .itam-hero__title {
+    font-size: 28px;
+  }
+
+  .itam-hero .itam-hero__search {
+    flex-basis: auto;
+  }
+
+  .itam-hero.itam-hero--brand {
+    padding: 20px 16px 28px;
+  }
+}

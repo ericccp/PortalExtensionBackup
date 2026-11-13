@@ -1,0 +1,33 @@
+<footer class="itam-footer" aria-label="{{::c.data.text.footerLabel}}">
+  <div class="itam-footer__grid">
+    <section class="itam-footer__contact" aria-labelledby="itam-footer-contact-{{::$id}}">
+      <h2 class="itam-footer__heading" id="itam-footer-contact-{{::$id}}">{{::c.data.text.contactHeading}}</h2>
+      <p class="itam-footer__intro">{{::c.data.text.contactIntro}}</p>
+      <div class="itam-footer__actions">
+        <a class="itam-footer__button" ng-if="::c.data.email" ng-href="mailto:{{::c.data.email}}">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <span>{{::c.data.text.emailLabel}}</span>
+        </a>
+        <a class="itam-footer__button itam-footer__button--secondary" href="?id=itam_help">
+          <i class="fa fa-life-ring" aria-hidden="true"></i>
+          <span>{{::c.data.text.getHelp}}</span>
+        </a>
+      </div>
+      <p class="itam-footer__email" ng-if="::c.data.email">{{::c.data.email}}</p>
+    </section>
+
+    <section aria-labelledby="itam-footer-explore-{{::$id}}">
+      <h2 class="itam-footer__heading" id="itam-footer-explore-{{::$id}}">{{::c.data.text.exploreHeading}}</h2>
+      <ul class="itam-footer__links">
+        <li ng-repeat="link in ::c.data.explore track by link.id"><a ng-href="?id={{::link.page}}">{{::link.label}}</a></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="itam-footer-links-{{::$id}}">
+      <h2 class="itam-footer__heading" id="itam-footer-links-{{::$id}}">{{::c.data.text.resourcesHeading}}</h2>
+      <ul class="itam-footer__links">
+        <li ng-repeat="link in ::c.data.links track by link.id"><a ng-href="{{::link.url}}">{{::link.label}}</a></li>
+      </ul>
+    </section>
+  </div>
+</footer>

@@ -1,0 +1,157 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$text-primary: #10171a !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$hr-border: #cfd5d7 !default;
+$sp-panel-box-shadow: 0 4px 8px 0 rgba(23, 40, 52, 0.08) !default;
+
+.itam-tiles {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-tiles .itam-tiles__header {
+  margin-bottom: 16px;
+}
+
+.itam-tiles .itam-tiles__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-tiles .itam-tiles__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-tiles .itam-tiles__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// ---- Link tiles ----
+.itam-tiles .itam-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding: 20px 20px 44px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-primary;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.itam-tiles .itam-tile:hover {
+  border-color: $brand-primary;
+  box-shadow: $sp-panel-box-shadow;
+}
+
+.itam-tiles .itam-tile:hover .itam-tile__title {
+  text-decoration: underline;
+}
+
+.itam-tiles .itam-tile:focus-visible {
+  outline: 3px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-tiles .itam-tile__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-size: 20px;
+}
+
+.itam-tiles .itam-tile__title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.itam-tiles .itam-tile__desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+.itam-tiles .itam-tile__arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  color: $brand-primary-darker;
+}
+
+// ---- Steps ----
+.itam-tiles.itam-tiles--steps .itam-tiles__grid {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  counter-reset: none;
+}
+
+.itam-tiles .itam-step {
+  position: relative;
+  padding: 16px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-tiles .itam-step__number {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  color: $hr-border;
+}
+
+.itam-tiles .itam-step__icon {
+  display: block;
+  margin-bottom: 10px;
+  color: $brand-primary-darker;
+  font-size: 22px;
+}
+
+.itam-tiles .itam-step__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.itam-tiles .itam-step__desc {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+@media (max-width: 480px) {
+  .itam-tiles .itam-tiles__grid,
+  .itam-tiles.itam-tiles--steps .itam-tiles__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .itam-tiles .itam-tile {
+    transition: none;
+  }
+}

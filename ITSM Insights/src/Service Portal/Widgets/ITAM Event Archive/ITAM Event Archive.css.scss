@@ -1,0 +1,252 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-darkest: #002d39 !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-events {
+  margin-bottom: 32px;
+  padding: 24px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-primary;
+}
+
+.itam-events .itam-events__header {
+  margin-bottom: 16px;
+}
+
+.itam-events .itam-events__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-events .itam-events__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-events .itam-events__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-events .itam-events__empty {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+.itam-events .itam-events__empty i {
+  margin-top: 3px;
+}
+
+// ---- Upcoming ----
+.itam-events .itam-events__upcoming {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-events .itam-event {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.itam-events .itam-event__date {
+  display: flex;
+  flex: 0 0 64px;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.itam-events .itam-event__month {
+  display: block;
+  width: 100%;
+  padding: 3px 0;
+  background: $brand-primary-darker;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.itam-events .itam-event__day {
+  padding: 6px 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.itam-events .itam-event__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.itam-events .itam-event__when {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: $text-secondary;
+}
+
+.itam-events .itam-event__summary {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+.itam-events .itam-event__join {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: $brand-primary-darker;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.itam-events .itam-event__join:hover {
+  text-decoration: underline;
+}
+
+// ---- Past: accordion ----
+.itam-events .itam-events__year {
+  border-top: 1px solid $hr-border;
+}
+
+.itam-events .itam-events__year:last-child {
+  border-bottom: 1px solid $hr-border;
+}
+
+.itam-events .itam-events__year-heading {
+  margin: 0;
+}
+
+.itam-events .itam-events__year-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 4px;
+  border: 0;
+  background: transparent;
+  color: $brand-primary-darker;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.itam-events .itam-events__year-toggle:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: -2px;
+}
+
+.itam-events .itam-events__year-toggle .fa {
+  margin-left: auto;
+  font-size: 20px;
+}
+
+.itam-events .itam-events__count {
+  font-size: 13px;
+  font-weight: 500;
+  color: $text-tertiary;
+}
+
+.itam-events .itam-events__list {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-events .itam-events__row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  gap: 4px 16px;
+  align-items: baseline;
+  padding: 10px 4px;
+  font-size: 14px;
+}
+
+.itam-events .itam-events__row + .itam-events__row {
+  border-top: 1px solid #eceff0;
+}
+
+.itam-events .itam-events__row-date {
+  font-weight: 600;
+  color: $text-secondary;
+}
+
+.itam-events .itam-events__row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itam-events .itam-events__row-summary {
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-events .itam-events__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  white-space: nowrap;
+}
+
+.itam-events .itam-events__links a {
+  color: $brand-primary-darker;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.itam-events .itam-events__pending {
+  font-size: 13px;
+  font-style: italic;
+  color: $text-tertiary;
+  white-space: normal;
+}
+
+@media (max-width: 767px) {
+  .itam-events {
+    padding: 16px;
+  }
+
+  .itam-events .itam-events__row {
+    grid-template-columns: 1fr;
+  }
+}

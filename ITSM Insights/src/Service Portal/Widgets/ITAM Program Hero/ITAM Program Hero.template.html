@@ -1,0 +1,43 @@
+<div class="itam-hero" ng-class="'itam-hero--' + c.data.style">
+  <div class="itam-hero__inner">
+    <nav class="itam-hero__breadcrumb" ng-if="::c.data.showBreadcrumb" aria-label="{{::c.data.text.breadcrumbLabel}}">
+      <ol>
+        <li><a ng-href="?id={{::c.data.homePage}}">{{::c.data.text.homeLabel}}</a></li>
+        <li aria-current="page">{{::c.data.text.title}}</li>
+      </ol>
+    </nav>
+
+    <div class="itam-hero__body">
+      <div class="itam-hero__copy">
+        <p class="itam-hero__eyebrow">{{::c.data.text.eyebrow}}</p>
+        <h1 class="itam-hero__title">{{::c.data.text.title}}</h1>
+        <p class="itam-hero__intro">{{::c.data.text.intro}}</p>
+        <div class="itam-hero__actions" ng-if="::c.data.actions.length">
+          <a class="itam-hero__action"
+             ng-repeat="action in ::c.data.actions track by action.id"
+             ng-class="'itam-hero__action--' + action.id"
+             ng-href="?id={{::action.page}}">{{::action.label}}</a>
+        </div>
+      </div>
+
+      <div class="itam-hero__search" role="search" ng-if="::c.data.showSearch">
+        <label class="sr-only" for="itam-hero-search-{{::$id}}">{{::c.data.text.searchLabel}}</label>
+        <i class="fa fa-search itam-hero__search-icon" aria-hidden="true"></i>
+        <input id="itam-hero-search-{{::$id}}"
+               type="search"
+               class="itam-hero__search-input"
+               autocomplete="off"
+               placeholder="{{::c.data.text.searchPlaceholder}}"
+               ng-model="c.term"
+               ng-change="c.onSearchChange()" />
+        <button type="button"
+                class="itam-hero__search-clear"
+                ng-if="c.term"
+                ng-click="c.clearSearch()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.clearSearch}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

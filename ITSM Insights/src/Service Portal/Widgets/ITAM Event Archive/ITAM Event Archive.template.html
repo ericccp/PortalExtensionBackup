@@ -1,0 +1,75 @@
+<section class="itam-events" ng-class="'itam-events--' + c.data.mode" aria-labelledby="itam-events-title-{{::$id}}">
+  <header class="itam-events__header">
+    <h2 class="itam-events__title" id="itam-events-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-events__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <div class="itam-events__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <p class="itam-events__empty" ng-if="::(!c.data.loadError && !c.data.events.length)">
+    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+    <span>{{::(c.data.mode === 'upcoming' ? c.data.text.emptyUpcoming : c.data.text.emptyPast)}}</span>
+  </p>
+
+  <!-- Upcoming: date block cards -->
+  <ul class="itam-events__upcoming" ng-if="::(c.data.mode === 'upcoming' && c.data.events.length)">
+    <li class="itam-event" ng-repeat="ev in ::c.data.events track by ev.id">
+      <span class="itam-event__date" aria-hidden="true">
+        <span class="itam-event__month">{{::ev.month}}</span>
+        <span class="itam-event__day">{{::ev.day}}</span>
+      </span>
+      <div class="itam-event__body">
+        <h3 class="itam-event__title">{{::ev.title}}</h3>
+        <p class="itam-event__when">
+          <time datetime="{{::ev.isoDate}}">{{::ev.dateLabel}}</time> {{::c.data.text.at}} {{::ev.time}}
+        </p>
+        <p class="itam-event__summary" itam-glossary-terms ng-if="::ev.summary">{{::ev.summary}}</p>
+        <a class="itam-event__join" ng-if="::ev.meetingUrl" ng-href="{{::ev.meetingUrl}}" target="_blank" rel="noopener noreferrer">
+          <i class="fa fa-video-camera" aria-hidden="true"></i>
+          <span>{{::c.data.text.join}}</span>
+          <span class="sr-only">({{::c.data.text.opensNewWindow}})</span>
+        </a>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Past: accordion by year -->
+  <div class="itam-events__years" ng-if="::(c.data.mode === 'past' && c.data.years.length)">
+    <section class="itam-events__year" ng-repeat="group in ::c.data.years track by group.year">
+      <h3 class="itam-events__year-heading">
+        <button type="button"
+                class="itam-events__year-toggle"
+                aria-expanded="{{!!c.open[group.year]}}"
+                aria-controls="itam-events-list-{{::$id}}"
+                ng-click="c.toggle(group.year)">
+          <span>{{::group.year}}</span>
+          <span class="itam-events__count">{{::c.countLabel(group)}}</span>
+          <i class="fa" ng-class="c.open[group.year] ? 'fa-angle-up' : 'fa-angle-down'" aria-hidden="true"></i>
+        </button>
+      </h3>
+      <ul class="itam-events__list" id="itam-events-list-{{::$id}}" ng-show="c.open[group.year]">
+        <li class="itam-events__row" ng-repeat="ev in ::group.items track by ev.id">
+          <time class="itam-events__row-date" datetime="{{::ev.isoDate}}">{{::ev.dateLabel}}</time>
+          <div class="itam-events__row-main">
+            <span class="itam-events__row-title">{{::ev.title}}</span>
+            <span class="itam-events__row-summary" itam-glossary-terms ng-if="::ev.summary">{{::ev.summary}}</span>
+          </div>
+          <div class="itam-events__links">
+            <a ng-if="::ev.recordingUrl" ng-href="{{::ev.recordingUrl}}" target="_blank" rel="noopener noreferrer">
+              <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+              {{::c.data.text.recording}}<span class="sr-only">: {{::ev.title}} ({{::c.data.text.opensNewWindow}})</span>
+            </a>
+            <a ng-if="::ev.notesUrl" ng-href="{{::ev.notesUrl}}" target="_blank" rel="noopener noreferrer">
+              <i class="fa fa-file-text-o" aria-hidden="true"></i>
+              {{::c.data.text.notes}}<span class="sr-only">: {{::ev.title}} ({{::c.data.text.opensNewWindow}})</span>
+            </a>
+            <span class="itam-events__pending" ng-if="::(!ev.recordingUrl && !ev.notesUrl)">{{::c.data.text.noLinks}}</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</section>

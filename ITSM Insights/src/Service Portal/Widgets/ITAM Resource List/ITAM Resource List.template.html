@@ -1,0 +1,79 @@
+<section class="itam-resources" aria-labelledby="itam-resources-title-{{::$id}}">
+  <header class="itam-resources__header">
+    <h2 class="itam-resources__title" id="itam-resources-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-resources__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <div class="itam-resources__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-resources__empty" ng-if="::(!c.data.loadError && !c.data.total)">
+    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+    <p>{{::c.data.text.noResources}}</p>
+  </div>
+
+  <div ng-if="::c.data.total">
+    <div class="itam-resources__toolbar">
+      <div class="itam-resources__chips" role="group" aria-label="{{::c.data.text.filterLabel}}" ng-if="::c.data.groups.length > 1">
+        <button type="button" class="itam-chip" ng-class="{'itam-chip--active': c.type === 'all'}" aria-pressed="{{c.type === 'all'}}" ng-click="c.setType('all')">{{::c.data.text.allTypes}}</button>
+        <button type="button"
+                class="itam-chip"
+                ng-repeat="g in ::c.data.groups track by g.value"
+                ng-class="{'itam-chip--active': c.type === g.value}"
+                aria-pressed="{{c.type === g.value}}"
+                ng-click="c.setType(g.value)">
+          <i class="fa {{::g.icon}}" aria-hidden="true"></i>
+          <span>{{::g.label}}</span>
+        </button>
+      </div>
+      <div class="itam-resources__search" role="search">
+        <label class="sr-only" for="itam-resources-search-{{::$id}}">{{::c.data.text.searchLabel}}</label>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input id="itam-resources-search-{{::$id}}" type="search" autocomplete="off" placeholder="{{::c.data.text.searchLabel}}" ng-model="c.term" ng-change="c.apply()" />
+        <button type="button" class="itam-resources__clear" ng-if="c.term" ng-click="c.clearSearch()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.clearSearch}}</span>
+        </button>
+      </div>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite">{{c.resultMessage}}</p>
+
+    <div class="itam-resources__empty" ng-if="!c.visibleTotal">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <p>{{::c.data.text.noMatches}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.clearAll()">{{::c.data.text.clearFilters}}</button>
+    </div>
+
+    <section class="itam-resources__group" ng-repeat="group in ::c.data.groups track by group.value" ng-if="group.visible.length" aria-labelledby="itam-res-group-{{::$id}}">
+      <h3 class="itam-resources__group-title" id="itam-res-group-{{::$id}}">
+        <i class="fa {{::group.icon}}" aria-hidden="true"></i>
+        <span>{{::group.label}}</span>
+      </h3>
+      <ul class="itam-resources__grid">
+        <li class="itam-resource" ng-repeat="item in group.visible track by item.id">
+          <h4 class="itam-resource__title">{{::item.title}}</h4>
+          <p class="itam-resource__desc" itam-glossary-terms ng-if="::item.description">{{::item.description}}</p>
+          <dl class="itam-resource__meta" ng-if="::(item.duration || item.audience)">
+            <div ng-if="::item.duration"><dt><i class="fa fa-clock-o" aria-hidden="true"></i><span class="sr-only">{{::c.data.text.durationLabel}}</span></dt><dd>{{::c.minutes(item.duration)}}</dd></div>
+            <div ng-if="::item.audience"><dt><i class="fa fa-user-o" aria-hidden="true"></i><span class="sr-only">{{::c.data.text.audienceLabel}}</span></dt><dd>{{::item.audience}}</dd></div>
+          </dl>
+          <div class="itam-resource__footer">
+            <a class="itam-resource__open"
+               ng-if="::item.url"
+               ng-href="{{::item.url}}"
+               ng-attr-target="{{::item.external ? '_blank' : undefined}}"
+               ng-attr-rel="{{::item.external ? 'noopener noreferrer' : undefined}}">
+              {{::c.data.text.open}}<span class="sr-only">: {{::item.title}}</span>
+              <i class="fa" ng-class="::item.external ? 'fa-external-link' : 'fa-arrow-right'" aria-hidden="true"></i>
+              <span class="sr-only" ng-if="::item.external">({{::c.data.text.opensNewWindow}})</span>
+            </a>
+            <span class="itam-resource__soon" ng-if="::!item.url">{{::c.data.text.comingSoon}}</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</section>

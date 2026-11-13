@@ -1,0 +1,370 @@
+$text-primary: #181A1F !default;
+$text-secondary: #2C323F !default;
+$text-muted: #545B68 !default;
+$card-background: #FFFFFF !default;
+$card-border: #DADDE3 !default;
+$divider: #E6E8EC !default;
+$link: #24386B !default;
+$focus-ring: #4F7FF0 !default;
+$placeholder-background: #E6E8EC !default;
+$button-border: #C3C8D1 !default;
+$button-hover: #F4F5F7 !default;
+$status-degraded-background: #FCE7D2 !default;
+$status-degraded-text: #84420C !default;
+$status-outage-background: #FBE1E1 !default;
+$status-outage-text: #9B1C1C !default;
+$sla-track: #E6E8EC !default;
+$sla-ok: #7DD87A !default;
+$sla-warning: #F2CA5C !default;
+$sla-critical: #EC8C4A !default;
+$sla-breached: #E35656 !default;
+$sp-space--xs: 4px !default;
+$sp-space--sm: 8px !default;
+$sp-space--md: 12px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+
+// Selectors are written out in full: the instance SCSS compiler drops &__ / &-- suffix rules
+// Half the card grid gap on each side; the page's .site-status-row supplies the rest of the outer gutter
+.incidents-outages {
+  margin: 0 $sp-space--sm $sp-space--lg;
+  padding: $sp-space--xl;
+  background-color: $card-background;
+  border: 1px solid $card-border;
+  border-radius: 7px;
+  color: $text-primary;
+}
+
+// Grid so View all stays in the top-right corner, on the heading's first line, however narrow the card gets
+.incidents-outages .incidents-outages__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: $sp-space--sm $sp-space--lg;
+  padding-bottom: $sp-space--md;
+}
+
+.incidents-outages .incidents-outages__heading {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+// Keeps the subtitle under the heading while the View all link stays beside them
+.incidents-outages .incidents-outages__heading-group {
+  min-width: 0;
+}
+
+.incidents-outages .incidents-outages__subtitle {
+  margin: $sp-space--xs 0 0;
+  color: $text-secondary;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.incidents-outages .incidents-outages__view-all {
+  color: $link;
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: underline;
+}
+
+.incidents-outages .incidents-outages__view-all:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+.incidents-outages .incidents-outages__empty {
+  margin: $sp-space--lg 0 0;
+  color: $text-secondary;
+  font-size: 16px;
+}
+
+.incidents-outages .incidents-outages__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// SLA sits beside the body while both fit, then wraps under it. Keyed to the card's own width,
+// not the viewport, so a narrow grid column stacks too
+.incidents-outages .incident-outage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: $sp-space--md $sp-space--xl;
+  padding: $sp-space--lg 0;
+}
+
+.incidents-outages .incident-outage--loading {
+  display: block;
+}
+
+// The large grow ratio keeps the SLA at its basis width while on the same line;
+// alone on its own line it grows to the full width
+.incidents-outages .incident-outage__body {
+  flex: 999 1 320px;
+  min-width: 0;
+}
+
+.incidents-outages .incident-outage:last-child {
+  padding-bottom: 0;
+}
+
+.incidents-outages .incident-outage + .incident-outage {
+  border-top: 1px solid $divider;
+}
+
+.incidents-outages .incident-outage__meta,
+.incidents-outages .incident-outage__title,
+.incidents-outages .incident-outage__affects,
+.incidents-outages .incident-outage__detail,
+.incidents-outages .incident-outage__footer {
+  margin: 0;
+}
+
+.incidents-outages .incident-outage__meta,
+.incidents-outages .incident-outage__affects,
+.incidents-outages .incident-outage__footer {
+  color: $text-muted;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.incidents-outages .incident-outage__affects {
+  margin-top: $sp-space--xs;
+  overflow-wrap: break-word;
+}
+
+.incidents-outages .incident-outage__number {
+  font-weight: 600;
+}
+
+.incidents-outages .incident-outage__title {
+  margin-top: $sp-space--xs;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+// Long descriptions are clamped so one incident cannot stretch the card
+.incidents-outages .incident-outage__detail {
+  display: -webkit-box;
+  margin-top: $sp-space--sm;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: $text-secondary;
+  font-size: 16px;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+.incidents-outages .incident-outage__footer {
+  margin-top: $sp-space--sm;
+}
+
+// Resolution SLA: time left and a bar of the share of SLA time used
+.incidents-outages .incident-outage__sla {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.incidents-outages .incident-outage__sla-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 $sp-space--md;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.incidents-outages .incident-outage__sla-label {
+  color: $text-muted;
+}
+
+.incidents-outages .incident-outage__sla-time {
+  color: $text-primary;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.incidents-outages .incident-outage__sla-bar {
+  height: 10px;
+  margin-top: $sp-space--sm;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: $sla-track;
+}
+
+.incidents-outages .incident-outage__sla-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px 0 0 999px;
+}
+
+.incidents-outages .incident-outage__sla-fill--ok {
+  background-color: $sla-ok;
+}
+
+.incidents-outages .incident-outage__sla-fill--warning {
+  background-color: $sla-warning;
+}
+
+.incidents-outages .incident-outage__sla-fill--critical {
+  background-color: $sla-critical;
+}
+
+.incidents-outages .incident-outage__sla-fill--breached {
+  border-radius: 999px;
+  background-color: $sla-breached;
+}
+
+.incidents-outages .incident-outage__sla-assigned {
+  margin: $sp-space--sm 0 0;
+  color: $text-muted;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.incidents-outages .incident-outage__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.incidents-outages .incident-outage__link:hover {
+  color: $link;
+  text-decoration: underline;
+}
+
+.incidents-outages .incident-outage__link:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+// Status badge, matching the Service Offerings widget
+.incidents-outages .incident-outage__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: $sp-space--sm;
+  padding: 1px $sp-space--sm;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+
+.incidents-outages .incident-outage__status--degraded {
+  background-color: $status-degraded-background;
+  color: $status-degraded-text;
+}
+
+.incidents-outages .incident-outage__status--outage,
+.incidents-outages .incident-outage__status--major-p1 {
+  background-color: $status-outage-background;
+  color: $status-outage-text;
+}
+
+// P2 major incidents share the degraded orange; the P1/P2 text in the meta line tells them apart without color
+.incidents-outages .incident-outage__status--major-p2 {
+  background-color: $status-degraded-background;
+  color: $status-degraded-text;
+}
+
+// Status shapes, so status never relies on color alone; drawn in currentColor
+.incidents-outages .incident-outage__icon {
+  display: inline-block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+}
+
+.incidents-outages .incident-outage__icon--degraded {
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+
+.incidents-outages .incident-outage__icon--outage {
+  border-radius: 2px;
+  background-color: currentColor;
+}
+
+.incidents-outages .incident-outage__placeholder {
+  display: block;
+  border-radius: 4px;
+  background-color: $placeholder-background;
+}
+
+.incidents-outages .incident-outage__placeholder--meta {
+  width: 35%;
+  height: 16px;
+}
+
+.incidents-outages .incident-outage__placeholder--title {
+  width: 70%;
+  height: 20px;
+  margin-top: $sp-space--sm;
+}
+
+.incidents-outages .incident-outage__placeholder--line {
+  width: 90%;
+  height: 18px;
+  margin-top: $sp-space--sm;
+}
+
+// Pager, styled like the Maintenance Windows calendar button
+.incidents-outages .incidents-outages__pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $sp-space--md;
+  margin-top: $sp-space--lg;
+  padding-top: $sp-space--lg;
+  border-top: 1px solid $divider;
+}
+
+.incidents-outages .incidents-outages__page-status {
+  color: $text-muted;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.incidents-outages .incidents-outages__page-button {
+  padding: $sp-space--sm $sp-space--lg;
+  border: 1px solid $button-border;
+  border-radius: 8px;
+  background-color: $card-background;
+  color: $text-primary;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.incidents-outages .incidents-outages__page-button:hover:not([disabled]) {
+  background-color: $button-hover;
+}
+
+.incidents-outages .incidents-outages__page-button:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+.incidents-outages .incidents-outages__page-button[disabled] {
+  cursor: default;
+  opacity: 0.5;
+}
+
+@media (max-width: 767px) {
+  .incidents-outages {
+    padding: $sp-space--lg;
+  }
+}

@@ -1,0 +1,120 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-darkest: #002d39 !default;
+$text-primary: #10171a !default;
+
+// Dark band that closes every ITAM page, echoing the brand hero
+.itam-footer {
+  padding: 32px;
+  border-radius: 8px;
+  background: $brand-primary-darkest;
+  color: #ffffff;
+}
+
+.itam-footer .itam-footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 32px;
+}
+
+.itam-footer .itam-footer__heading {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.itam-footer .itam-footer__intro {
+  max-width: 420px;
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.itam-footer .itam-footer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.itam-footer .itam-footer__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 2px solid #ffffff;
+  border-radius: 6px;
+  background: #ffffff;
+  color: $brand-primary-darkest;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.itam-footer .itam-footer__button.itam-footer__button--secondary {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: #ffffff;
+}
+
+.itam-footer .itam-footer__button:hover {
+  text-decoration: underline;
+}
+
+.itam-footer .itam-footer__email {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.itam-footer .itam-footer__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-footer .itam-footer__links li + li {
+  margin-top: 8px;
+}
+
+.itam-footer .itam-footer__links a {
+  color: #ffffff;
+  font-size: 14px;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.5);
+}
+
+.itam-footer .itam-footer__links a:hover {
+  text-decoration-color: #ffffff;
+}
+
+.itam-footer a:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (max-width: 1000px) {
+  .itam-footer .itam-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .itam-footer .itam-footer__contact {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .itam-footer {
+    padding: 24px 16px;
+  }
+
+  .itam-footer .itam-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

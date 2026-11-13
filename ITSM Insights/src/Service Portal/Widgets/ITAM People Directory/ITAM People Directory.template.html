@@ -1,0 +1,57 @@
+<section class="itam-people" ng-class="'itam-people--' + c.data.layout" aria-labelledby="itam-people-title-{{::$id}}">
+  <header class="itam-people__header">
+    <h2 class="itam-people__title" id="itam-people-title-{{::$id}}">
+      {{::c.data.text.title}}
+      <span class="itam-people__count" ng-if="::c.data.people.length">{{::c.countLabel()}}</span>
+    </h2>
+    <p class="itam-people__intro" ng-if="::c.data.text.intro">{{::c.data.text.intro}}</p>
+  </header>
+
+  <div class="itam-people__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-people__empty" ng-if="::(!c.data.loadError && !c.data.people.length)">
+    <i class="fa fa-users" aria-hidden="true"></i>
+    <p>{{::c.data.text.empty}}</p>
+  </div>
+
+  <div class="itam-people__az" role="group" aria-label="{{::c.data.text.azLabel}}" ng-if="::c.data.showAz">
+    <button type="button"
+            class="itam-people__letter itam-people__letter--all"
+            ng-class="{'itam-people__letter--active': !c.letter}"
+            aria-pressed="{{!c.letter}}"
+            ng-click="c.setLetter('')">{{::c.data.text.all}}</button>
+    <button type="button"
+            class="itam-people__letter"
+            ng-repeat="l in ::c.data.letters track by l.value"
+            ng-class="{'itam-people__letter--active': c.letter === l.value}"
+            ng-disabled="::!l.enabled"
+            aria-pressed="{{c.letter === l.value}}"
+            aria-label="{{::c.letterLabel(l.value)}}"
+            ng-click="c.setLetter(l.value)">{{::l.value}}</button>
+  </div>
+  <p class="sr-only" role="status" aria-live="polite" ng-if="::c.data.showAz">{{c.shownLabel()}}</p>
+
+  <ul class="itam-people__grid" ng-if="::c.data.people.length">
+    <li class="itam-person" ng-repeat="person in c.visible() track by person.memberId">
+      <img class="itam-person__avatar" ng-if="::person.photo" ng-src="{{::person.photo}}" alt="" />
+      <span class="itam-person__avatar itam-person__avatar--initials" ng-if="::!person.photo" aria-hidden="true">{{::person.initials}}</span>
+      <div class="itam-person__body">
+        <h3 class="itam-person__name">{{::person.name}}</h3>
+        <p class="itam-person__title" ng-if="::person.title">{{::person.title}}</p>
+        <p class="itam-person__dept" ng-if="::person.department">{{::person.department}}</p>
+        <p class="itam-person__role" ng-if="::person.programRole">
+          <span class="sr-only">{{::c.data.text.roleLabel}}:</span>{{::person.programRole}}
+        </p>
+        <p class="itam-person__bio" ng-if="::(person.bio && c.data.layout === 'cards')">{{::person.bio}}</p>
+        <a class="itam-person__email" ng-if="::person.email" ng-href="mailto:{{::person.email}}">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <span>{{::person.email}}</span>
+          <span class="sr-only">({{::c.emailLabel(person)}})</span>
+        </a>
+      </div>
+    </li>
+  </ul>
+</section>

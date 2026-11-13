@@ -1,0 +1,234 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-moderate-darker: #6245cc !default;
+$brand-info-darker: #005f9d !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-overview {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-overview .itam-overview__header {
+  margin-bottom: 20px;
+}
+
+.itam-overview .itam-overview__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-overview .itam-overview__intro {
+  margin: 8px 0 0;
+  max-width: 820px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: $text-tertiary;
+}
+
+.itam-overview .itam-overview__block + .itam-overview__block {
+  margin-top: 32px;
+}
+
+.itam-overview .itam-overview__block-title {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $text-tertiary;
+}
+
+.itam-overview .itam-overview__lead {
+  margin: 0 0 16px;
+  max-width: 820px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: $text-secondary;
+}
+
+// ---- Program areas ----
+.itam-overview .itam-overview__areas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-overview .itam-area {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-overview .itam-area__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-size: 20px;
+}
+
+.itam-overview .itam-area--sam .itam-area__icon {
+  background: #f2eeff;
+  color: $brand-moderate-darker;
+}
+
+.itam-overview .itam-area--service_mapping .itam-area__icon {
+  background: #e6f0f8;
+  color: $brand-info-darker;
+}
+
+.itam-overview .itam-area__content {
+  min-width: 0;
+}
+
+.itam-overview .itam-area__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.itam-overview .itam-area__summary {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+.itam-overview .itam-area__includes ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-overview .itam-area__includes li {
+  padding: 3px 10px;
+  border-radius: 5px;
+  background: $background-secondary;
+  color: $text-secondary;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+// ---- Objectives ----
+.itam-overview .itam-overview__objectives {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 20px;
+  border-radius: 8px;
+  background: $background-primary;
+  border: 1px solid $hr-border;
+  list-style: none;
+}
+
+.itam-overview .itam-objective {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.itam-overview .itam-objective__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-size: 16px;
+}
+
+.itam-overview .itam-objective__title {
+  margin: 6px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.itam-overview .itam-objective__summary {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+// ---- Compact layout: single column for sidebars ----
+.itam-overview.itam-overview--compact {
+  padding: 20px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+}
+
+.itam-overview.itam-overview--compact .itam-overview__intro,
+.itam-overview.itam-overview--compact .itam-overview__lead {
+  font-size: 14px;
+}
+
+.itam-overview.itam-overview--compact .itam-overview__block + .itam-overview__block {
+  margin-top: 24px;
+}
+
+.itam-overview.itam-overview--compact .itam-overview__areas,
+.itam-overview.itam-overview--compact .itam-overview__objectives {
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.itam-overview.itam-overview--compact .itam-area {
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.itam-overview.itam-overview--compact .itam-area__icon {
+  flex-basis: 36px;
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+}
+
+.itam-overview.itam-overview--compact .itam-area__title,
+.itam-overview.itam-overview--compact .itam-objective__title {
+  margin-top: 0;
+  font-size: 14px;
+}
+
+.itam-overview.itam-overview--compact .itam-area__summary,
+.itam-overview.itam-overview--compact .itam-objective__summary {
+  font-size: 13px;
+}
+
+.itam-overview.itam-overview--compact .itam-overview__objectives {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}

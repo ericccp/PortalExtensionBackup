@@ -1,0 +1,155 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-darkest: #002d39 !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$text-primary: #10171a !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-nav {
+  color: $text-primary;
+}
+
+.itam-nav .itam-nav__inner {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  min-height: 56px;
+  border-bottom: 1px solid $hr-border;
+}
+
+// ---- Wordmark ----
+.itam-nav .itam-nav__brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+  color: $brand-primary-darkest;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.itam-nav .itam-nav__brand:hover .itam-nav__brand-text {
+  text-decoration: underline;
+}
+
+.itam-nav .itam-nav__brand:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.itam-nav .itam-nav__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, $brand-primary-darkest 0%, $brand-primary-darker 100%);
+  color: #ffffff;
+  font-size: 15px;
+}
+
+// ---- Tabs ----
+.itam-nav .itam-nav__scroller {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.itam-nav .itam-nav__scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.itam-nav .itam-nav__list {
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-nav .itam-nav__item {
+  display: flex;
+}
+
+.itam-nav .itam-nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  color: $text-tertiary;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.itam-nav .itam-nav__link:hover {
+  border-bottom-color: $hr-border;
+  color: $text-primary;
+}
+
+.itam-nav .itam-nav__link:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: -4px;
+  border-radius: 4px;
+}
+
+// Active tab: heavier underline, darker text and bold weight, not color alone
+.itam-nav .itam-nav__link.itam-nav__link--active {
+  border-bottom-color: $brand-primary-darker;
+  color: $brand-primary-darker;
+}
+
+.itam-nav .itam-nav__icon {
+  font-size: 14px;
+}
+
+@media (max-width: 1199px) {
+  .itam-nav .itam-nav__icon {
+    display: none;
+  }
+
+  .itam-nav .itam-nav__link {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .itam-nav .itam-nav__inner {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .itam-nav .itam-nav__brand {
+    padding: 14px 0 6px;
+  }
+
+  .itam-nav .itam-nav__list {
+    justify-content: flex-start;
+  }
+
+  .itam-nav .itam-nav__link {
+    min-height: 48px;
+  }
+
+  .itam-nav .itam-nav__item:first-child .itam-nav__link {
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .itam-nav .itam-nav__link {
+    transition: none;
+  }
+}

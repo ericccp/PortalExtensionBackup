@@ -1,0 +1,288 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-moderate-darker: #6245cc !default;
+$brand-success-darker: #306700 !default;
+$brand-info-darker: #005f9d !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+$border-secondary: #616d74 !default;
+
+.itam-outreach {
+  margin-bottom: 32px;
+  padding: 24px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-primary;
+}
+
+.itam-outreach .itam-outreach__header {
+  margin-bottom: 16px;
+}
+
+.itam-outreach .itam-outreach__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-outreach .itam-outreach__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-outreach .itam-outreach__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-outreach .itam-outreach__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 24px;
+  color: $text-tertiary;
+  text-align: center;
+}
+
+.itam-outreach .itam-outreach__empty p {
+  margin: 0;
+}
+
+// ---- Toolbar ----
+.itam-outreach .itam-outreach__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+}
+
+.itam-outreach .itam-outreach__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.itam-outreach .itam-outreach__search {
+  position: relative;
+  flex: 0 1 280px;
+}
+
+.itam-outreach .itam-outreach__search > .fa-search {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: $text-tertiary;
+}
+
+.itam-outreach .itam-outreach__search input {
+  width: 100%;
+  height: 38px;
+  padding: 0 36px;
+  border: 1px solid $border-secondary;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.itam-outreach .itam-outreach__search input:focus {
+  outline: none;
+  border-color: $brand-primary;
+  box-shadow: 0 0 0 3px rgba(0, 128, 163, 0.25);
+}
+
+.itam-outreach .itam-outreach__search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.itam-outreach .itam-outreach__clear {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  width: 30px;
+  height: 30px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: $text-tertiary;
+}
+
+// ---- Status chips (legend buttons and cells share the palette) ----
+.itam-outreach .itam-status-chip,
+.itam-outreach .itam-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.itam-outreach .itam-status-chip {
+  min-height: 30px;
+  cursor: pointer;
+}
+
+.itam-outreach .itam-status-chip:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-outreach .itam-status-chip.itam-status-chip--active {
+  border: 2px solid currentColor;
+  padding: 2px 9px;
+  box-shadow: 0 0 0 2px $background-primary inset;
+}
+
+.itam-outreach .itam-status-chip--completed,
+.itam-outreach .itam-status--completed {
+  background: #e9f8ef;
+  color: $brand-success-darker;
+}
+
+.itam-outreach .itam-status-chip--in_progress,
+.itam-outreach .itam-status--in_progress {
+  background: #f2eeff;
+  color: $brand-moderate-darker;
+}
+
+.itam-outreach .itam-status-chip--scheduled,
+.itam-outreach .itam-status--scheduled {
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+}
+
+.itam-outreach .itam-status-chip--to_be_scheduled,
+.itam-outreach .itam-status--to_be_scheduled {
+  background: #fff3e0;
+  color: #8a4b00;
+}
+
+.itam-outreach .itam-status-chip--future,
+.itam-outreach .itam-status--future {
+  background: #e6f0f8;
+  color: $brand-info-darker;
+}
+
+.itam-outreach .itam-status-chip--not_applicable,
+.itam-outreach .itam-status--not_applicable {
+  background: $background-secondary;
+  color: $text-tertiary;
+}
+
+// ---- Table ----
+.itam-outreach .itam-outreach__scroll {
+  overflow-x: auto;
+  border: 1px solid $hr-border;
+  border-radius: 6px;
+}
+
+.itam-outreach .itam-outreach__scroll:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-outreach .itam-outreach__table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+
+.itam-outreach .itam-outreach__table th,
+.itam-outreach .itam-outreach__table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #eceff0;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.itam-outreach .itam-outreach__table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: $background-secondary;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: $text-tertiary;
+}
+
+.itam-outreach .itam-outreach__table tbody tr:last-child th,
+.itam-outreach .itam-outreach__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.itam-outreach .itam-outreach__table tbody tr:hover th,
+.itam-outreach .itam-outreach__table tbody tr:hover td {
+  background: #fafbfb;
+}
+
+// First column stays visible while the table scrolls sideways
+.itam-outreach .itam-outreach__dept {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 200px;
+  background: $background-primary;
+  font-weight: 600;
+  box-shadow: 1px 0 0 #eceff0;
+}
+
+.itam-outreach .itam-outreach__table thead .itam-outreach__dept {
+  z-index: 2;
+  background: $background-secondary;
+}
+
+.itam-outreach .itam-outreach__date {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: $text-tertiary;
+}
+
+.itam-outreach .itam-outreach__none {
+  color: $text-tertiary;
+}
+
+.itam-outreach .itam-outreach__cell--dim .itam-status,
+.itam-outreach .itam-outreach__cell--dim .itam-outreach__date {
+  opacity: 0.35;
+}
+
+@media (max-width: 767px) {
+  .itam-outreach {
+    padding: 16px;
+  }
+
+  .itam-outreach .itam-outreach__search {
+    flex-basis: 100%;
+  }
+
+  .itam-outreach .itam-outreach__dept {
+    min-width: 150px;
+  }
+}

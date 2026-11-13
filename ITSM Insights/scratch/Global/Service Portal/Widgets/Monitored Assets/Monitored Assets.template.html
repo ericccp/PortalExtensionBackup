@@ -1,0 +1,122 @@
+<section class="monitored-assets" aria-labelledby="monitored-assets-heading-{{::$id}}" aria-busy="{{c.loading}}">
+  <div class="monitored-assets__header">
+    <div class="monitored-assets__heading-group">
+      <h2 id="monitored-assets-heading-{{::$id}}" class="monitored-assets__heading">{{::c.data.messages.heading}}</h2>
+      <p ng-if="::c.data.messages.subHeading" class="monitored-assets__subtitle">{{::c.data.messages.subHeading}}</p>
+    </div>
+    <a ng-if="!c.loading && c.hasAssets()" class="monitored-assets__view-all" ng-href="{{c.data.assets.url}}" target="_blank">{{::c.data.messages.viewAll}}</a>
+    <div class="monitored-assets__view-control">
+      <!-- Only offered once the site has two vendors; the choice is kept for the next site that does -->
+      <label ng-if="c.canColorByVendor()" id="monitored-assets-color-{{::$id}}" class="monitored-assets__view-label">{{::c.data.messages.colorLabel}}</label>
+      <div ng-if="c.canColorByVendor()" class="monitored-assets__view-select">
+        <sn-choice-list sn-model="c.colorBy" sn-items="c.data.colorOptions" sn-value-field="id" sn-text-field="label"
+                        aria-labelledby="monitored-assets-color-{{::$id}}"></sn-choice-list>
+      </div>
+      <label id="monitored-assets-view-{{::$id}}" class="monitored-assets__view-label">{{::c.data.messages.viewLabel}}</label>
+      <!-- sn-choice-list renders the same select2 dropdown as the EC Asset Filters sort control -->
+      <div class="monitored-assets__view-select">
+        <sn-choice-list sn-model="c.view" sn-items="c.data.views" sn-value-field="id" sn-text-field="label"
+                        aria-labelledby="monitored-assets-view-{{::$id}}"></sn-choice-list>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="c.loading" class="monitored-assets__loading" aria-hidden="true">
+    <span ng-repeat="width in ['90%', '65%', '45%', '30%'] track by $index" class="monitored-assets__placeholder" ng-style="{width: width}"></span>
+  </div>
+
+  <p ng-if="!c.loading && c.noLocation" class="monitored-assets__empty">{{::c.data.messages.chooseLocation}}</p>
+  <p ng-if="!c.loading && !c.noLocation && c.data.loadFailed" class="monitored-assets__empty">{{::c.data.messages.loadFailed}}</p>
+  <p ng-if="!c.loading && !c.noLocation && !c.data.loadFailed && !c.data.locationFound" class="monitored-assets__empty">{{::c.data.messages.locationNotFound}}</p>
+  <p ng-if="!c.loading && !c.noLocation && !c.data.loadFailed && c.data.locationFound && !c.hasAssets()" class="monitored-assets__empty">{{::c.data.messages.empty}}</p>
+
+  <div ng-if="!c.loading && c.hasAssets()" class="monitored-assets__body monitored-assets__body--{{c.view}}">
+    <!-- Bar and donut share the legend; the pivot table labels its own columns -->
+    <!-- Status names explain themselves; vendor colors get a visible title so the key reads as vendors -->
+    <div ng-if="c.view !== 'pivot'" class="monitored-assets__key">
+      <p ng-if="c.data.assets.colorBy === 'vendor'" class="monitored-assets__key-title">{{c.legendLabel()}}</p>
+      <ul class="monitored-assets__legend" aria-label="{{c.legendLabel()}}">
+        <li ng-repeat="series in c.data.assets.series track by series.id" class="monitored-assets__legend-item">
+          <span class="monitored-assets__shape monitored-assets__shape--{{series.shape}} monitored-assets__tone--{{series.tone}}" aria-hidden="true"></span>
+          <span class="monitored-assets__legend-label">{{series.label}}</span>
+          <a class="monitored-assets__legend-value" ng-href="{{series.url}}" target="_blank">{{series.count | number}}</a>
+          <span ng-if="c.view === 'donut'" class="monitored-assets__legend-percent">{{c.seriesPercent(series)}}%</span>
+        </li>
+      </ul>
+    </div>
+
+    <ul ng-if="c.view === 'bar'" class="monitored-assets__bars">
+      <li ng-repeat="row in c.data.assets.rows track by row.id" class="monitored-assets__bar-row">
+        <span class="monitored-assets__bar-label">{{row.label}}</span>
+        <div class="monitored-assets__bar-track">
+          <div class="monitored-assets__bar" style="--bar-share: {{c.barShare(row)}}" role="img" aria-label="{{c.rowSummary(row)}}">
+            <!-- Segments are mouse shortcuts; the total link and pivot view give keyboard users the same lists -->
+            <a ng-repeat="cell in row.cells track by cell.seriesId" ng-if="cell.count"
+               class="monitored-assets__segment monitored-assets__tone--{{c.toneOf(cell.seriesId)}}"
+               ng-style="{'flex-grow': cell.count}" ng-href="{{cell.url}}" target="_blank"
+               tabindex="-1" aria-hidden="true" data-tip="{{c.segmentTip(row, cell)}}"></a>
+          </div>
+          <a class="monitored-assets__bar-value" ng-href="{{row.url}}" target="_blank">{{row.total | number}}</a>
+        </div>
+      </li>
+    </ul>
+
+    <div ng-if="c.view === 'donut'" class="monitored-assets__donut">
+      <svg class="monitored-assets__donut-svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+        <g transform="rotate(-90 60 60)">
+          <circle ng-repeat="segment in c.donut track by segment.id"
+                  class="monitored-assets__donut-segment monitored-assets__tone--{{segment.tone}}"
+                  cx="60" cy="60" ng-attr-r="{{c.donutRadius}}"
+                  ng-attr-stroke-dasharray="{{segment.dashArray}}" ng-attr-stroke-dashoffset="{{segment.dashOffset}}"
+                  data-tip="{{segment.tip}}"></circle>
+        </g>
+      </svg>
+      <p class="monitored-assets__donut-center">
+        <span class="monitored-assets__donut-total">{{c.data.assets.total | number}}</span>
+        <span class="monitored-assets__donut-caption">{{::c.data.messages.totalAssets}}</span>
+      </p>
+    </div>
+
+    <div ng-if="c.view === 'pivot'" class="monitored-assets__table-scroll" role="region" tabindex="0" aria-labelledby="monitored-assets-heading-{{::$id}}">
+      <table class="monitored-assets__table">
+        <thead>
+          <tr>
+            <th scope="col">{{::c.data.messages.columnClass}}</th>
+            <th scope="col" ng-repeat="series in c.data.assets.series track by series.id" class="monitored-assets__number">
+              <span class="monitored-assets__column-status">
+                <span class="monitored-assets__shape monitored-assets__shape--{{series.shape}} monitored-assets__tone--{{series.tone}}" aria-hidden="true"></span>
+                {{series.label}}
+              </span>
+            </th>
+            <th scope="col" class="monitored-assets__number">{{::c.data.messages.columnTotal}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in c.data.assets.rows track by row.id">
+            <th scope="row">{{row.label}}</th>
+            <td ng-repeat="cell in row.cells track by cell.seriesId" class="monitored-assets__number">
+              <a ng-if="cell.count" ng-href="{{cell.url}}" target="_blank" aria-label="{{c.cellLabel(row, cell)}}">{{cell.count | number}}</a>
+              <span ng-if="!cell.count" class="monitored-assets__zero">0</span>
+            </td>
+            <td class="monitored-assets__number monitored-assets__total">
+              <a ng-href="{{row.url}}" target="_blank">{{row.total | number}}</a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row">{{::c.data.messages.columnTotal}}</th>
+            <td ng-repeat="series in c.data.assets.series track by series.id" class="monitored-assets__number">
+              <a ng-href="{{series.url}}" target="_blank">{{series.count | number}}</a>
+            </td>
+            <td class="monitored-assets__number">
+              <a ng-href="{{c.data.assets.url}}" target="_blank">{{c.data.assets.total | number}}</a>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class="monitored-assets__tooltip" aria-hidden="true"></div>
+</section>

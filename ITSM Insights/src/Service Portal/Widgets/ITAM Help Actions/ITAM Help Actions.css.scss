@@ -1,0 +1,127 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$hr-border: #cfd5d7 !default;
+$sp-panel-box-shadow: 0 4px 8px 0 rgba(23, 40, 52, 0.08) !default;
+
+.itam-help {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-help .itam-help__header {
+  margin-bottom: 16px;
+}
+
+.itam-help .itam-help__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-help .itam-help__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-help .itam-help__empty {
+  margin: 0;
+  padding: 16px;
+  border: 1px dashed $hr-border;
+  border-radius: 8px;
+  color: $text-tertiary;
+}
+
+.itam-help .itam-help__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  // Matches the page's 30px column gutter so the cards line up with the 8/4 row below
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-help .itam-action {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  transition: box-shadow 0.15s ease;
+}
+
+.itam-help .itam-action:hover {
+  box-shadow: $sp-panel-box-shadow;
+}
+
+.itam-help .itam-action__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+  font-size: 20px;
+}
+
+.itam-help .itam-action--issue .itam-action__icon {
+  background: #fdecec;
+  color: $brand-danger-darker;
+}
+
+.itam-help .itam-action__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.itam-help .itam-action__desc {
+  flex: 1 1 auto;
+  margin: 6px 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $text-tertiary;
+}
+
+.itam-help .itam-action__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 2px solid $brand-primary-darker;
+  border-radius: 6px;
+  background: $background-primary;
+  color: $brand-primary-darker;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.itam-help .itam-action__button:hover {
+  background: $brand-primary-darker;
+  color: #ffffff;
+}
+
+.itam-help .itam-action__button:focus-visible {
+  outline: 3px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .itam-help .itam-action {
+    transition: none;
+  }
+}

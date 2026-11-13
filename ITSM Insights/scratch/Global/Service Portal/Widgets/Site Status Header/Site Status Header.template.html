@@ -1,0 +1,11 @@
+<header class="site-status-header" role="banner" aria-labelledby="site-status-header-title">
+  <div class="site-status-header__top">
+    <div class="site-status-header__text">
+      <h1 id="site-status-header-title" class="site-status-header__title">{{::c.data.heading}}</h1>
+      <p ng-if="::c.data.subHeading" class="site-status-header__subtitle">{{::c.data.subHeading}}</p>
+    </div>
+    <div ng-if="::c.data.locationSelector" class="site-status-header__locations">
+      <sp-widget widget="c.data.locationSelector"></sp-widget>
+    </div>
+  </div>
+</header>

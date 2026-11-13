@@ -1,0 +1,71 @@
+<div class="weol" aria-busy="{{c.loading}}">
+    <div class="weol__header">
+        <div class="weol__heading">
+            <h3 class="weol__title">{{c.data.text.title}}</h3>
+            <p class="weol__subtitle">{{c.data.text.subtitle}}</p>
+        </div>
+        <a class="weol__link" ng-href="{{c.data.assetListUrl}}">{{c.data.text.assetListLabel}}</a>
+    </div>
+
+    <div class="weol__empty-state" ng-if="c.loading" role="status" aria-live="polite">
+        <p>{{c.data.text.loadingMessage}}</p>
+    </div>
+
+    <div class="weol__alert" ng-if="!c.loading && c.data.loadError" role="alert">
+        {{c.data.text.loadError}}
+    </div>
+
+    <div class="weol__empty-state" ng-if="!c.loading && !c.data.loadError && c.data.noLocation">
+        <p>{{c.data.text.noLocationMessage}}</p>
+    </div>
+
+    <div class="weol__sections" ng-if="!c.loading && !c.data.loadError && !c.data.noLocation">
+        <section class="weol__section" ng-repeat="section in c.data.sections track by section.id"
+            aria-labelledby="weol-{{section.id}}-heading-{{::$id}}">
+            <div class="weol__section-header">
+                <h4 class="weol__section-title" id="weol-{{section.id}}-heading-{{::$id}}">{{section.heading}}</h4>
+                <div class="weol__total">
+                    <span class="weol__total-value">{{section.total}}</span>
+                    <span class="weol__total-label">{{section.totalLabel}}</span>
+                </div>
+            </div>
+
+            <div ng-if="section.total">
+                <!-- Decorative: the legend below carries the same counts as text -->
+                <div class="weol__bar" aria-hidden="true">
+                    <!-- Segments are mouse shortcuts; the legend count links give keyboard users the same lists -->
+                    <a class="weol__bar-segment weol__bar-segment--{{segment.key}}"
+                        ng-repeat="segment in section.segments track by segment.key"
+                        ng-if="segment.count"
+                        ng-href="{{segment.url}}"
+                        ng-style="{width: segment.percent + '%'}"
+                        tabindex="-1"
+                        uib-tooltip="{{segment.ariaLabel}}"
+                        tooltip-placement="top"
+                        tooltip-append-to-body="true"></a>
+                </div>
+
+                <ul class="weol__legend">
+                    <li class="weol__legend-item" ng-repeat="segment in section.segments track by segment.key">
+                        <div class="weol__legend-label">
+                            <span class="weol__swatch weol__swatch--{{segment.key}}" aria-hidden="true"></span>
+                            <span>{{segment.label}}</span>
+                        </div>
+                        <div class="weol__legend-values">
+                            <a class="weol__legend-count weol__legend-count--link" ng-if="segment.url"
+                                ng-href="{{segment.url}}" aria-label="{{segment.linkLabel}}"
+                                title="{{segment.linkLabel}}">{{segment.count}}</a>
+                            <span class="weol__legend-count" ng-if="!segment.url">{{segment.count}}</span>
+                            <span class="weol__legend-percent">{{segment.percent}}%</span>
+                        </div>
+                        <div class="weol__legend-hint">{{segment.hint}}</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="weol__empty-state" ng-if="!section.total">
+                <p>{{section.emptyMessage}}</p>
+            </div>
+        </section>
+    </div>
+</div>

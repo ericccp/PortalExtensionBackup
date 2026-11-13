@@ -1,0 +1,83 @@
+<section class="itam-goals" aria-labelledby="itam-goals-title-{{::$id}}">
+  <header class="itam-goals__header">
+    <div>
+      <h2 class="itam-goals__title" id="itam-goals-title-{{::$id}}">{{::c.data.text.title}}</h2>
+      <p class="itam-goals__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+    </div>
+    <div class="itam-goals__years" role="group" aria-label="{{::c.data.text.yearFilterLabel}}" ng-if="::c.data.years.length > 1">
+      <button type="button"
+              class="itam-goals__year"
+              ng-repeat="year in ::c.data.years track by year"
+              ng-class="{'itam-goals__year--active': c.year === year}"
+              aria-pressed="{{c.year === year}}"
+              ng-click="c.setYear(year)">{{::year}}</button>
+    </div>
+  </header>
+
+  <div class="itam-goals__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-goals__empty" ng-if="::(!c.data.loadError && !c.data.goals.length)">
+    <i class="fa fa-bullseye" aria-hidden="true"></i>
+    <p>{{::c.data.text.noGoals}}</p>
+  </div>
+
+  <ol class="itam-goals__list" ng-if="::c.data.goals.length">
+    <li class="itam-goal"
+        ng-repeat="goal in ::c.data.goals track by goal.id"
+        ng-if="c.inYear(goal)"
+        ng-class="'itam-goal--' + goal.status">
+      <div class="itam-goal__main">
+        <div class="itam-goal__top">
+          <span class="itam-goal__status">
+            <i class="fa {{::goal.statusIcon}}" aria-hidden="true"></i>
+            <span class="sr-only">{{::c.data.text.statusLabel}}:</span>
+            {{::goal.statusLabel}}
+          </span>
+          <span class="itam-goal__target" ng-if="::goal.targetQuarter">
+            <i class="fa fa-flag-o" aria-hidden="true"></i>
+            {{::c.data.text.targetLabel}}: {{::goal.targetQuarter}} {{::goal.fiscalYear}}
+          </span>
+        </div>
+        <h3 class="itam-goal__name">{{::goal.name}}</h3>
+        <p class="itam-goal__desc" itam-glossary-terms ng-if="::goal.description">{{::goal.description}}</p>
+
+        <div class="itam-goal__progress">
+          <div class="itam-goal__bar"
+               role="progressbar"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="{{::goal.percentComplete}}"
+               aria-label="{{::c.data.text.progressLabel}}: {{::goal.name}}">
+            <span class="itam-goal__fill" ng-style="::{width: goal.percentComplete + '%'}"></span>
+          </div>
+          <span class="itam-goal__percent">{{::c.percentText(goal)}}</span>
+        </div>
+      </div>
+
+      <div class="itam-goal__detail">
+        <div ng-if="::goal.criteria.length">
+          <h4 class="itam-goal__label">{{::c.data.text.criteriaHeading}}</h4>
+          <ul class="itam-goal__criteria" itam-glossary-terms>
+            <li ng-repeat="item in ::goal.criteria track by $index">
+              <i class="fa fa-check" aria-hidden="true"></i>
+              <span>{{::item}}</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="itam-goal__label">{{::c.data.text.projectsHeading}}</h4>
+          <ul class="itam-goal__projects" ng-if="::goal.projects.length">
+            <li ng-repeat="project in ::goal.projects track by project.id">
+              <a ng-if="::c.data.projectPage" ng-href="?id={{::c.data.projectPage}}&sys_id={{::project.id}}">{{::project.name}}</a>
+              <span ng-if="::!c.data.projectPage">{{::project.name}}</span>
+            </li>
+          </ul>
+          <p class="itam-goal__none" ng-if="::!goal.projects.length">{{::c.data.text.noProjects}}</p>
+        </div>
+      </div>
+    </li>
+  </ol>
+</section>

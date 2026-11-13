@@ -1,0 +1,250 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+$border-secondary: #616d74 !default;
+
+.itam-glossary {
+  margin-bottom: 32px;
+  color: $text-primary;
+}
+
+.itam-glossary .itam-glossary__header {
+  margin-bottom: 16px;
+}
+
+.itam-glossary .itam-glossary__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-glossary .itam-glossary__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-glossary .itam-glossary__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+.itam-glossary .itam-glossary__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 24px;
+  border: 1px dashed $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-tertiary;
+  text-align: center;
+}
+
+.itam-glossary .itam-glossary__empty p {
+  margin: 0;
+}
+
+// ---- Tools: search and A-Z stay in reach while scrolling ----
+.itam-glossary .itam-glossary__tools {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin-bottom: 8px;
+  padding: 12px 0;
+  background: $background-secondary;
+}
+
+.itam-glossary .itam-glossary__search {
+  position: relative;
+  max-width: 480px;
+  margin-bottom: 12px;
+}
+
+.itam-glossary .itam-glossary__search > .fa-search {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: $text-tertiary;
+}
+
+.itam-glossary .itam-glossary__search input {
+  width: 100%;
+  height: 42px;
+  padding: 0 36px;
+  border: 1px solid $border-secondary;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.itam-glossary .itam-glossary__search input:focus {
+  outline: none;
+  border-color: $brand-primary;
+  box-shadow: 0 0 0 3px rgba(0, 128, 163, 0.25);
+}
+
+.itam-glossary .itam-glossary__search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.itam-glossary .itam-glossary__clear {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: $text-tertiary;
+}
+
+.itam-glossary .itam-glossary__az {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.itam-glossary .itam-glossary__letter {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 4px;
+  border: 1px solid $hr-border;
+  border-radius: 5px;
+  background: $background-primary;
+  color: $brand-primary-darker;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.itam-glossary .itam-glossary__letter:hover:not([disabled]) {
+  background: $brand-primary-opacity;
+  border-color: $brand-primary;
+}
+
+.itam-glossary .itam-glossary__letter:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-glossary .itam-glossary__letter[disabled] {
+  border-style: dashed;
+  color: #9aa5ab;
+  font-weight: 400;
+  cursor: not-allowed;
+}
+
+// ---- Entries ----
+.itam-glossary .itam-glossary__group {
+  margin-top: 16px;
+}
+
+.itam-glossary .itam-glossary__letter-heading {
+  margin: 0 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid $brand-primary-darker;
+  font-size: 22px;
+  font-weight: 700;
+  color: $brand-primary-darker;
+  scroll-margin-top: 120px;
+}
+
+.itam-glossary .itam-glossary__letter-heading:focus,
+.itam-glossary .itam-glossary__term:focus {
+  outline: none;
+}
+
+.itam-glossary .itam-glossary__letter-heading:focus-visible,
+.itam-glossary .itam-glossary__term:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-glossary .itam-glossary__list {
+  margin: 0;
+}
+
+.itam-glossary .itam-glossary__entry {
+  padding: 14px 16px;
+  border-radius: 6px;
+  transition: background-color 0.6s ease;
+}
+
+.itam-glossary .itam-glossary__entry + .itam-glossary__entry {
+  border-top: 1px solid #e3e7e8;
+  border-radius: 0;
+}
+
+.itam-glossary .itam-glossary__entry.itam-glossary__entry--highlight {
+  background: $brand-primary-opacity;
+}
+
+.itam-glossary .itam-glossary__term {
+  font-size: 16px;
+  font-weight: 600;
+  scroll-margin-top: 140px;
+}
+
+.itam-glossary .itam-glossary__definition {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: $text-secondary;
+}
+
+.itam-glossary .itam-glossary__definition p {
+  margin: 0 0 8px;
+}
+
+.itam-glossary .itam-glossary__definition p:last-child {
+  margin-bottom: 0;
+}
+
+.itam-glossary .itam-glossary__see {
+  margin-top: 8px;
+  font-size: 14px;
+  font-style: italic;
+  color: $text-tertiary;
+}
+
+.itam-glossary .itam-glossary__see-label {
+  margin-right: 4px;
+  font-weight: 600;
+}
+
+.itam-glossary .itam-glossary__see-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $brand-primary-darker;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.itam-glossary .itam-glossary__see-link:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .itam-glossary .itam-glossary__entry {
+    transition: none;
+  }
+}

@@ -1,0 +1,87 @@
+<section class="itam-resources" aria-labelledby="itam-admin-kb-title-{{::$id}}">
+  <header class="itam-resources__header itam-admin-kb__header">
+    <div>
+      <h2 class="itam-resources__title" id="itam-admin-kb-title-{{::$id}}">{{::c.data.text.title}}</h2>
+      <p class="itam-resources__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+    </div>
+    <a class="itam-admin-kb__manage" ng-if="::(c.data.canView && c.data.manageUrl)" ng-href="{{::c.data.manageUrl}}" target="_blank" rel="noopener noreferrer">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      <span>{{::c.data.text.manage}}</span>
+      <span class="sr-only">({{::c.data.text.opensNewWindow}})</span>
+    </a>
+  </header>
+
+  <div class="itam-resources__empty" ng-if="::!c.data.canView">
+    <i class="fa fa-lock" aria-hidden="true"></i>
+    <p>{{::c.data.text.noAccess}}</p>
+  </div>
+
+  <div class="itam-resources__alert" role="alert" ng-if="::c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div class="itam-resources__empty" ng-if="::(c.data.canView && !c.data.loadError && !c.data.total)">
+    <i class="fa fa-book" aria-hidden="true"></i>
+    <p>{{::c.data.text.noArticles}}</p>
+  </div>
+
+  <div ng-if="::c.data.total">
+    <div class="itam-admin-kb__notice">
+      <i class="fa fa-lock" aria-hidden="true"></i>
+      <p>{{::c.data.text.notice}}</p>
+    </div>
+
+    <div class="itam-resources__toolbar">
+      <div class="itam-resources__chips" role="group" aria-label="{{::c.data.text.filterLabel}}" ng-if="::c.data.groups.length > 1">
+        <button type="button" class="itam-chip" ng-class="{'itam-chip--active': c.category === 'all'}" aria-pressed="{{c.category === 'all'}}" ng-click="c.setCategory('all')">{{::c.data.text.allTopics}}</button>
+        <button type="button"
+                class="itam-chip"
+                ng-repeat="g in ::c.data.groups track by g.value"
+                ng-class="{'itam-chip--active': c.category === g.value}"
+                aria-pressed="{{c.category === g.value}}"
+                ng-click="c.setCategory(g.value)">{{::g.label}}</button>
+      </div>
+      <div class="itam-resources__search" role="search">
+        <label class="sr-only" for="itam-admin-kb-search-{{::$id}}">{{::c.data.text.searchLabel}}</label>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input id="itam-admin-kb-search-{{::$id}}" type="search" autocomplete="off" placeholder="{{::c.data.text.searchLabel}}" ng-model="c.term" ng-change="c.apply()" />
+        <button type="button" class="itam-resources__clear" ng-if="c.term" ng-click="c.clearSearch()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <span class="sr-only">{{::c.data.text.clearSearch}}</span>
+        </button>
+      </div>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite">{{c.resultMessage}}</p>
+
+    <div class="itam-resources__empty" ng-if="!c.visibleTotal">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <p>{{::c.data.text.noMatches}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.clearAll()">{{::c.data.text.clearFilters}}</button>
+    </div>
+
+    <section class="itam-resources__group" ng-repeat="group in ::c.data.groups track by group.value" ng-if="group.visible.length" aria-labelledby="itam-admin-kb-group-{{::$id}}-{{::$index}}">
+      <h3 class="itam-resources__group-title" id="itam-admin-kb-group-{{::$id}}-{{::$index}}">
+        <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+        <span>{{::group.label}}</span>
+      </h3>
+      <ul class="itam-resources__grid">
+        <li class="itam-resource" ng-repeat="item in group.visible track by item.id">
+          <h4 class="itam-resource__title">{{::item.title}}</h4>
+          <p class="itam-resource__desc" ng-if="::item.description">{{::item.description}}</p>
+          <dl class="itam-resource__meta">
+            <div><dt><i class="fa fa-file-text-o" aria-hidden="true"></i><span class="sr-only">Number</span></dt><dd>{{::item.number}}</dd></div>
+            <div><dt><i class="fa fa-clock-o" aria-hidden="true"></i><span class="sr-only">Updated</span></dt><dd>{{::c.updated(item.updated)}}</dd></div>
+          </dl>
+          <div class="itam-resource__footer">
+            <a class="itam-resource__open" ng-href="{{::item.url}}">
+              {{::c.data.text.open}}<span class="sr-only">: {{::item.title}}</span>
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</section>

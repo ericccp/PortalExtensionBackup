@@ -1,0 +1,35 @@
+<div class="itam-tabs">
+  <div class="itam-tabs__bar">
+    <div class="itam-tabs__list" role="tablist" aria-label="{{::c.data.text.tabsLabel}}">
+      <button type="button"
+              class="itam-tabs__tab"
+              role="tab"
+              ng-repeat="tab in ::c.data.tabs track by tab.id"
+              id="{{::c.tabDomId(tab)}}"
+              aria-controls="{{::c.panelDomId(tab)}}"
+              aria-selected="{{c.active === tab.id}}"
+              tabindex="{{c.active === tab.id ? 0 : -1}}"
+              ng-class="{'itam-tabs__tab--active': c.active === tab.id}"
+              ng-click="c.select(tab)"
+              ng-keydown="c.onKeydown($event, $index)">
+        <i class="fa {{::tab.icon}}" aria-hidden="true" ng-if="::tab.icon"></i>
+        <span>{{::tab.label}}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="itam-tabs__panel"
+       role="tabpanel"
+       ng-repeat="tab in ::c.data.tabs track by tab.id"
+       id="{{::c.panelDomId(tab)}}"
+       aria-labelledby="{{::c.tabDomId(tab)}}"
+       ng-show="c.active === tab.id">
+    <div ng-if="c.visited[tab.id]">
+      <div class="itam-tabs__alert" role="alert" ng-if="::!tab.widgets.length">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        <span>{{::c.data.text.loadError}}</span>
+      </div>
+      <sp-widget ng-repeat="w in ::tab.widgets track by $index" widget="w"></sp-widget>
+    </div>
+  </div>
+</div>

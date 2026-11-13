@@ -1,0 +1,129 @@
+$text-primary: #181A1F !default;
+$text-secondary: #2C323F !default;
+$cards-background: #F4F5F7 !default;
+$card-background: #FFFFFF !default;
+$card-border: #DADDE3 !default;
+$placeholder-background: #E6E8EC !default;
+$link: #24386B !default;
+$focus-ring: #4F7FF0 !default;
+$font-size-value: 40px !default;
+$font-size-base: 18px !default;
+$sp-space--sm: 8px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+
+// Selectors are written out in full: the instance SCSS compiler drops &__ / &-- suffix rules
+.site-status-cards {
+  background-color: $cards-background;
+  padding: $sp-space--lg $sp-space--xl;
+}
+
+.site-status-cards .site-status-cards__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: $sp-space--lg;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-status-cards .site-status-cards__empty {
+  margin: 0;
+  color: $text-secondary;
+  font-size: $font-size-base;
+}
+
+.site-status-cards .site-status-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: $sp-space--xl;
+  background-color: $card-background;
+  border: 1px solid $card-border;
+  border-radius: 7px;
+}
+
+.site-status-cards .site-status-card__label,
+.site-status-cards .site-status-card__value,
+.site-status-cards .site-status-card__detail {
+  margin: 0;
+}
+
+.site-status-cards .site-status-card__label {
+  color: $text-secondary;
+  font-size: $font-size-base;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.site-status-cards .site-status-card__value {
+  margin-top: $sp-space--sm;
+  color: $text-primary;
+  font-size: $font-size-value;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.site-status-cards .site-status-card__link {
+  color: $link;
+  text-decoration: none;
+}
+
+.site-status-cards .site-status-card__link:hover {
+  text-decoration: underline;
+}
+
+.site-status-cards .site-status-card__link:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+.site-status-cards .site-status-card__detail {
+  margin-top: $sp-space--sm;
+  color: $text-secondary;
+  font-size: $font-size-base;
+  line-height: 1.4;
+}
+
+.site-status-cards .site-status-card__placeholder {
+  display: block;
+  border-radius: 4px;
+  background-color: $placeholder-background;
+}
+
+.site-status-cards .site-status-card__placeholder--label {
+  width: 60%;
+  height: 20px;
+}
+
+.site-status-cards .site-status-card__placeholder--value {
+  width: 30%;
+  height: 44px;
+  margin-top: $sp-space--sm;
+}
+
+.site-status-cards .site-status-card__placeholder--detail {
+  width: 70%;
+  height: 20px;
+  margin-top: $sp-space--sm;
+}
+
+@media (max-width: 767px) {
+  .site-status-cards {
+    padding: $sp-space--lg;
+  }
+
+  .site-status-cards .site-status-card {
+    padding: $sp-space--lg;
+  }
+
+  .site-status-cards .site-status-card__value {
+    font-size: 32px;
+  }
+
+  .site-status-cards .site-status-card__label,
+  .site-status-cards .site-status-card__detail {
+    font-size: 16px;
+  }
+}

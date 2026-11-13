@@ -1,0 +1,212 @@
+// Theme variables win when the Employee Center theme defines them (Coral theme values as fallbacks)
+$brand-primary: #0080a3 !default;
+$brand-primary-darker: #00566e !default;
+$brand-primary-opacity: #e5f2f6 !default;
+$brand-success-darker: #306700 !default;
+$brand-danger-darker: #b31b2c !default;
+$text-primary: #10171a !default;
+$text-secondary: #29353b !default;
+$text-tertiary: #4f5c62 !default;
+$background-primary: #ffffff !default;
+$background-secondary: #f5f6f7 !default;
+$hr-border: #cfd5d7 !default;
+
+.itam-issues {
+  margin-bottom: 32px;
+  padding: 24px;
+  border: 1px solid $hr-border;
+  border-radius: 8px;
+  background: $background-primary;
+  color: $text-primary;
+}
+
+.itam-issues .itam-issues__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.itam-issues .itam-issues__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itam-issues .itam-issues__count {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #fff3e0;
+  color: #8a4b00;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.itam-issues .itam-issues__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: $text-tertiary;
+}
+
+.itam-issues .itam-issues__resolved-toggle {
+  padding: 6px 10px;
+  border: 1px solid $hr-border;
+  border-radius: 6px;
+  background: $background-primary;
+  color: $brand-primary-darker;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.itam-issues .itam-issues__resolved-toggle:focus-visible {
+  outline: 2px solid $brand-primary;
+  outline-offset: 2px;
+}
+
+.itam-issues .itam-issues__resolved-toggle[aria-pressed="true"] {
+  background: $brand-primary-opacity;
+  border-color: $brand-primary-darker;
+}
+
+.itam-issues .itam-issues__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #fdecec;
+  color: $brand-danger-darker;
+  font-size: 14px;
+}
+
+// "All clear" is good news, so it reads as a positive state rather than an empty one
+.itam-issues .itam-issues__clear {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 6px;
+  background: #e9f8ef;
+  color: $brand-success-darker;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.itam-issues .itam-issues__clear i {
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+.itam-issues .itam-issues__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itam-issues .itam-issue {
+  padding: 16px;
+  border: 1px solid $hr-border;
+  border-radius: 6px;
+}
+
+.itam-issues .itam-issue.itam-issue--resolved {
+  background: $background-secondary;
+}
+
+.itam-issues .itam-issue__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  font-size: 12px;
+  color: $text-tertiary;
+}
+
+.itam-issues .itam-issue__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #fff3e0;
+  color: #8a4b00;
+  font-weight: 600;
+}
+
+.itam-issues .itam-issue--workaround .itam-issue__status {
+  background: $brand-primary-opacity;
+  color: $brand-primary-darker;
+}
+
+.itam-issues .itam-issue--resolved .itam-issue__status {
+  background: #e9f8ef;
+  color: $brand-success-darker;
+}
+
+.itam-issues .itam-issue__area {
+  font-weight: 600;
+  color: $text-secondary;
+}
+
+.itam-issues .itam-issue__title {
+  margin: 8px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.itam-issues .itam-issue__workaround {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: $brand-primary-opacity;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.itam-issues .itam-issue__workaround strong {
+  color: $brand-primary-darker;
+}
+
+.itam-issues .itam-issue__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0 -6px;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: $brand-primary-darker;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.itam-issues .itam-issue__toggle:focus-visible {
+  outline: 2px solid $brand-primary;
+}
+
+.itam-issues .itam-issue__desc {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-line;
+  color: $text-secondary;
+}
+
+@media (max-width: 767px) {
+  .itam-issues {
+    padding: 16px;
+  }
+}

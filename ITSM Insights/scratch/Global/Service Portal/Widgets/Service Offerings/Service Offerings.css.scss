@@ -1,0 +1,287 @@
+$text-primary: #181A1F !default;
+$text-secondary: #2C323F !default;
+$text-muted: #4F5666 !default;
+$offerings-background: #F4F5F7 !default;
+$card-background: #FFFFFF !default;
+$card-border: #DADDE3 !default;
+$link: #24386B !default;
+$focus-ring: #4F7FF0 !default;
+$placeholder-background: #E6E8EC !default;
+$status-operational-background: #DDF3E3 !default;
+$status-operational-text: #1B5E2E !default;
+$status-degraded-background: #FCE7D2 !default;
+$status-degraded-text: #84420C !default;
+$status-outage-background: #FBE1E1 !default;
+$status-outage-text: #9B1C1C !default;
+$status-maintenance-background: #DFE6F8 !default;
+$status-maintenance-text: #233F94 !default;
+$status-monitoring-background: #E6E8EC !default;
+$status-monitoring-text: #2C323F !default;
+$font-size-title: 18px !default;
+$font-size-subtitle: 16px !default;
+$font-size-name: 18px !default;
+$font-size-base: 16px !default;
+$font-size-small: 14px !default;
+$sp-space--xs: 4px !default;
+$sp-space--sm: 8px !default;
+$sp-space--md: 12px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+
+// Selectors are written out in full: the instance SCSS compiler drops &__ / &-- suffix rules
+.service-offerings {
+  background-color: $offerings-background;
+  padding: $sp-space--lg $sp-space--xl;
+}
+
+.service-offerings .service-offerings__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $sp-space--sm $sp-space--xl;
+  margin-bottom: $sp-space--lg;
+}
+
+.service-offerings .service-offerings__title {
+  margin: 0;
+  color: $text-primary;
+  font-size: $font-size-title;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+// Keeps the subtitle under the heading while the legend stays beside them
+.service-offerings .service-offerings__heading-group {
+  min-width: 0;
+}
+
+.service-offerings .service-offerings__subtitle {
+  margin: $sp-space--xs 0 0;
+  color: $text-secondary;
+  font-size: $font-size-subtitle;
+  line-height: 1.4;
+}
+
+.service-offerings .service-offerings__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $sp-space--xs $sp-space--lg;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-offerings .service-offerings__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $text-secondary;
+  font-size: $font-size-base;
+  cursor: help;
+}
+
+.service-offerings .service-offerings__empty {
+  margin: 0;
+  color: $text-secondary;
+  font-size: $font-size-base;
+}
+
+.service-offerings .service-offerings__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-gap: $sp-space--lg;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-offerings .service-offering {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 140px;
+  margin: 0;
+  padding: $sp-space--lg + $sp-space--xs;
+  background-color: $card-background;
+  border: 1px solid $card-border;
+  border-radius: 7px;
+}
+
+.service-offerings .service-offering__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $sp-space--md;
+}
+
+// The 10em basis drops the badge below a long name instead of squeezing the name until words split
+.service-offerings .service-offering__name {
+  flex: 1 1 10em;
+  min-width: 0;
+  margin: 0;
+  color: $text-primary;
+  font-size: $font-size-name;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.service-offerings .service-offering__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.service-offerings .service-offering__link:hover {
+  color: $link;
+  text-decoration: underline;
+}
+
+.service-offerings .service-offering__link:focus {
+  outline: 2px solid $focus-ring;
+  outline-offset: 2px;
+}
+
+.service-offerings .service-offering__detail {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-space--xs;
+  margin-top: $sp-space--md;
+}
+
+// Long summaries are cut at two lines; the full text is in the title tooltip
+.service-offerings .service-offering__summary {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: $text-secondary;
+  font-size: $font-size-base;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.service-offerings .service-offering__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+  color: $text-muted;
+  font-size: $font-size-small;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.service-offerings .service-offering__meta-icon {
+  flex-shrink: 0;
+  width: 14px;
+  text-align: center;
+}
+
+// Status badge, sized to match the Incidents and Outages widget
+.service-offerings .service-offering-status {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  padding: 1px $sp-space--sm;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.service-offerings .service-offering-status--operational {
+  background-color: $status-operational-background;
+  color: $status-operational-text;
+}
+
+.service-offerings .service-offering-status--degraded {
+  background-color: $status-degraded-background;
+  color: $status-degraded-text;
+}
+
+.service-offerings .service-offering-status--outage {
+  background-color: $status-outage-background;
+  color: $status-outage-text;
+}
+
+.service-offerings .service-offering-status--maintenance {
+  background-color: $status-maintenance-background;
+  color: $status-maintenance-text;
+}
+
+.service-offerings .service-offering-status--monitoring {
+  background-color: $status-monitoring-background;
+  color: $status-monitoring-text;
+}
+
+// Status shapes, so status never relies on color alone; drawn in currentColor
+.service-offerings .service-offering-status__icon {
+  display: inline-block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+}
+
+.service-offerings .service-offering-status__icon--operational {
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.service-offerings .service-offering-status__icon--degraded {
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+
+.service-offerings .service-offering-status__icon--outage {
+  border-radius: 2px;
+  background-color: currentColor;
+}
+
+.service-offerings .service-offering-status__icon--maintenance {
+  width: 7px;
+  height: 7px;
+  margin: 0 1.5px;
+  background-color: currentColor;
+  transform: rotate(45deg);
+}
+
+.service-offerings .service-offering-status__icon--monitoring {
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+}
+
+// Loading placeholders
+.service-offerings .service-offering__placeholder {
+  display: block;
+  border-radius: 4px;
+  background-color: $placeholder-background;
+}
+
+.service-offerings .service-offering__placeholder--name {
+  width: 55%;
+  height: 22px;
+}
+
+.service-offerings .service-offering__placeholder--detail {
+  width: 80%;
+  height: 18px;
+  margin-top: $sp-space--md;
+}
+
+@media (max-width: 767px) {
+  .service-offerings {
+    padding: $sp-space--lg;
+  }
+
+  .service-offerings .service-offering {
+    min-height: 0;
+    padding: $sp-space--lg;
+  }
+}

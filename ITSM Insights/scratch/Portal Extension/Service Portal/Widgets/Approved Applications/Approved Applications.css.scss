@@ -1,0 +1,256 @@
+// Theme defaults mirrored from EC Asset Filters; the portal theme overrides them.
+$brand-primary: #4F52BD !default;
+$background-primary: #FFFFFF !default;
+$text-primary: #181A1F !default;
+$text-color: $text-primary !default;
+$border-black: #000000 !default;
+$border-secondary: #ACB2BE !default;
+$border-tertiary: #DADDE2 !default;
+$font-size-small: 14px !default;
+$padding-base-vertical: 6px !default;
+$sp-space--sm: 8px !default;
+$sp-space--md: 12px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+$sp-space--xxl: 32px !default;
+
+.approved-applications {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #dadde2;
+  border-radius: 6px;
+  color: #181a1f;
+
+  .aa-header { padding: 24px 24px 0; }
+  h2 { margin: 0 0 8px; font-size: 24px; font-weight: 600; }
+  .aa-header p { margin: 0; color: #5e6c7a; }
+  /* Search: EC Asset Filters .asset-search-control, placed on the filter row */
+  .asset-search-control { display: flex; flex: 0 0 auto; margin-left: auto; }
+  ::placeholder { color: $border-tertiary; }
+  .search-input-container {
+    font-size: 16px;
+    height: 36px;
+    border: 1px solid $border-black;
+    border-right: 0;
+    border-radius: 4px 0 0 4px;
+    padding: 6px 8px;
+    width: 180px;
+  }
+  .search-icon, .cross-icon {
+    color: $text-primary;
+    height: 36px;
+    font-size: 18px;
+    padding: 8px 12px;
+    border: 1px solid $border-black;
+    border-radius: 0 4px 4px 0;
+    background-color: $background-primary;
+  }
+
+  /* Filter dropdowns: EC Asset Filters .filter-container / .filter-group */
+  .display-flex { display: flex; }
+  .space-between { justify-content: space-between; align-items: center; }
+  .mg-tp-sm { margin-top: $sp-space--sm; }
+  .mg-tp-lg { margin-top: $sp-space--lg !important; }
+  .mg-bt-sm { margin-bottom: $sp-space--sm; }
+  .mg-bt-lg { margin-bottom: $sp-space--lg; }
+  .mg-bt-xl { margin-bottom: $sp-space--xl; }
+  .pd-initial { padding: initial !important; }
+
+  .filter-container { padding: 0 $sp-space--xl; }
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $sp-space--md $sp-space--xl;
+    margin-top: $sp-space--lg;
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    color: $text-color;
+    gap: $sp-space--sm;
+    white-space: nowrap;
+
+    .filter-label { margin: 0; }
+    .dropdown { position: relative; }
+    .open .dropdown-menu, .dropdown.open > .dropdown-menu {
+      display: flex;
+      flex-direction: column;
+      overflow: unset;
+    }
+    .dropdown-menu {
+      min-width: 306px;
+      max-width: 306px;
+      z-index: 900;
+      .filter-actions { padding: 0 $sp-space--lg $sp-space--lg; }
+      .action-separator-style { margin: 0 0 $sp-space--lg; }
+    }
+  }
+  .filter-group-button { color: $text-primary; }
+  .filter-group-label-style { font-weight: 700; }
+  .filter-container-style { overflow-y: auto; max-height: 320px; }
+  .list-group {
+    margin-bottom: 0;
+    padding: $sp-space--lg $sp-space--lg 0;
+    display: flex;
+    flex-direction: column;
+    label {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+  .list-group-item { border: none; padding: 0; background: transparent; }
+  .filter-style {
+    display: flex;
+    align-items: baseline;
+    cursor: pointer;
+    gap: $sp-space--sm;
+    white-space: break-spaces;
+  }
+  input[type="checkbox"] {
+    accent-color: $brand-primary;
+    cursor: pointer;
+    margin: 0;
+    + label { cursor: pointer; white-space: break-spaces; margin: 0; font-weight: 400; }
+  }
+  .btn.btn-link:disabled { border: none; }
+
+  /* Applied filter pills: EC Asset Filters .filter-pills-container */
+  .pills-container-separator { width: 100%; margin: 0; border-bottom: 1px solid $border-tertiary; }
+  .filter-pills-container {
+    width: 100%;
+    align-items: center;
+    padding: $sp-space--lg $sp-space--xl $sp-space--xl;
+  }
+  .filter-pill-display-flex { display: flex; flex-wrap: wrap; align-items: center; gap: $sp-space--sm; }
+  .pill {
+    padding: 0 $padding-base-vertical 0 $sp-space--md;
+    font-weight: 400;
+    font-size: $font-size-small;
+    box-sizing: border-box;
+    border: 1px solid $border-secondary;
+    border-radius: $sp-space--lg;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 300px;
+    height: $sp-space--xxl;
+    .pill-button { background: none; border: none; padding: 0 $padding-base-vertical; color: $text-primary; }
+    .pill-text { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+  }
+  .filter-pills-container .btn-link.btn-sm { padding-left: $sp-space--sm; padding-right: $sp-space--sm; }
+
+  // Pagination sits above the results, so rows can grow without moving it.
+  // Retain horizontal overflow only for tables inside narrow portal columns.
+  .aa-table-scroll { overflow-x: auto; }
+  .aa-table { width: 100%; min-width: 1000px; margin: 0; table-layout: fixed; }
+  .aa-table thead { background: #f2f5f8; }
+  .aa-table thead th { background: #f2f5f8; padding: 0; border-bottom: 1px solid #dadde2; vertical-align: middle; }
+  .aa-table thead th:nth-child(1) { width: 24%; }
+  .aa-table thead th:nth-child(2) { width: 12%; }
+  .aa-table thead th:nth-child(3) { width: 12%; }
+  .aa-table thead th:nth-child(4) { width: 10%; }
+  .aa-table thead th:nth-child(5) { width: 10%; }
+  .aa-table thead th:nth-child(6) { width: 14%; }
+  .aa-table thead th:nth-child(7) { width: 18%; }
+  .aa-table thead button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 16px;
+    border: 0;
+    background: transparent;
+    color: #243447;
+    text-align: left;
+    font-weight: 600;
+  }
+  .aa-table thead button:hover { background: #e5ecf2; }
+  .aa-table thead i { flex-shrink: 0; color: #5e6c7a; }
+  .aa-table tbody td, .aa-table tbody th {
+    padding: 18px 16px;
+    border-top: 1px solid #e5e9ee;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+  }
+  .aa-table tbody tr:hover { background: #f8fafc; }
+  .aa-application { font-weight: 400; }
+  .aa-name, .aa-vendor, .aa-purpose { display: block; }
+  .aa-name { color: #17324d; font-size: 16px; font-weight: 600; }
+  .aa-vendor { margin-top: 2px; color: #5e6c7a; font-size: 12px; }
+  .aa-purpose { margin-top: 6px; color: #5e6c7a; }
+  .aa-status { display: inline-block; padding: 3px 8px; border-radius: 4px; background: #eef1f5; font-size: 12px; font-weight: 600; }
+  .aa-status-approved { background: #e5f2e7; color: #256137; }
+  .aa-empty { padding: 48px 24px; text-align: center; border-top: 1px solid #dadde2; }
+  .aa-empty > i { font-size: 24px; color: #5e6c7a; }
+  .aa-empty h3 { margin: 16px 0 8px; font-size: 18px; }
+  .aa-empty p { color: #5e6c7a; }
+  button:focus, input:focus, select:focus { outline: 2px solid #1875bb; outline-offset: 2px; }
+  .aa-table-scroll:focus { outline: 2px solid #1875bb; outline-offset: -2px; }
+
+  .aa-compact-sort, .aa-compact-list { display: none; }
+
+  .aa-pagination { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 16px; padding: 16px 24px; border-top: 1px solid #dadde2; }
+  .aa-page-summary { margin: 0; color: #5e6c7a; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .aa-page-number { display: block; margin-top: 4px; }
+  .aa-page-actions { display: flex; gap: 8px; }
+  .aa-page-actions button { min-height: 44px; white-space: normal; }
+
+  // Tablet and phone layouts avoid squeezing seven columns into a narrow viewport.
+  @media (max-width: 1000px) {
+    .aa-table-scroll { display: none; }
+    .aa-compact-sort {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 12px;
+      padding: 0 24px 20px;
+    }
+    .aa-sort-field { flex: 1 1 180px; min-width: 0; margin: 0; }
+    .aa-sort-field > span { display: block; margin-bottom: 6px; font-weight: 600; }
+    .aa-sort-field select { width: 100%; height: 44px; font-size: 16px; }
+    .aa-compact-sort button { min-height: 44px; white-space: normal; }
+    .aa-compact-sort button i { margin-right: 6px; }
+    .aa-compact-list { display: block; list-style: none; margin: 0; padding: 0; }
+    .aa-compact-card { padding: 20px 24px; border-top: 1px solid #dadde2; overflow-wrap: anywhere; }
+    .aa-compact-heading { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+    .aa-compact-heading > div { flex: 1 1 180px; min-width: 0; }
+    .aa-compact-heading .aa-name { margin: 0; line-height: 1.4; }
+    .aa-compact-heading .aa-status { flex: 0 0 auto; }
+    .aa-compact-card .aa-purpose { margin: 10px 0 16px; font-size: 14px; line-height: 1.5; }
+    .aa-compact-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; margin: 0; }
+    .aa-compact-details > div { min-width: 0; }
+    .aa-compact-details dt { margin-bottom: 4px; color: #5e6c7a; font-size: 12px; }
+    .aa-compact-details dd { margin: 0; font-size: 14px; line-height: 1.5; }
+  }
+
+  @media (max-width: 767px) {
+    .aa-header { padding: 20px 16px 0; }
+    .asset-search-control { width: 100%; }
+    .search-input-container { width: 100%; }
+    .filter-container { padding: 0 $sp-space--lg; }
+    .filter-group .dropdown-menu { min-width: 0; max-width: none; left: 0; right: 0; }
+    .filter-pills-container { padding: $sp-space--lg $sp-space--lg $sp-space--xl; }
+    .aa-compact-sort { padding: 0 16px 16px; }
+    .aa-compact-card { padding: 20px 16px; }
+    .aa-pagination { padding: 16px; }
+  }
+
+  @media (max-width: 480px) {
+    .aa-pagination { grid-template-columns: minmax(0, 1fr); }
+    .aa-page-actions { grid-row: 1; justify-content: flex-end; }
+    .aa-compact-details { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .aa-sort-field { flex-basis: 100%; }
+    .filter-group > div, .filter-group .dropdown { width: 100%; }
+    .filter-group .filter-group-button { width: 100%; text-align: left; }
+  }
+}

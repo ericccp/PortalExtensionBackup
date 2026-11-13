@@ -1,0 +1,51 @@
+<div class="w360-tabs">
+  <p ng-if="::c.data.configError" class="w360-tabs__message" role="alert">{{::c.data.text.configError}}</p>
+
+  <div ng-if="::!c.data.configError" class="w360-tabs__bar">
+    <div class="w360-tabs__list" role="tablist" aria-label="{{::c.data.text.tabListLabel}}">
+      <button type="button"
+              ng-repeat="tab in c.tabs track by tab.id"
+              id="w360-tab-{{::c.uid}}-{{::tab.id}}"
+              class="w360-tabs__tab"
+              ng-class="{'w360-tabs__tab--active': c.isActive(tab)}"
+              role="tab"
+              aria-selected="{{c.isActive(tab)}}"
+              aria-controls="w360-panel-{{::c.uid}}-{{::tab.id}}"
+              tabindex="{{c.isActive(tab) ? 0 : -1}}"
+              ng-click="c.selectTab(tab)"
+              ng-keydown="c.onTabKeydown($event, $index)">{{::tab.label}}</button>
+    </div>
+  </div>
+
+  <div ng-repeat="tab in c.tabs track by tab.id"
+       id="w360-panel-{{::c.uid}}-{{::tab.id}}"
+       class="w360-tabs__panel w360-tabs__panel--{{::tab.id}}"
+       role="tabpanel"
+       aria-labelledby="w360-tab-{{::c.uid}}-{{::tab.id}}"
+       aria-busy="{{c.tabState[tab.id].loading}}"
+       ng-show="c.isActive(tab)">
+    <div ng-if="c.tabState[tab.id].loading" class="w360-tabs__message" role="status">
+      <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> {{::c.data.text.loading}}
+    </div>
+
+    <div ng-if="!c.tabState[tab.id].loading && c.tabState[tab.id].failed" class="w360-tabs__message" role="alert">
+      <p>{{::c.data.text.loadError}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.retry(tab)">{{::c.data.text.retry}}</button>
+    </div>
+
+    <div ng-if="c.layouts[tab.id] && !c.layouts[tab.id].length" class="w360-tabs__empty">
+      <i class="fa fa-inbox" aria-hidden="true"></i>
+      <h3>{{::c.data.text.emptyTab}}</h3>
+      <p>{{::c.data.text.emptyTabHelp}}</p>
+    </div>
+
+    <div ng-if="c.layouts[tab.id].length">
+      <div class="row w360-tabs__row" ng-class="::{'w360-tabs__row--stretch': row.stretch}" ng-repeat="row in c.layouts[tab.id] track by $index">
+        <div ng-repeat="column in row.columns track by $index" class="col-xs-12 col-md-{{::column.size}} w360-tabs__col"
+             ng-class="::{'w360-tabs__col--stretch': column.stretch}">
+          <sp-widget ng-repeat="widget in column.widgets track by $index" widget="widget"></sp-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

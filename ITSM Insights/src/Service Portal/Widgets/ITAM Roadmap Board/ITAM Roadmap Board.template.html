@@ -1,0 +1,122 @@
+<section class="itam-board" ng-class="'itam-board--' + c.data.layout" aria-labelledby="itam-board-title-{{::$id}}">
+  <header class="itam-board__header">
+    <h2 class="itam-board__title" id="itam-board-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-board__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <div class="itam-board__alert" role="alert" ng-if="c.data.loadError">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span>{{::c.data.text.loadError}}</span>
+  </div>
+
+  <div ng-if="!c.data.loadError">
+    <div class="itam-board__chips"
+         role="group"
+         aria-label="{{::c.data.text.filterLabel}}"
+         ng-if="::(c.data.showFilters && c.data.workstreams.length > 1)">
+      <button type="button"
+              class="itam-chip"
+              ng-class="{'itam-chip--active': c.workstream === 'all'}"
+              aria-pressed="{{c.workstream === 'all'}}"
+              ng-click="c.setWorkstream('all')">{{::c.data.text.allWorkstreams}}</button>
+      <button type="button"
+              class="itam-chip"
+              ng-repeat="ws in c.data.workstreams track by ws.value"
+              ng-class="{'itam-chip--active': c.workstream === ws.value}"
+              aria-pressed="{{c.workstream === ws.value}}"
+              ng-click="c.setWorkstream(ws.value)">
+        <i class="fa {{::ws.icon}}" aria-hidden="true"></i>
+        <span>{{::ws.label}}</span>
+      </button>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite">{{c.resultMessage}}</p>
+
+    <div class="itam-board__empty" ng-if="c.data.total === 0">
+      <i class="fa fa-map-o" aria-hidden="true"></i>
+      <p>{{::c.data.text.noProjects}}</p>
+    </div>
+
+    <div class="itam-board__empty" ng-if="c.data.total > 0 && c.visibleTotal === 0">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <p>{{::c.data.text.noMatches}}</p>
+      <button type="button" class="btn btn-default" ng-click="c.clearAll()">{{::c.data.text.clearFilters}}</button>
+    </div>
+
+    <div class="itam-board__columns" ng-if="c.visibleTotal > 0">
+      <section class="itam-board__column"
+               ng-repeat="col in c.data.columns track by col.value"
+               ng-class="'itam-board__column--' + col.value"
+               aria-labelledby="itam-col-{{::$id}}">
+        <h3 class="itam-board__column-title" id="itam-col-{{::$id}}">
+          <i class="fa {{::col.icon}} itam-board__column-icon" aria-hidden="true"></i>
+          <span>{{::col.label}}</span>
+          <span class="itam-board__count">
+            <span aria-hidden="true">{{col.visible.length}}</span>
+            <span class="sr-only">{{c.countLabel(col)}}</span>
+          </span>
+        </h3>
+
+        <p class="itam-board__column-empty" ng-if="!col.visible.length">{{::c.data.text.emptyColumn}}</p>
+
+        <ul class="itam-board__list" ng-if="col.visible.length">
+          <li class="itam-card" ng-repeat="item in col.visible | limitTo: c.limitFor(col) track by item.id">
+            <div class="itam-card__body">
+              <span class="itam-tag" ng-class="'itam-tag--' + item.workstream">
+                <i class="fa {{::item.workstreamIcon}}" aria-hidden="true"></i>
+                <span class="sr-only">{{::c.data.text.workstreamLabel}}:</span>
+                {{::item.workstreamLabel}}
+              </span>
+              <h4 class="itam-card__title">
+                <a class="itam-card__title-link" ng-if="::c.data.projectPage" ng-href="?id={{::c.data.projectPage}}&sys_id={{::item.id}}">{{::item.name}}</a>
+                <span ng-if="::!c.data.projectPage">{{::item.name}}</span>
+              </h4>
+              <p class="itam-card__desc" itam-glossary-terms ng-if="::item.shortDescription">{{::item.shortDescription}}</p>
+
+              <div class="itam-card__details" id="itam-details-{{::item.id}}" ng-show="c.expanded[item.id]">
+                <p class="itam-card__description" itam-glossary-terms ng-if="::item.description">{{::item.description}}</p>
+                <dl class="itam-card__meta" ng-if="::(item.startDate || item.endDate)">
+                  <div ng-if="::item.startDate"><dt>{{::c.data.text.startLabel}}</dt><dd>{{::item.startDate}}</dd></div>
+                  <div ng-if="::item.endDate"><dt>{{::c.data.text.endLabel}}</dt><dd>{{::item.endDate}}</dd></div>
+                </dl>
+                <a class="itam-card__link"
+                   ng-if="::item.moreInfoUrl"
+                   ng-href="{{::item.moreInfoUrl}}"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                  {{::c.data.text.moreInfo}}
+                  <i class="fa fa-external-link" aria-hidden="true"></i>
+                  <span class="sr-only">({{::c.data.text.opensNewWindow}})</span>
+                </a>
+                <p class="itam-card__no-details" ng-if="::!c.hasDetails(item)">{{::c.data.text.noDetails}}</p>
+              </div>
+            </div>
+
+            <div class="itam-card__footer">
+              <span class="itam-card__phase" ng-if="::item.phase">
+                <span class="sr-only">{{::c.data.text.phaseLabel}}:</span>{{::item.phase}}
+              </span>
+              <button type="button"
+                      class="itam-card__toggle"
+                      aria-expanded="{{!!c.expanded[item.id]}}"
+                      aria-controls="itam-details-{{::item.id}}"
+                      ng-click="c.toggle(item)">
+                <span>{{c.expanded[item.id] ? c.data.text.lessDetails : c.data.text.moreDetails}}</span>
+                <span class="sr-only">: {{::item.name}}</span>
+                <i class="fa" ng-class="c.expanded[item.id] ? 'fa-angle-up' : 'fa-angle-down'" aria-hidden="true"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <button type="button"
+                class="itam-board__show-all"
+                ng-if="c.data.collapseAfter && col.visible.length > c.data.collapseAfter"
+                aria-expanded="{{!!c.showAll[col.value]}}"
+                ng-click="c.toggleShowAll(col)">
+          {{c.showAll[col.value] ? c.data.text.showFewer : c.showAllLabel(col)}}
+        </button>
+      </section>
+    </div>
+  </div>
+</section>

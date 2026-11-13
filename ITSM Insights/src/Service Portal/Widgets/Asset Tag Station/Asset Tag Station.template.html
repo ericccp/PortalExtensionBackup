@@ -1,0 +1,316 @@
+<section class="ats" aria-labelledby="ats-title">
+  <header class="ats__header">
+    <div class="ats__heading">
+      <h2 id="ats-title" class="ats__title">{{::c.text.title}}</h2>
+      <p class="ats__subtitle">{{::c.text.subtitle}}</p>
+    </div>
+
+    <!-- Operator defaults for new assets; closes on outside click and Escape (link function) -->
+    <div class="ats__defaults">
+      <button type="button"
+              class="btn btn-default ats__defaults-toggle"
+              aria-haspopup="dialog"
+              aria-expanded="{{c.defaultsOpen}}"
+              aria-controls="ats-defaults-panel"
+              ng-click="c.toggleDefaults()">
+        <i class="fa fa-sliders" aria-hidden="true"></i>
+        <span>{{::c.text.defaultsButton}}</span>
+        <span class="ats__defaults-summary" ng-if="c.defaults.modelCategory.value">
+          {{c.defaults.modelCategory.displayValue}}<span ng-if="c.defaults.model.value"> / {{c.defaults.model.displayValue}}</span>
+        </span>
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+      </button>
+
+      <div id="ats-defaults-panel"
+           class="ats__defaults-panel"
+           ng-if="c.defaultsOpen"
+           role="dialog"
+           aria-labelledby="ats-defaults-heading">
+        <h3 id="ats-defaults-heading" class="ats__panel-title" tabindex="-1">{{::c.text.defaultsHeading}}</h3>
+        <p class="ats__hint">{{::c.text.defaultsHelp}}</p>
+
+        <form ng-submit="c.saveDefaults()" novalidate>
+          <div class="ats__field">
+            <label class="ats__label" for="ats-default-category">{{::c.text.modelCategoryLabel}}</label>
+            <sn-record-picker id="ats-default-category"
+                              field="c.defaultsForm.modelCategory"
+                              table="'cmdb_model_category'"
+                              display-field="'name'"
+                              value-field="'sys_id'"
+                              search-fields="'name'"
+                              page-size="20"></sn-record-picker>
+          </div>
+          <div class="ats__field">
+            <label class="ats__label" for="ats-default-model">
+              {{::c.text.modelLabel}} <span class="ats__required">({{::c.text.optionalLabel}})</span>
+            </label>
+            <sn-record-picker id="ats-default-model"
+                              ng-if="c.defaultsForm.modelCategory.value"
+                              field="c.defaultsForm.model"
+                              table="'cmdb_model'"
+                              display-field="'display_name'"
+                              value-field="'sys_id'"
+                              search-fields="'display_name,name'"
+                              default-query="c.modelQuery(c.defaultsForm.modelCategory)"
+                              page-size="20"></sn-record-picker>
+            <p class="ats__hint" ng-if="!c.defaultsForm.modelCategory.value">{{::c.text.selectCategoryFirst}}</p>
+          </div>
+
+          <p class="ats__note ats__note--error" ng-if="c.defaultsError" role="alert">{{c.defaultsError}}</p>
+
+          <div class="ats__actions">
+            <button type="submit" class="btn btn-primary" ng-disabled="c.savingDefaults || !c.defaultsForm.modelCategory.value">
+              {{c.savingDefaults ? c.text.saving : c.text.defaultsSave}}
+            </button>
+            <button type="button" class="btn btn-default" ng-disabled="c.savingDefaults || !c.defaults.modelCategory.value" ng-click="c.clearDefaults()">
+              {{::c.text.defaultsClear}}
+            </button>
+            <button type="button" class="btn btn-link" ng-click="c.closeDefaults()">
+              {{::c.text.defaultsCancel}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- Scanners type the value and press Enter, which submits this form -->
+  <form class="ats__scan" role="search" ng-submit="c.lookup()" novalidate autocomplete="off">
+    <label for="ats-scan-input" class="ats__label">{{::c.text.scanLabel}}</label>
+    <div class="ats__scan-row">
+      <div class="ats__scan-field">
+        <i class="fa fa-barcode ats__scan-icon" aria-hidden="true"></i>
+        <input id="ats-scan-input"
+               class="form-control ats__scan-input"
+               type="text"
+               ng-model="c.scan.raw"
+               placeholder="{{::c.text.scanPlaceholder}}"
+               aria-describedby="ats-scan-hint"
+               autocapitalize="off"
+               autocorrect="off"
+               spellcheck="false"
+               maxlength="500" />
+      </div>
+      <button type="submit" class="btn btn-primary ats__scan-button" ng-disabled="c.state === 'loading'">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <span>{{::c.text.searchButton}}</span>
+      </button>
+      <button type="button"
+              class="btn btn-default ats__scan-button"
+              ng-disabled="!c.canClear()"
+              ng-click="c.clearScan()">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <span>{{::c.text.clearButton}}</span>
+      </button>
+    </div>
+    <p id="ats-scan-hint" class="ats__hint">{{::c.text.scanHint}}</p>
+  </form>
+
+  <div class="ats__live" role="status" aria-live="polite">
+    <div class="ats__alert"
+         ng-if="c.message"
+         ng-class="{'ats__alert--error': c.message.type === 'error', 'ats__alert--warning': c.message.type === 'warning', 'ats__alert--success': c.message.type === 'success'}">
+      <i class="fa"
+         ng-class="{'fa-exclamation-circle': c.message.type === 'error', 'fa-exclamation-triangle': c.message.type === 'warning', 'fa-check-circle': c.message.type === 'success'}"
+         aria-hidden="true"></i>
+      <span>{{c.message.text}}</span>
+    </div>
+    <p class="ats__loading" ng-if="c.state === 'loading'" aria-busy="true">
+      <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+      {{c.text.searching.replace('{0}', c.pendingSerial)}}
+    </p>
+  </div>
+
+  <!-- Result: found or not found -->
+  <div class="ats__result" ng-if="c.state === 'found' || c.state === 'notFound'">
+    <div class="ats__panel">
+      <div class="ats__panel-header">
+        <span class="ats__badge"
+              ng-class="{'ats__badge--found': c.state === 'found', 'ats__badge--missing': c.state === 'notFound'}">
+          <i class="fa" ng-class="c.state === 'found' ? 'fa-check' : 'fa-times'" aria-hidden="true"></i>
+          {{c.state === 'found' ? c.text.foundHeading : c.text.notFoundHeading}}
+        </span>
+        <h3 class="ats__panel-title">{{c.state === 'found' ? c.asset.displayName : c.serial}}</h3>
+        <a ng-if="c.state === 'found'" class="ats__link" ng-href="{{c.asset.url}}" target="_blank" rel="noopener">
+          {{::c.text.openRecord}}<span class="sr-only"> ({{c.asset.displayName}})</span>
+        </a>
+      </div>
+
+      <p class="ats__note" ng-if="c.state === 'notFound'">{{c.text.notFoundMessage.replace('{0}', c.serial)}}</p>
+      <p class="ats__note" ng-if="c.state === 'found' && !c.asset.canWrite">{{::c.text.readOnlyMessage}}</p>
+      <p class="ats__note ats__note--error" ng-if="c.state === 'notFound' && !c.data.canCreate">{{::c.text.noCreateMessage}}</p>
+
+      <dl class="ats__facts" ng-if="c.state === 'found'">
+        <div class="ats__fact">
+          <dt>{{::c.text.serialLabel}}</dt>
+          <dd class="ats__mono">{{c.asset.serialNumber}}</dd>
+        </div>
+        <div class="ats__fact" ng-if="c.asset.assetTag">
+          <dt>{{::c.text.assetTagLabel}}</dt>
+          <dd>{{c.asset.assetTag}}</dd>
+        </div>
+        <div class="ats__fact">
+          <dt>{{::c.text.modelLabel}}</dt>
+          <dd>{{c.asset.model || '-'}}</dd>
+        </div>
+        <div class="ats__fact">
+          <dt>{{::c.text.statusLabel}}</dt>
+          <dd>{{c.asset.status || '-'}}</dd>
+        </div>
+        <div class="ats__fact">
+          <dt>{{::c.text.substatusLabel}}</dt>
+          <dd>{{c.asset.substatus || '-'}}</dd>
+        </div>
+        <div class="ats__fact">
+          <dt>{{::c.text.assetFunctionLabel}}</dt>
+          <dd>{{c.asset.assetFunction || '-'}}</dd>
+        </div>
+        <div class="ats__fact">
+          <dt>{{::c.text.warrantyLabel}}</dt>
+          <dd>
+            {{c.asset.warrantyExpiration || '-'}}
+            <span class="ats__flag ats__flag--expired" ng-if="c.asset.warrantyExpired">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+              {{::c.text.warrantyExpired}}
+            </span>
+          </dd>
+        </div>
+      </dl>
+
+      <form class="ats__form"
+            ng-if="c.state === 'notFound' ? c.data.canCreate : c.asset.canWrite"
+            ng-submit="c.save()"
+            novalidate>
+        <div class="ats__grid">
+          <div class="ats__field" ng-if="c.state === 'notFound'">
+            <label class="ats__label" for="ats-model-category">
+              {{::c.text.modelCategoryLabel}} <span class="ats__required">({{::c.text.requiredLabel}})</span>
+            </label>
+            <sn-record-picker id="ats-model-category"
+                              field="c.form.modelCategory"
+                              table="'cmdb_model_category'"
+                              display-field="'name'"
+                              value-field="'sys_id'"
+                              search-fields="'name'"
+                              page-size="20"></sn-record-picker>
+          </div>
+          <div class="ats__field" ng-if="c.state === 'notFound'">
+            <label class="ats__label" for="ats-model">
+              {{::c.text.modelLabel}} <span class="ats__required">({{::c.text.requiredLabel}})</span>
+            </label>
+            <sn-record-picker id="ats-model"
+                              ng-if="c.form.modelCategory.value"
+                              field="c.form.model"
+                              table="'cmdb_model'"
+                              display-field="'display_name'"
+                              value-field="'sys_id'"
+                              search-fields="'display_name,name'"
+                              default-query="c.modelQuery()"
+                              page-size="20"></sn-record-picker>
+            <p class="ats__hint" ng-if="!c.form.modelCategory.value">{{::c.text.selectCategoryFirst}}</p>
+          </div>
+          <div class="ats__field">
+            <label class="ats__label" for="ats-assigned-to">{{::c.text.assignedToLabel}}</label>
+            <sn-record-picker id="ats-assigned-to"
+                              field="c.form.assignedTo"
+                              table="'sys_user'"
+                              display-field="'name'"
+                              display-fields="'email'"
+                              value-field="'sys_id'"
+                              search-fields="'name,email,user_name'"
+                              default-query="'active=true'"
+                              page-size="20"></sn-record-picker>
+          </div>
+          <div class="ats__field">
+            <label class="ats__label" for="ats-cost-center">{{::c.text.costCenterLabel}}</label>
+            <sn-record-picker id="ats-cost-center"
+                              field="c.form.costCenter"
+                              table="'cmn_cost_center'"
+                              display-field="'name'"
+                              value-field="'sys_id'"
+                              search-fields="'name,account_number'"
+                              page-size="20"></sn-record-picker>
+          </div>
+          <div class="ats__field">
+            <label class="ats__label" for="ats-location">{{::c.text.locationLabel}}</label>
+            <sn-record-picker id="ats-location"
+                              field="c.form.location"
+                              table="'cmn_location'"
+                              display-field="'name'"
+                              display-fields="'full_name'"
+                              value-field="'sys_id'"
+                              search-fields="'name,full_name'"
+                              page-size="20"></sn-record-picker>
+          </div>
+        </div>
+
+        <div class="ats__actions">
+          <button ng-if="c.state === 'found'"
+                  type="submit"
+                  class="btn btn-primary"
+                  ng-disabled="!c.isDirty() || c.saving">
+            {{c.saving ? c.text.saving : c.text.saveButton}}
+          </button>
+          <button ng-if="c.state === 'found'"
+                  type="button"
+                  class="btn btn-default"
+                  ng-disabled="!c.isDirty() || c.saving"
+                  ng-click="c.resetForm()">
+            {{::c.text.resetButton}}
+          </button>
+          <button ng-if="c.state === 'notFound'"
+                  type="submit"
+                  class="btn btn-primary"
+                  ng-disabled="!c.canCreate()">
+            {{c.saving ? c.text.saving : c.text.createButton}}
+          </button>
+        </div>
+      </form>
+
+      <dl class="ats__facts" ng-if="c.state === 'found' && !c.asset.canWrite">
+        <div class="ats__fact">
+          <dt>{{::c.text.assignedToLabel}}</dt>
+          <dd>{{c.asset.assignedTo.displayValue || '-'}}</dd>
+        </div>
+        <div class="ats__fact">
+          <dt>{{::c.text.costCenterLabel}}</dt>
+          <dd>{{c.asset.costCenter.displayValue || '-'}}</dd>
+        </div>
+        <div class="ats__fact">
+          <dt>{{::c.text.locationLabel}}</dt>
+          <dd>{{c.asset.location.displayValue || '-'}}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Tag preview; printing is offered once the asset exists -->
+    <aside class="ats__panel ats__tag-panel" aria-labelledby="ats-tag-heading">
+      <h3 id="ats-tag-heading" class="ats__panel-title">{{::c.text.tagPreviewLabel}}</h3>
+      <!-- The link function renders the same label layout used for printing into this frame -->
+      <div class="ats__tag-frame"
+           ng-if="c.tag.barcode"
+           role="img"
+           aria-label="{{c.tag.ariaLabel}}"
+           ng-style="{'aspect-ratio': c.data.tag.widthIn + ' / ' + c.data.tag.heightIn}">
+        <iframe title="{{::c.text.tagPreviewLabel}}" aria-hidden="true" tabindex="-1"></iframe>
+      </div>
+      <p class="ats__note ats__note--error" ng-if="!c.tag.barcode">{{::c.text.barcodeError}}</p>
+      <p class="ats__hint" ng-if="c.isDirty()">{{::c.text.unsavedChanges}}</p>
+
+      <div class="ats__actions">
+        <button type="button"
+                class="btn btn-primary"
+                ng-if="c.state === 'found'"
+                ng-disabled="!c.tag.barcode"
+                ng-click="c.print()">
+          <i class="fa fa-print" aria-hidden="true"></i>
+          {{::c.text.printButton}}
+        </button>
+        <button type="button" class="btn btn-default" ng-click="c.scanNext()">
+          <i class="fa fa-repeat" aria-hidden="true"></i>
+          {{::c.text.scanNextButton}}
+        </button>
+      </div>
+    </aside>
+  </div>
+</section>

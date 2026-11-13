@@ -1,0 +1,8 @@
+
+.itam-page-header { border-bottom: 1px solid #cfd5d7; padding-bottom: 8px; }
+.itam-page-body { padding-top: 32px; padding-bottom: 16px; }
+.itam-page-footer { padding-bottom: 48px; }
+@media (max-width: 767px) {
+  .itam-page-body { padding-top: 20px; }
+  .itam-page-footer { padding-bottom: 24px; }
+}

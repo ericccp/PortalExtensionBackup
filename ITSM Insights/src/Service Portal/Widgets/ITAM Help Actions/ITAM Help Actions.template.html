@@ -1,0 +1,24 @@
+<section class="itam-help" aria-labelledby="itam-help-title-{{::$id}}">
+  <header class="itam-help__header">
+    <h2 class="itam-help__title" id="itam-help-title-{{::$id}}">{{::c.data.text.title}}</h2>
+    <p class="itam-help__subtitle" ng-if="::c.data.text.subtitle">{{::c.data.text.subtitle}}</p>
+  </header>
+
+  <p class="itam-help__empty" ng-if="::!c.data.actions.length">{{::c.data.text.noActions}}</p>
+
+  <ul class="itam-help__grid" ng-if="::c.data.actions.length">
+    <li class="itam-action" ng-repeat="action in ::c.data.actions track by action.id" ng-class="'itam-action--' + action.id">
+      <span class="itam-action__icon" aria-hidden="true"><i class="fa {{::action.icon}}"></i></span>
+      <h3 class="itam-action__title">{{::action.title}}</h3>
+      <p class="itam-action__desc" itam-glossary-terms>{{::action.description}}</p>
+      <a class="itam-action__button"
+         ng-href="{{::action.url}}"
+         ng-attr-target="{{::action.external ? '_blank' : undefined}}"
+         ng-attr-rel="{{::action.external ? 'noopener noreferrer' : undefined}}">
+        <span>{{::action.label}}</span>
+        <i class="fa" ng-class="::action.external ? 'fa-external-link' : 'fa-arrow-right'" aria-hidden="true"></i>
+        <span class="sr-only" ng-if="::action.external">({{::c.data.text.opensNewWindow}})</span>
+      </a>
+    </li>
+  </ul>
+</section>
