@@ -18,7 +18,7 @@
     data.showSoftwareUnsubscribe = true;
     data.showReceiveAsset = true;
     data.isManager = assetUtil.isManager();
-    data.isCostCenterManager = assetUtil.isCostCenterManager();
+    // data.isCostCenterManager = assetUtil.isCostCenterManager();
 
     data.hardwareTabId = input && input.hardwareTabId ? input.hardwareTabId : options.hardwareTabId;
     data.softwareTabId = input && input.softwareTabId ? input.softwareTabId : options.softwareTabId;
@@ -109,7 +109,7 @@
                 data.searchParam,
                 data.sortOption,
                 data.uiFilters
-            )
+            );
 
             data.assetData = data.assetResults.data || [];
             data.assetCards = getAssetCardsData(data.assetData);

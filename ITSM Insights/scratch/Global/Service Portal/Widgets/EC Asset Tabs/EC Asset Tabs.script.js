@@ -7,7 +7,7 @@
 
     data.limit = options.limit;
     data.isManager = util.isManager();
-    data.isCostCenterManager = util.isCostCenterManager();
+    // data.isCostCenterManager = util.isCostCenterManager();
     data.teamTab = { label: gs.getMessage("My team"), selected: false, sys_id: "team" };
 
     data.hardwareTab = {

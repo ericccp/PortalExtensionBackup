@@ -196,10 +196,10 @@ AssetWidgetUtilsExtension.prototype = {
             }
         }
 
-        if (this.isCostCenterManager()) {
-            encodedQuery +=
-                "^ORcost_center.managerDYNAMIC90d1921e5f510100a9ad2572f2b477fe";
-        }
+        // if (this.isCostCenterManager()) {
+        //     encodedQuery +=
+        //         "^ORcost_center.managerDYNAMIC90d1921e5f510100a9ad2572f2b477fe";
+        // }
 
         return encodedQuery;
     },

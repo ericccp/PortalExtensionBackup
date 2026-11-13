@@ -1,6 +1,7 @@
 (function() {
     var assetUtil = new global.AssetWidgetUtilsExtension();
-    var isManager = assetUtil.isManager() || assetUtil.isCostCenterManager();
+    var isManager = assetUtil.isManager();
+    // var isManager = assetUtil.isManager() || assetUtil.isCostCenterManager();
 
     if (isManager) {
         data.assetsHeader = gs.getMessage("My Team's IT Assets");
