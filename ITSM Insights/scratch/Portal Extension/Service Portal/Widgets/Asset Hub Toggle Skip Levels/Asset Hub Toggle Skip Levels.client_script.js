@@ -5,8 +5,8 @@ api.controller = function($rootScope, $sce) {
 
     setDisplaySkipLevelToggleValue = function() {
         displaySkipLevels = !displaySkipLevels;
-        // Received by EC Asset Tabs, which reloads the Devices tab with the
-        // expanded (or direct-reports-only) manager audience.
+        // Received by EC Asset Tabs, which reloads the active tab (Devices or
+        // Software licenses) with the expanded (or direct-reports-only) manager audience.
         $rootScope.$emit('sn_ex_sp.toggleSkipLevels', {
             tabId: c.data.tabId,
             includeSkipLevels: displaySkipLevels

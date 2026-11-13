@@ -324,15 +324,17 @@ AssetWidgetUtilsExtension.prototype = {
     },
 
     /**
-     * Returns paginated software assets for the current user and their direct reports.
+     * Returns paginated software assets for the current user and their reports.
      *
      * @param {Number|String} limit - Number of records to render.
      * @param {Number|String} offset - Number of records to skip.
      * @param {String} searchText - Optional full-text search value.
      * @param {Object|String} sortOption - Optional sort option.
+     * @param {Object} [uiFilters] - Selected filter options keyed by field name.
+     * @param {Boolean} [includeSkipLevels] - Skip-level toggle state; see _applySoftwareAudience.
      * @returns {Object} Object containing data, showMore, offset, and nextOffset.
      */
-    getSoftwareAssets: function(limit, offset, searchText, sortOption, uiFilters) {
+    getSoftwareAssets: function(limit, offset, searchText, sortOption, uiFilters, includeSkipLevels) {
         var paging = this._getPaging(limit, offset);
 
         var result = {
@@ -343,7 +345,7 @@ AssetWidgetUtilsExtension.prototype = {
         };
 
         var gr = new GlideRecordSecure("alm_entitlement");
-        this._applySoftwareAudience(gr);
+        this._applySoftwareAudience(gr, includeSkipLevels);
 
         this._applySoftwareKeywordSearch(gr, searchText);
 
@@ -509,7 +511,7 @@ AssetWidgetUtilsExtension.prototype = {
         tabType = (tabType || "").toString().toLowerCase().trim();
 
         if (tabType == "software") {
-            return this._getSoftwareAssetFilters(searchText);
+            return this._getSoftwareAssetFilters(searchText, includeSkipLevels);
         }
 
         return this._getHardwareAssetFilters(searchText, statusFilter, includeSkipLevels);
@@ -593,13 +595,24 @@ AssetWidgetUtilsExtension.prototype = {
         return choices;
     },
 
-    _applySoftwareAudience: function(gr) {
-        // Use the same audience for software results and filter options.
-        // GlideRecordSecure continues to enforce access to each entitlement.
+    /**
+     * Use the same audience for software results and filter options.
+     * GlideRecordSecure continues to enforce access to each entitlement.
+     * Mirrors _getAudienceEncodedQuery, but entitlements only have assigned_to.
+     *
+     * @param {GlideRecord} gr - An alm_entitlement GlideRecord(Secure) to constrain.
+     * @param {Boolean} [includeSkipLevels] - When true, walks the full configured
+     *     manager-hierarchy depth; when false/omitted, direct reports only.
+     */
+    _applySoftwareAudience: function(gr, includeSkipLevels) {
         var currentUserId = gs.getUserID();
         var audience = gr.addQuery("assigned_to", currentUserId);
         if (this.isManager()) {
-            audience.addOrCondition("assigned_to.manager", currentUserId);
+            var depth = includeSkipLevels ? this._getManagerHierarchyDepth() : 1;
+            var reportIds = this._getAllReportSysIds(currentUserId, depth);
+            if (reportIds.length) {
+                audience.addOrCondition("assigned_to", "IN", reportIds.join(","));
+            }
         }
         gr.addQuery("licensed_by.install_status", "1");
     },

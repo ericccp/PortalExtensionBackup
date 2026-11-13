@@ -65,7 +65,8 @@
                 data.offset,
                 data.searchParam,
                 data.sortOption,
-                data.uiFilters
+                data.uiFilters,
+                data.includeSkipLevels
             );
             data.nextAssetData = data.nextAssets.data || [];
             data.nextAssetCards = getAssetCardsData(data.nextAssetData);
@@ -108,7 +109,8 @@
                 data.offset,
                 data.searchParam,
                 data.sortOption,
-                data.uiFilters
+                data.uiFilters,
+                data.includeSkipLevels
             );
 
             data.assetData = data.assetResults.data || [];

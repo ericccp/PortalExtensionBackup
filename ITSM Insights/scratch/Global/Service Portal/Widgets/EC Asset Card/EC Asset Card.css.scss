@@ -11,7 +11,28 @@ $label-default-bg: #C2C4CA !default;
 $label-primary-bg: #D1D2EE !default;
 $label-success-bg: #D2EABC !default;
 $label-warning-bg: #FBF7BC !default;
-$label-danger-bg: #FFCCD2 !default;
+$label-danger-bg: #F4D8D7 !default;
+
+// Neutrals & text
+$text-muted: #5E6C7A !default;
+$color-divider: #DADDE2 !default;
+$color-chip-text: #243447 !default;
+
+//Grey accents
+$color-grey-accent: #656E81 !default;
+$color-grey-text: #656E81 !default;
+
+// Surfaces
+$color-owner-icon-bg: #F2F5F8 !default;
+$color-software-icon-bg: #F2F5F8 !default;
+$color-chip-bg: #F2F5F8 !default;
+$color-status-bg: #EDF5FB !default;
+$color-status-divider: #D7E2EB !default;
+
+// Software card
+$color-software-border: #656E81 !default;
+$label-license-bg: #F2F5F8 !default;
+$label-renewal-bg: #F2F5F8 !default;
 
 .label-info-color {
   background-color: $label-info-bg;
@@ -87,7 +108,7 @@ $label-danger-bg: #FFCCD2 !default;
 }
 
 .asset-card-link:focus {
-  outline: 2px solid #173b53;
+  outline: 2px solid $color-grey-accent;
   outline-offset: 2px;
 }
 
@@ -97,7 +118,7 @@ $label-danger-bg: #FFCCD2 !default;
   gap: 4px;
   min-width: 0;
   padding-bottom: 8px;
-  border-bottom: 1px solid #dadde2;
+  border-bottom: 1px solid $color-divider;
   pointer-events: none;
 }
 
@@ -132,7 +153,7 @@ $label-danger-bg: #FFCCD2 !default;
 .software-asset-card .software-renewal-badge {
   padding: 0.3rem 0.6rem;
   border-radius: 5px;
-  color: #17324d;
+  color: $color-grey-text;
   font-size: $font-size-xs;
   font-weight: 600;
 }
@@ -184,7 +205,7 @@ $label-danger-bg: #FFCCD2 !default;
   width: 100%;
   height: 1px;
   margin: 8px 0 4px;
-  background: #DADDE2;
+  background: $color-divider;
 }
 
 .asset-owner-block {
@@ -212,8 +233,8 @@ $label-danger-bg: #FFCCD2 !default;
   align-items: center;
   justify-content: center;
 
-  background: #EEF3F8;
-  color: #17324D;
+  background: $color-owner-icon-bg;
+  color: $color-grey-text;
   font-size: 22px;
 }
 
@@ -224,7 +245,7 @@ $label-danger-bg: #FFCCD2 !default;
 
 .asset-owner-label {
   margin-bottom: 2px;
-  color: #5E6C7A;
+  color: $text-muted;
   font-size: $font-size-xs;
   line-height: 1.2;
 }
@@ -261,9 +282,9 @@ $label-danger-bg: #FFCCD2 !default;
   padding: 8px 12px;
   overflow: hidden;
 
-  background: #F2F5F8;
+  background: $color-chip-bg;
   border-radius: 5px;
-  color: #243447;
+  color: $color-chip-text;
 
   font-size: 14px;
   font-weight: 500;
@@ -273,7 +294,7 @@ $label-danger-bg: #FFCCD2 !default;
 
 .asset-meta-chip i {
   flex: 0 0 auto;
-  color: #17324D;
+  color: $color-grey-text;
   font-size: 14px;
 }
 
@@ -326,11 +347,11 @@ $label-danger-bg: #FFCCD2 !default;
     border-radius: 12px;
   }
   .software-card-link:focus {
-    outline: 2px solid #173b53;
+    outline: 2px solid $color-grey-accent;
     outline-offset: 2px;
   }
   // Inherit the hardware card's height, padding, and outer gap.
-  border-color: #929da5;
+  border-color: $color-software-border;
   border-radius: 4px;
 
   .software-card-content {
@@ -348,7 +369,7 @@ $label-danger-bg: #FFCCD2 !default;
     gap: 4px;
     min-width: 0;
     padding-bottom: 8px;
-    border-bottom: 1px solid #dadde2;
+    border-bottom: 1px solid $color-divider;
   }
 
   .software-card-header-row {
@@ -370,8 +391,8 @@ $label-danger-bg: #FFCCD2 !default;
     i { font-size: $font-size-base; }
   }
 
-  .software-license-badge { background: #cbe4f2; }
-  .software-renewal-badge { background: #dce5ec; }
+  .software-license-badge { background: $label-license-bg; }
+  .software-renewal-badge { background: $label-renewal-bg; }
 
   .software-assignment {
     display: flex;
@@ -394,7 +415,7 @@ $label-danger-bg: #FFCCD2 !default;
 
   .software-muted {
     margin: 0;
-    color: #5e6c7a;
+    color: $text-muted;
     font-size: $font-size-xs;
     line-height: 1.5;
   }
@@ -407,8 +428,8 @@ $label-danger-bg: #FFCCD2 !default;
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #edf3f7;
-    color: #173b53;
+    background: $color-software-icon-bg;
+    color: $color-grey-accent;
     font-size: 22px;
   }
 
@@ -432,7 +453,7 @@ $label-danger-bg: #FFCCD2 !default;
     margin-top: auto;
     padding: 12px;
     border-radius: 5px;
-    background: #edf5fb;
+    background: $color-status-bg;
   }
 
   .software-status-row {
@@ -443,10 +464,10 @@ $label-danger-bg: #FFCCD2 !default;
     margin-top: 8px;
   }
 
-  .software-status-icon { color: #173b53; font-size: 22px; }
+  .software-status-icon { color: $color-grey-accent; font-size: 22px; }
   .software-status-copy {
     flex: 1 1 100px;
-    strong { display: block; color: #17324d; font-size: $font-size-base; line-height: 1.3; }
+    strong { display: block; color: $color-grey-text; font-size: $font-size-base; line-height: 1.3; }
     .software-muted { margin-top: 5px; }
   }
 
@@ -456,24 +477,22 @@ $label-danger-bg: #FFCCD2 !default;
     gap: 12px;
     margin-top: 8px;
     padding-top: 8px;
-    border-top: 1px solid #d7e2eb;
-    color: #5e6c7a;
+    border-top: 1px solid $color-status-divider;
+    color: $text-muted;
     font-size: $font-size-xs;
     line-height: 1.5;
 
-    i { color: #173b53; font-size: 22px; flex-shrink: 0; }
+    i { color: $color-grey-accent; font-size: 22px; flex-shrink: 0; }
     p { margin: 0; }
   }
 
   .asset-card-action-button {
-    border: 1px solid #788b99;
+    border: 1px solid;
     border-radius: 5px;
-    background: #fff;
-    color: #1675a9;
     white-space: normal;
 
-    &:hover:not(:disabled) { background: #edf5fb; }
-    &:focus { outline: 2px solid #1875bb; outline-offset: 2px; }
+    // &:hover:not(:disabled) { background: $color-status-bg; }
+    // &:focus { outline: 2px solid $color-button-focus; outline-offset: 2px; }
     &:disabled { opacity: 0.45; cursor: not-allowed; }
   }
 }

@@ -173,11 +173,6 @@
     }
 
     function populateSkipLevelToggleWidget(tab, includeSkipLevels) {
-        // Manager-hierarchy audience only applies to the Devices tab today.
-        if (tab == "software") {
-            return;
-        }
-
         var assetUtil = new global.AssetWidgetUtilsExtension();
         if (!assetUtil.isManager()) {
             return;
